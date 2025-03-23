@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShopMenager.Views.Popups.AddUpdateReviewPopup">
+    <StackLayout Padding="20" BackgroundColor="White" Spacing="15">
+
+        <!-- Nagłówek -->
+        <Label Text="{Binding Header}" 
+           FontSize="20" 
+           FontAttributes="Bold" 
+           HorizontalOptions="Center" />
+
+        <!-- Wybór pracownika (wystawiającego recenzję) -->
+        <Picker Title="Select Employee" 
+            ItemsSource="{Binding Employees}" 
+            SelectedItem="{Binding SelectedEmployee}" />
+
+        <!-- Wybór produktu -->
+        <Picker Title="Select Product" 
+            ItemsSource="{Binding Products}" 
+            SelectedItem="{Binding SelectedProduct}" />
+
+        <!-- Ocena -->
+        <StackLayout Orientation="Horizontal" Spacing="10" VerticalOptions="Center">
+            <Label Text="Rating:" 
+               VerticalOptions="Center" />
+            <Slider Minimum="0" 
+                Maximum="5" 
+                Value="{Binding CurrentReview.Rating}" 
+                VerticalOptions="Center" />
+            <Label Text="{Binding CurrentReview.Rating, StringFormat='{0:F1}'}" 
+               VerticalOptions="Center" />
+        </StackLayout>
+
+        <!-- Komentarz (treść recenzji) -->
+        <Editor Placeholder="Write your review here..." 
+            Text="{Binding CurrentReview.Comments}" 
+            AutoSize="TextChanges" 
+            HeightRequest="100" />
+
+        <!-- Data recenzji -->
+        <DatePicker Date="{Binding CurrentReview.ReviewDate}" />
+
+        <!-- Przycisk zapisu/dodania recenzji -->
+        <Button Text="{Binding ActionButtonText}" 
+            Command="{Binding AddCommand}" 
+            BackgroundColor="#2196F3" 
+            TextColor="White" 
+            CornerRadius="10"/>
+
+        <!-- Przycisk anulowania -->
+        <Button Text="Cancel" 
+            Command="{Binding CancleCommand}" 
+            BackgroundColor="#F44336" 
+            TextColor="White" 
+            CornerRadius="10"/>
+
+    </StackLayout>
+</ContentPage>

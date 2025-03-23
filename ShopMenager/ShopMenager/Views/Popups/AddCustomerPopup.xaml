@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<popup:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 x:Class="ShopMenager.Views.Popups.AddCustomerPopup">
+    
+    <StackLayout Padding="20" BackgroundColor="White" Spacing="15">
+
+        <Label Text="{Binding Header}" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
+
+        <Entry Placeholder="First Name" Text="{Binding CurrentCustomer.FirstName}" />
+        <Entry Placeholder="Last Name" Text="{Binding CurrentCustomer.LastName}" />
+        <Entry Placeholder="Email" Text="{Binding CurrentCustomer.Email}" />
+        <Entry Placeholder="Phone" Text="{Binding CurrentCustomer.Phone}" />
+        <Entry Placeholder="Address" Text="{Binding CurrentCustomer.Address}" />
+        <Entry Placeholder="City" Text="{Binding CurrentCustomer.City}" />
+        <Entry Placeholder="Photo Path" Text="{Binding CurrentCustomer.PhotoPath}" />
+
+        <Button Text="{Binding ActionButtonText}" Command="{Binding AddCommand}" BackgroundColor="#2196F3" TextColor="White" CornerRadius="10"/>
+        <Button Text="Cancel" Command="{Binding CancleCommand}" BackgroundColor="#F44336" TextColor="White" CornerRadius="10"/>
+    </StackLayout>
+</popup:PopupPage>

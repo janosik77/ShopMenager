@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms" 
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:local="clr-namespace:ShopMenager.Views"
+       Title="ShopMenager"
+       x:Class="ShopMenager.AppShell">
+
+    <!--
+        The overall app visual hierarchy is defined here, along with navigation. 
+        https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/
+    -->
+
+    <FlyoutItem Title="Home" Icon="home.png">
+        <ShellContent ContentTemplate="{DataTemplate local:HomePage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Customers" Icon="customer.png">
+        <ShellContent ContentTemplate="{DataTemplate local:CustomersPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Employees" Icon="worker.png">
+        <ShellContent ContentTemplate="{DataTemplate local:EmployeesPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Products" Icon="product.png">
+        <ShellContent ContentTemplate="{DataTemplate local:ProductPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Categories" Icon="category.png">
+        <ShellContent ContentTemplate="{DataTemplate local:CategoriesPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Discounts" Icon="discount.png">
+        <ShellContent ContentTemplate="{DataTemplate local:DiscountsPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Orders" Icon="order.png">
+        <ShellContent ContentTemplate="{DataTemplate local:OrdersPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Payments" Icon="payments.png">
+        <ShellContent ContentTemplate="{DataTemplate local:PaymentsPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Reviews" Icon="reviews.png">
+        <ShellContent ContentTemplate="{DataTemplate local:ReviewsPage}" />
+    </FlyoutItem>
+
+
+    
+
+    <!--
+    
+        <TabBar>
+    <ShellContent Title="About" Icon="icon_about.png" Route="Home" ContentTemplate="{DataTemplate local:HomePage}" />
+    <ShellContent Title="About" Icon="icon_about.png" Route="Products" ContentTemplate="{DataTemplate local:ProductsPage}" />
+    <ShellContent Title="About" Icon="icon_about.png" Route="Orders" ContentTemplate="{DataTemplate local:OrdersPage}" />
+    <ShellContent Title="About" Icon="icon_about.png" Route="Discounts" ContentTemplate="{DataTemplate local:DiscountsPage}" />
+    <ShellContent Title="About" Icon="icon_about.png" Route="more..." ContentTemplate="{DataTemplate local:MorePage}" />
+</TabBar>
+    
+        If you would like to navigate to this content you can do so by calling
+        await Shell.Current.GoToAsync("//LoginPage");
+        <TabBar>
+        <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate local:LoginPage}" />
+        </TabBar>
+    -->
+    
+
+
+</Shell>
