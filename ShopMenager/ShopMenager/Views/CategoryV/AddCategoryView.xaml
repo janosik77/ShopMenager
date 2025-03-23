@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShopMenager.Views.CategoryV.AddCategoryView"
+             xmlns:views="clr-namespace:ShopMenager.Views"
+             xmlns:vm="clr-namespace:ShopMenager.ViewModels.CategoryVM"
+             x:TypeArguments="vm:AddCategoryViewModel"
+             >
+                
+    
+    
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="20" Spacing="15">
+
+                <Label Text="Create Category"
+                       FontSize="Large"
+                       HorizontalOptions="Center" />
+
+                <!-- Formularz dodawania kategorii -->
+                <StackLayout Spacing="10">
+
+                    <!-- Category Name -->
+                    <Label Text="Category Name" />
+                    <Entry Placeholder="Enter category name"
+                           Text="{Binding CategoryName}" />
+
+                    <!-- Category Description -->
+                    <Label Text="Category Description" />
+                    <Entry Placeholder="Enter category description"
+                           Text="{Binding CategoryDescription}" />
+
+                    <!-- Przycisk Create -->
+                    <Button Text="Create"
+                            Command="{Binding SaveCommand}" />
+                </StackLayout>
+
+                <!-- Przycisk Back to List -->
+                <Button Text="Back to List"
+                        Command="{Binding CancelCommand}" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</views:BasePage>

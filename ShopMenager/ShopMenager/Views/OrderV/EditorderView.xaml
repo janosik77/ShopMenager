@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShopMenager.Views.OrderV.EditorderView">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="20" Spacing="15">
+
+                <Label Text="Edit Order"
+               FontSize="Large"
+               HorizontalOptions="Center" />
+
+                <StackLayout Spacing="10">
+
+                    <Label Text="Customer ID" />
+                    <Entry Keyboard="Numeric"
+                   Text="{Binding CustomerID}" />
+
+                    <Label Text="Employee ID" />
+                    <Entry Keyboard="Numeric"
+                   Text="{Binding EmployeeID}" />
+
+                    <Label Text="Order Date" />
+                    <DatePicker Date="{Binding OrderDate}" />
+
+                    <Label Text="Status" />
+                    <Entry Text="{Binding Status}" />
+
+                    <Button Text="Update"
+                    Command="{Binding SaveCommand}" />
+                </StackLayout>
+
+                <Button Text="Back to List"
+                Command="{Binding CancelCommand}" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

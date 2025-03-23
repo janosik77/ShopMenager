@@ -1,10 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ShopMenager.Services
 {
     public interface INavigationService
     {
-        Task NavigateTo<TViewModel>() where TViewModel : class;
+        Task NavigateToAsync(string route);
+        Task NavigateToAsync(string route, IDictionary<string, object> parameters);
         Task GoBack();
     }
 }

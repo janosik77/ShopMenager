@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShopMenager.Views.OrderItemsV.AddOrderItemView">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="20" Spacing="15">
+
+                <!-- Nagłówek -->
+                <Label Text="Create Order Item"
+                       FontSize="Large"
+                       HorizontalOptions="Center" />
+
+                <!-- Formularz dodawania OrderItem -->
+                <StackLayout Spacing="10">
+
+                    <!-- Order ID -->
+                    <Label Text="Order ID" />
+                    <Entry Placeholder="Enter order ID"
+                           Keyboard="Numeric"
+                           Text="{Binding OrderID}" />
+
+                    <!-- Product ID -->
+                    <Label Text="Product ID" />
+                    <Entry Placeholder="Enter product ID"
+                           Keyboard="Numeric"
+                           Text="{Binding ProductID}" />
+
+                    <!-- Quantity -->
+                    <Label Text="Quantity" />
+                    <Entry Placeholder="Enter quantity"
+                           Keyboard="Numeric"
+                           Text="{Binding Quantity}" />
+
+                    <!-- Unit Price -->
+                    <Label Text="Unit Price" />
+                    <Entry Placeholder="Enter unit price"
+                           Keyboard="Numeric"
+                           Text="{Binding UnitPrice}" />
+
+                    <!-- Discount -->
+                    <Label Text="Discount" />
+                    <Entry Placeholder="Enter discount"
+                           Keyboard="Numeric"
+                           Text="{Binding Discount}" />
+
+                    <!-- Przycisk Create -->
+                    <Button Text="Create"
+                            Command="{Binding SaveCommand}" />
+                </StackLayout>
+
+                <!-- Przycisk Back to List -->
+                <Button Text="Back to List"
+                        Command="{Binding CancelCommand}" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

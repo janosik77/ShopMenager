@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShopMenager.Views.CategoryV.EditCategoryView"
+             xmlns:views="clr-namespace:ShopMenager.Views"
+             xmlns:vm="clr-namespace:ShopMenager.ViewModels.CategoryVM"
+             x:TypeArguments="vm:EditCategoryViewModel"
+             >
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="20" Spacing="15">
+
+                <Label Text="Edit Category"
+                       FontSize="Large"
+                       HorizontalOptions="Center" />
+
+                <StackLayout Spacing="10">
+
+                    <Label Text="Category Name" />
+                    <Entry Text="{Binding CategoryName}" />
+
+                    <Label Text="Category Description" />
+                    <Entry Text="{Binding CategoryDescription}" />
+
+                    <Button Text="Update"
+                            Command="{Binding SaveCommand}" />
+                </StackLayout>
+
+                <Button Text="Back to List"
+                        Command="{Binding CancelCommand}" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</views:BasePage>

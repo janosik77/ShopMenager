@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 x:Class="ShopMenager.Views.CategoryV.CategoryDetailView"
+                 xmlns:views="clr-namespace:ShopMenager.Views"
+                 xmlns:vm="clr-namespace:ShopMenager.ViewModels.CategoryVM"
+                 x:TypeArguments="vm:CategoryDetailViewModel"
+                 >
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="20" Spacing="15">
+
+                <Label Text="Details"
+                       FontSize="Large"
+                       HorizontalOptions="Center" />
+
+                <StackLayout Spacing="10">
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Category ID:"
+                               FontAttributes="Bold"
+                               WidthRequest="120"/>
+                        <Label Text="{Binding CategoryID}" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Category Name:"
+                               FontAttributes="Bold"
+                               WidthRequest="120"/>
+                        <Label Text="{Binding CategoryName}" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Description:"
+                               FontAttributes="Bold"
+                               WidthRequest="120"/>
+                        <Label Text="{Binding CategoryDescription}" />
+                    </StackLayout>
+                </StackLayout>
+
+                <Button Text="Edit"
+                        Command="{Binding EditCommand}"
+                        CommandParameter="{Binding CategoryID}" />
+                <Button Text="Delete"
+                        Command="{Binding DeleteCommand}"
+                        CommandParameter="{Binding CategoryID}" />
+                <Button Text="Back to List"
+                        Command="{Binding BackCommand}" />
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</views:BasePage>

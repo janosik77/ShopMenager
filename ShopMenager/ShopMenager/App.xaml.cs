@@ -11,9 +11,8 @@ namespace ShopMenager
         public static IServiceProvider Services { get; private set; }
         public App()
         {
-            //DependencyService.Register<MockDataStore>();
             InitializeComponent();
-            
+           
             Services = Startup.ConfigureService();           
             MainPage = new AppShell();
         }

@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:views="clr-namespace:ShopMenager.Views"
+                xmlns:vm="clr-namespace:ShopMenager.ViewModels.DiscountVM"
+                x:Class="ShopMenager.Views.DiscountV.DiscountsPage"
+                x:TypeArguments="vm:DicountViewModel"
+                >
+
+    <StackLayout Padding="15" Spacing="15">
+
+        <!-- Search Bar -->
+        <Grid ColumnSpacing="5" VerticalOptions="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Frame Grid.Column="0"
+                   CornerRadius="10"
+                   Padding="0"
+                   BackgroundColor="White"
+                   HeightRequest="45"
+                   VerticalOptions="Center"
+                   HasShadow="False">
+                <Entry x:Name="SearchEntry"
+                       Placeholder="Search for discount"
+                       BackgroundColor="Transparent"
+                       Margin="15,0"
+                       VerticalOptions="Center"
+                       FontSize="14"/>
+            </Frame>
+
+            <Button Grid.Column="1"
+                    Text="🔍"
+                    BackgroundColor="Transparent"
+                    WidthRequest="45"
+                    HeightRequest="45"
+                    FontSize="18"
+                    HorizontalOptions="End"
+                    VerticalOptions="Center" />
+        </Grid>
+
+        <!-- Discounts List -->
+        <CollectionView x:Name="DiscountsList" ItemsSource="{Binding Discounts}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame BackgroundColor="White"
+                           CornerRadius="15"
+                           Padding="10"
+                           Margin="0,5"
+                           HasShadow="True">
+                        <Grid ColumnSpacing="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Discount Icon (optional) -->
+                            <Image Source="{Binding Icon}"
+                                   WidthRequest="60"
+                                   HeightRequest="60"
+                                   Aspect="AspectFill"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   Grid.Column="0"
+                                   BackgroundColor="#E0E0E0"
+                                   Clip="EllipseGeometry Center='30,30' RadiusX='30' RadiusY='30'" />
+
+                            <!-- Discount Info -->
+                            <StackLayout Grid.Column="1" VerticalOptions="Center">
+                                <Label Text="{Binding Name}"
+                                       FontAttributes="Bold"
+                                       FontSize="16"
+                                       TextColor="#333" />
+                                <Label Text="{Binding Percentage, StringFormat='Discount: {0}%'}"
+                                       FontSize="13"
+                                       TextColor="#777" />
+                                <Label Text="{Binding StartDate, StringFormat='Start: {0:MM/dd/yyyy}'}"
+                                       FontSize="12"
+                                       TextColor="#777" />
+                                <Label Text="{Binding EndDate, StringFormat='End: {0:MM/dd/yyyy}'}"
+                                       FontSize="12"
+                                       TextColor="#777" />
+                            </StackLayout>
+
+                            <!-- Edit/Delete Buttons -->
+                            <StackLayout Grid.Column="2"
+                                         VerticalOptions="Center"
+                                         Spacing="10">
+                                <Button Text="✏️"
+                                        BackgroundColor="#4CAF50"
+                                        WidthRequest="35"
+                                        HeightRequest="35"
+                                        CornerRadius="10"
+                                        FontSize="14"
+                                        TextColor="White" />
+                                <Button Text="🗑️"
+                                        BackgroundColor="#F44336"
+                                        WidthRequest="35"
+                                        HeightRequest="35"
+                                        CornerRadius="10"
+                                        FontSize="14"
+                                        TextColor="White" />
+                            </StackLayout>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Add Discount Button -->
+        <Button Text="＋ ADD DISCOUNT"
+                BackgroundColor="#2196F3"
+                TextColor="White"
+                CornerRadius="10"
+                FontSize="16"
+                HeightRequest="50"
+                VerticalOptions="End" />
+
+    </StackLayout>
+
+</views:BasePage>

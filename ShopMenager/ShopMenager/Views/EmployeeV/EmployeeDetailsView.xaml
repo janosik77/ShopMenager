@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShopMenager.Views.EmployeeV.EmployeeDetailsView">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="20" Spacing="15">
+
+                <Label Text="Details"
+                       FontSize="Large"
+                       HorizontalOptions="Center" />
+
+                <StackLayout Spacing="10">
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Employee ID:"
+                               FontAttributes="Bold"
+                               WidthRequest="120"/>
+                        <Label Text="{Binding EmployeeID}" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="First Name:"
+                               FontAttributes="Bold"
+                               WidthRequest="120"/>
+                        <Label Text="{Binding FirstName}" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Last Name:"
+                               FontAttributes="Bold"
+                               WidthRequest="120"/>
+                        <Label Text="{Binding LastName}" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Email:"
+                               FontAttributes="Bold"
+                               WidthRequest="120"/>
+                        <Label Text="{Binding Email}" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Phone:"
+                               FontAttributes="Bold"
+                               WidthRequest="120"/>
+                        <Label Text="{Binding Phone}" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Hire Date:"
+                               FontAttributes="Bold"
+                               WidthRequest="120"/>
+                        <Label Text="{Binding HireDate}" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Salary:"
+                               FontAttributes="Bold"
+                               WidthRequest="120"/>
+                        <Label Text="{Binding Salary}" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Photo Path:"
+                               FontAttributes="Bold"
+                               WidthRequest="120"/>
+                        <Label Text="{Binding PhotoPath}" />
+                    </StackLayout>
+                </StackLayout>
+
+                <Button Text="Edit"
+                        Command="{Binding EditCommand}"
+                        CommandParameter="{Binding EmployeeID}" />
+                <Button Text="Delete"
+                        Command="{Binding DeleteCommand}"
+                        CommandParameter="{Binding EmployeeID}" />
+                <Button Text="Back to List"
+                        Command="{Binding BackCommand}" />
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

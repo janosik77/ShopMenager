@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShopMenager.Views.PaymentsV.PaymentDetailView">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="20" Spacing="15">
+
+                <Label Text="Details"
+                       FontSize="Large"
+                       HorizontalOptions="Center" />
+
+                <StackLayout Spacing="10">
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Payment ID:"
+                               FontAttributes="Bold"
+                               WidthRequest="120"/>
+                        <Label Text="{Binding PaymentID}" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Order ID:"
+                               FontAttributes="Bold"
+                               WidthRequest="120"/>
+                        <Label Text="{Binding OrderID}" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Payment Date:"
+                               FontAttributes="Bold"
+                               WidthRequest="120"/>
+                        <Label Text="{Binding PaymentDate}" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Amount:"
+                               FontAttributes="Bold"
+                               WidthRequest="120"/>
+                        <Label Text="{Binding Amount}" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Method:"
+                               FontAttributes="Bold"
+                               WidthRequest="120"/>
+                        <Label Text="{Binding PaymentMethod}" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Status:"
+                               FontAttributes="Bold"
+                               WidthRequest="120"/>
+                        <Label Text="{Binding PaymentStatus}" />
+                    </StackLayout>
+                </StackLayout>
+
+                <Button Text="Edit"
+                        Command="{Binding EditCommand}"
+                        CommandParameter="{Binding PaymentID}" />
+                <Button Text="Delete"
+                        Command="{Binding DeleteCommand}"
+                        CommandParameter="{Binding PaymentID}" />
+                <Button Text="Back to List"
+                        Command="{Binding BackCommand}" />
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

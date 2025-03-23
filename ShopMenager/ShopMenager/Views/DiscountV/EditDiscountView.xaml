@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShopMenager.Views.DiscountV.EditDiscountView">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="20" Spacing="15">
+
+                <Label Text="Edit Discount"
+                       FontSize="Large"
+                       HorizontalOptions="Center" />
+
+                <StackLayout Spacing="10">
+                    <Label Text="Discount Name" />
+                    <Entry Text="{Binding DiscountName}" />
+
+                    <Label Text="Discount Rate (%)" />
+                    <Entry Keyboard="Numeric"
+                           Text="{Binding DiscountRate}" />
+
+                    <Label Text="Start Date" />
+                    <DatePicker Date="{Binding StartDate}" />
+
+                    <Label Text="End Date" />
+                    <DatePicker Date="{Binding EndDate}" />
+
+                    <Button Text="Update"
+                            Command="{Binding SaveCommand}" />
+                </StackLayout>
+
+                <Button Text="Back to List"
+                        Command="{Binding CancelCommand}" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

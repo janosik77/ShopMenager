@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShopMenager.Views.PorductV.AddProductView">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="20" Spacing="15">
+
+                <Label Text="Create Product"
+                       FontSize="Large"
+                       HorizontalOptions="Center" />
+
+                <StackLayout Spacing="10">
+
+                    <Label Text="Category ID" />
+                    <Entry Placeholder="Enter category ID"
+                           Keyboard="Numeric"
+                           Text="{Binding CategoryID}" />
+
+                    <Label Text="Product Name" />
+                    <Entry Placeholder="Enter product name"
+                           Text="{Binding ProductName}" />
+
+                    <Label Text="Price" />
+                    <Entry Placeholder="Enter price"
+                           Keyboard="Numeric"
+                           Text="{Binding Price}" />
+
+                    <Label Text="Stock" />
+                    <Entry Placeholder="Enter stock quantity"
+                           Keyboard="Numeric"
+                           Text="{Binding Stock}" />
+
+                    <Label Text="Description" />
+                    <Editor Placeholder="Enter product description"
+                            Text="{Binding Description}"
+                            AutoSize="TextChanges"
+                            HeightRequest="100" />
+
+                    <Label Text="Photo Path" />
+                    <Entry Placeholder="Enter photo path"
+                           Text="{Binding PhotoPath}" />
+
+                    <Button Text="Create"
+                            Command="{Binding SaveCommand}" />
+                </StackLayout>
+
+                <Button Text="Back to List"
+                        Command="{Binding CancelCommand}" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

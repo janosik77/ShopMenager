@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShopMenager.Views.DiscountV.DiscountDetailView">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="20" Spacing="15">
+
+                <Label Text="Details"
+                       FontSize="Large"
+                       HorizontalOptions="Center" />
+
+                <StackLayout Spacing="10">
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Discount ID:"
+                               FontAttributes="Bold"
+                               WidthRequest="120"/>
+                        <Label Text="{Binding DiscountID}" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Name:"
+                               FontAttributes="Bold"
+                               WidthRequest="120"/>
+                        <Label Text="{Binding DiscountName}" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Rate:"
+                               FontAttributes="Bold"
+                               WidthRequest="120"/>
+                        <Label Text="{Binding DiscountRate}" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Start Date:"
+                               FontAttributes="Bold"
+                               WidthRequest="120"/>
+                        <Label Text="{Binding StartDate}" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="End Date:"
+                               FontAttributes="Bold"
+                               WidthRequest="120"/>
+                        <Label Text="{Binding EndDate}" />
+                    </StackLayout>
+                </StackLayout>
+
+                <Button Text="Edit"
+                        Command="{Binding EditCommand}"
+                        CommandParameter="{Binding DiscountID}" />
+                <Button Text="Delete"
+                        Command="{Binding DeleteCommand}"
+                        CommandParameter="{Binding DiscountID}" />
+                <Button Text="Back to List"
+                        Command="{Binding BackCommand}" />
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -11,7 +11,10 @@ namespace ShopMenager.Models
         public string Comments { get; set; }
         public DateTime ReviewDate { get; set; }
 
-        public Employee Employee { get; set; }
-        public Product Product { get; set; }
+        public string EmployeeName { get; set; }
+        public int EmployeeID { get; set; }
+        public int ProductID { get; set; }
+        public string ProductName { get; set; }
     }
 }
+

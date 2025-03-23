@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShopMenager.Views.OrderItemsV.OrderItemDetailView">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="20" Spacing="15">
+
+                <Label Text="Details"
+                       FontSize="Large"
+                       HorizontalOptions="Center" />
+
+                <StackLayout Spacing="10">
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="OrderDetail ID:"
+                               FontAttributes="Bold"
+                               WidthRequest="120"/>
+                        <Label Text="{Binding OrderDetailsId}" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Order ID:"
+                               FontAttributes="Bold"
+                               WidthRequest="120"/>
+                        <Label Text="{Binding OrderID}" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Product ID:"
+                               FontAttributes="Bold"
+                               WidthRequest="120"/>
+                        <Label Text="{Binding ProductID}" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Quantity:"
+                               FontAttributes="Bold"
+                               WidthRequest="120"/>
+                        <Label Text="{Binding Quantity}" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Unit Price:"
+                               FontAttributes="Bold"
+                               WidthRequest="120"/>
+                        <Label Text="{Binding UnitPrice}" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Discount:"
+                               FontAttributes="Bold"
+                               WidthRequest="120"/>
+                        <Label Text="{Binding Discount}" />
+                    </StackLayout>
+                </StackLayout>
+
+                <Button Text="Edit"
+                        Command="{Binding EditCommand}"
+                        CommandParameter="{Binding OrderDetailsId}" />
+                <Button Text="Delete"
+                        Command="{Binding DeleteCommand}"
+                        CommandParameter="{Binding OrderDetailsId}" />
+                <Button Text="Back to List"
+                        Command="{Binding BackCommand}" />
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

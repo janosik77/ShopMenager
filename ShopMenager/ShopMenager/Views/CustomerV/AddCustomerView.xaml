@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShopMenager.Views.CustomerV.AddCustomerView"
+             xmlns:views="clr-namespace:ShopMenager.Views"
+             xmlns:vm="clr-namespace:ShopMenager.ViewModels.CustomerVM"
+             x:TypeArguments="vm:AddCustomerViewModel">
+    
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="20" Spacing="15">
+                <!-- Nagłówki -->
+                <Label Text="Create Customers" 
+               FontSize="Large" 
+               HorizontalOptions="Center" />
+                
+
+                <!-- Formularz -->
+                <StackLayout>
+                    <!-- First Name -->
+                    <Label Text="First Name" />
+                    <Entry Placeholder="Enter first name"
+                 Text="{Binding FirstName}" />
+
+                    <!-- Last Name -->
+                    <Label Text="Last Name" />
+                    <Entry Placeholder="Enter last name"
+                 Text="{Binding LastName}" />
+
+                    <!-- Email -->
+                    <Label Text="Email" />
+                    <Entry Placeholder="Enter email"
+                 Text="{Binding Email}"
+                 Keyboard="Email" />
+
+                    <!-- Phone -->
+                    <Label Text="Phone" />
+                    <Entry Placeholder="Enter phone"
+                 Text="{Binding Phone}"
+                 Keyboard="Telephone" />
+
+                    <!-- Address -->
+                    <Label Text="Address" />
+                    <Entry Placeholder="Enter address"
+                 Text="{Binding Address}" />
+
+                    <!-- City -->
+                    <Label Text="City" />
+                    <Entry Placeholder="Enter city"
+                 Text="{Binding City}" />
+
+                    <!-- Photo Path -->
+                    <Label Text="Photo Path" />
+                    <Entry Placeholder="Enter photo path"
+                 Text="{Binding PhotoPath}" />
+
+                    <!-- Przycisk Create -->
+                    <Button Text="Create"
+                  Command="{Binding SaveCommand}" />
+                </StackLayout>
+
+                <!-- Przycisk Back to List -->
+                <Button Text="Back to List"
+                Command="{Binding CancelCommand}" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</views:BasePage>

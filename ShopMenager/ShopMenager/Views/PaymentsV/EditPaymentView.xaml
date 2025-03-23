@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShopMenager.Views.PaymentsV.EditPaymentView">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="20" Spacing="15">
+
+                <Label Text="Edit Payment"
+                       FontSize="Large"
+                       HorizontalOptions="Center" />
+
+                <StackLayout Spacing="10">
+
+                    <Label Text="Order ID" />
+                    <Entry Placeholder="Enter order ID"
+                           Keyboard="Numeric"
+                           Text="{Binding OrderID}" />
+
+                    <Label Text="Payment Date" />
+                    <DatePicker Date="{Binding PaymentDate}" />
+
+                    <Label Text="Amount" />
+                    <Entry Placeholder="Enter amount"
+                           Keyboard="Numeric"
+                           Text="{Binding Amount}" />
+
+                    <Label Text="Payment Method" />
+                    <Entry Placeholder="Enter payment method"
+                           Text="{Binding PaymentMethod}" />
+
+                    <Label Text="Payment Status" />
+                    <Entry Placeholder="Enter payment status"
+                           Text="{Binding PaymentStatus}" />
+
+                    <Button Text="Update"
+                            Command="{Binding SaveCommand}" />
+                </StackLayout>
+
+                <Button Text="Back to List"
+                        Command="{Binding CancelCommand}" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

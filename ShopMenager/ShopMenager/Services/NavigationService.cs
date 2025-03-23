@@ -16,22 +16,25 @@ namespace ShopMenager.Services
             await Shell.Current.Navigation.PopAsync();
         }
 
-        public async Task NavigateTo<TViewModel>() where TViewModel : class
+        public async Task NavigateToAsync(string route)
         {
-            var page = GetPageFromView(typeof(TViewModel));
-            if (page == null)
-            {
-                await Shell.Current.Navigation.PushAsync(page);
-            }
+            await Shell.Current.GoToAsync(route);
         }
 
-        private Page GetPageFromView(Type viewModelType) 
+        public async Task NavigateToAsync(string route, IDictionary<string, object> parameters)
         {
-            if (viewModelType == typeof(HomePageViewModel))
-                return App.Services.GetService<HomePage>();
-            if (viewModelType == typeof(DiscountsPageViewModel))
-                return App.Services.GetService<DiscountsPage>();
-            return null;
+            if (parameters != null && parameters.Count > 0)
+            {
+                var queryString = "?";
+                foreach (var kvp in parameters)
+                {
+                    queryString += $"{kvp.Key}={kvp.Value}&";
+                }
+                queryString = queryString.TrimEnd('&');
+                route += queryString;
+            }
+
+            await Shell.Current.GoToAsync(route);
         }
     }
 }

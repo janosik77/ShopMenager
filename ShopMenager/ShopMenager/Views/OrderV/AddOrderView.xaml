@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShopMenager.Views.OrderV.AddOrderView">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="20" Spacing="15">
+
+                <!-- Nagłówek -->
+                <Label Text="Create Order"
+                       FontSize="Large"
+                       HorizontalOptions="Center" />
+
+                <!-- Formularz dodawania Order -->
+                <StackLayout Spacing="10">
+
+                    <!-- Customer ID -->
+                    <Label Text="Customer ID" />
+                    <Entry Placeholder="Enter customer ID"
+                           Keyboard="Numeric"
+                           Text="{Binding CustomerID}" />
+
+                    <!-- Employee ID -->
+                    <Label Text="Employee ID" />
+                    <Entry Placeholder="Enter employee ID"
+                           Keyboard="Numeric"
+                           Text="{Binding EmployeeID}" />
+
+                    <!-- Order Date -->
+                    <Label Text="Order Date" />
+                    <DatePicker Date="{Binding OrderDate}" />
+
+                    <!-- Status -->
+                    <Label Text="Status" />
+                    <Entry Placeholder="Enter status"
+                           Text="{Binding Status}" />
+
+                    <!-- Przycisk Create -->
+                    <Button Text="Create"
+                            Command="{Binding SaveCommand}" />
+                </StackLayout>
+
+                <!-- Przycisk Back to List -->
+                <Button Text="Back to List"
+                        Command="{Binding CancelCommand}" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

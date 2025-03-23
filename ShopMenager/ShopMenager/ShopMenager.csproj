@@ -7,6 +7,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ViewModels\Popups\**" />
+    <Compile Remove="ViewModels\tamplates\**" />
+    <Compile Remove="Views\Popups\**" />
+    <Compile Remove="Views\templates\**" />
+    <EmbeddedResource Remove="ViewModels\Popups\**" />
+    <EmbeddedResource Remove="ViewModels\tamplates\**" />
+    <EmbeddedResource Remove="Views\Popups\**" />
+    <EmbeddedResource Remove="Views\templates\**" />
+    <None Remove="ViewModels\Popups\**" />
+    <None Remove="ViewModels\tamplates\**" />
+    <None Remove="Views\Popups\**" />
+    <None Remove="Views\templates\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="ViewModels\DiscountVM\DiscountsPageViewModel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.3" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.3" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
@@ -16,11 +35,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\DiscountsPage.xaml.cs">
-      <DependentUpon>DiscountsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\Popups\AddCustomerPopup.xaml.cs">
-      <DependentUpon>AddCustomerPopup.xaml</DependentUpon>
+    <Compile Update="Views\OrderItemsV\OrdersItemView.xaml.cs">
+      <DependentUpon>OrdersItemView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -28,46 +44,91 @@
     <EmbeddedResource Update="Style\MainStyle.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\CategoriesPage.xaml">
+    <EmbeddedResource Update="Views\CategoryV\AddCategoryView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\CustomersPage.xaml">
+    <EmbeddedResource Update="Views\CategoryV\CategoryDetailView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\EmployeesPage.xaml">
+    <EmbeddedResource Update="Views\CategoryV\EditCategoryView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\MorePage.xaml">
+    <EmbeddedResource Update="Views\CustomerV\AddCustomerView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\DiscountsPage.xaml">
+    <EmbeddedResource Update="Views\CustomerV\CustomerDetailsView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\OrdersItems.xaml">
+    <EmbeddedResource Update="Views\CustomerV\CustomersPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\OrdersPage.xaml">
+    <EmbeddedResource Update="Views\CustomerV\EditCustomerViwe.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\PaymentsPage.xaml">
+    <EmbeddedResource Update="Views\DiscountV\AddDiscountView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Popups\AddCustomerPopup.xaml">
+    <EmbeddedResource Update="Views\DiscountV\DiscountDetailView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Popups\AddUpdateReviewPopup.xaml">
+    <EmbeddedResource Update="Views\DiscountV\EditDiscountView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\ProductPage.xaml">
+    <EmbeddedResource Update="Views\EmployeeV\AddEmployeeView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\HomePage.xaml">
+    <EmbeddedResource Update="Views\EmployeeV\EditEmployeeView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\ReviewsPage.xaml">
+    <EmbeddedResource Update="Views\EmployeeV\EmployeeDetailsView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\SupplierPage.xaml">
+    <EmbeddedResource Update="Views\OrderItemsV\AddOrderItemView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\OrderItemsV\EditOrderItemView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\OrderItemsV\OrderItemDetailView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\OrderItemsV\OrdersItemView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\OrderV\AddOrderView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\OrderV\EditorderView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\OrderV\OrderDetailView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\PaymentsV\AddPaymentView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\PaymentsV\EditPaymentView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\PaymentsV\PaymentDetailView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\PorductV\AddProductView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\PorductV\EditproductView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\PorductV\productDetailView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\ReviewV\AddReviewView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\ReviewV\EditReviewView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\ReviewV\ReviewdetailView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

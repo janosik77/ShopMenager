@@ -2,6 +2,15 @@
 <Shell xmlns="http://xamarin.com/schemas/2014/forms" 
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:ShopMenager.Views"
+       xmlns:empV="clr-namespace:ShopMenager.Views.EmployeeV"
+       xmlns:prodV="clr-namespace:ShopMenager.Views.PorductV"
+       xmlns:catV="clr-namespace:ShopMenager.Views.CategoryV"
+       xmlns:custV="clr-namespace:ShopMenager.Views.CustomerV"
+       xmlns:discV="clr-namespace:ShopMenager.Views.DiscountV"
+       xmlns:ordV="clr-namespace:ShopMenager.Views.OrderV"
+       xmlns:detV="clr-namespace:ShopMenager.Views.OrderItemsV"
+       xmlns:payV="clr-namespace:ShopMenager.Views.PaymentsV"
+       xmlns:revV="clr-namespace:ShopMenager.Views.ReviewV"
        Title="ShopMenager"
        x:Class="ShopMenager.AppShell">
 
@@ -14,28 +23,28 @@
         <ShellContent ContentTemplate="{DataTemplate local:HomePage}" />
     </FlyoutItem>
     <FlyoutItem Title="Customers" Icon="customer.png">
-        <ShellContent ContentTemplate="{DataTemplate local:CustomersPage}" />
+        <ShellContent ContentTemplate="{DataTemplate custV:CustomersPage}" />
     </FlyoutItem>
     <FlyoutItem Title="Employees" Icon="worker.png">
-        <ShellContent ContentTemplate="{DataTemplate local:EmployeesPage}" />
+        <ShellContent ContentTemplate="{DataTemplate empV:EmployeesPage}" />
     </FlyoutItem>
     <FlyoutItem Title="Products" Icon="product.png">
-        <ShellContent ContentTemplate="{DataTemplate local:ProductPage}" />
+        <ShellContent ContentTemplate="{DataTemplate prodV:ProductPage}" />
     </FlyoutItem>
     <FlyoutItem Title="Categories" Icon="category.png">
-        <ShellContent ContentTemplate="{DataTemplate local:CategoriesPage}" />
+        <ShellContent ContentTemplate="{DataTemplate catV:CategoriesPage}" />
     </FlyoutItem>
     <FlyoutItem Title="Discounts" Icon="discount.png">
-        <ShellContent ContentTemplate="{DataTemplate local:DiscountsPage}" />
+        <ShellContent ContentTemplate="{DataTemplate discV:DiscountsPage}" />
     </FlyoutItem>
     <FlyoutItem Title="Orders" Icon="order.png">
-        <ShellContent ContentTemplate="{DataTemplate local:OrdersPage}" />
+        <ShellContent ContentTemplate="{DataTemplate ordV:OrdersPage}" />
     </FlyoutItem>
     <FlyoutItem Title="Payments" Icon="payments.png">
-        <ShellContent ContentTemplate="{DataTemplate local:PaymentsPage}" />
+        <ShellContent ContentTemplate="{DataTemplate payV:PaymentsPage}" />
     </FlyoutItem>
     <FlyoutItem Title="Reviews" Icon="reviews.png">
-        <ShellContent ContentTemplate="{DataTemplate local:ReviewsPage}" />
+        <ShellContent ContentTemplate="{DataTemplate revV:ReviewsPage}" />
     </FlyoutItem>
 
 

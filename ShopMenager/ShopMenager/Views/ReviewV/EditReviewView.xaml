@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShopMenager.Views.ReviewV.EditReviewView">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="20" Spacing="15">
+
+                <Label Text="Edit Review"
+                       FontSize="Large"
+                       HorizontalOptions="Center" />
+
+                <StackLayout Spacing="10">
+
+                    <Label Text="Employee ID" />
+                    <Entry Keyboard="Numeric"
+                           Text="{Binding EmployeeID}" />
+
+                    <Label Text="Product ID" />
+                    <Entry Keyboard="Numeric"
+                           Text="{Binding ProductID}" />
+
+                    <Label Text="Rating" />
+                    <Entry Keyboard="Numeric"
+                           Text="{Binding Rating}" />
+
+                    <Label Text="Comments" />
+                    <Editor Text="{Binding Comments}"
+                            AutoSize="TextChanges"
+                            HeightRequest="100" />
+
+                    <Label Text="Review Date" />
+                    <DatePicker Date="{Binding ReviewDate}" />
+
+                    <Button Text="Update"
+                            Command="{Binding SaveCommand}" />
+                </StackLayout>
+
+                <Button Text="Back to List"
+                        Command="{Binding CancelCommand}" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

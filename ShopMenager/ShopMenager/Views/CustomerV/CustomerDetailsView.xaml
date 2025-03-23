@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShopMenager.Views.CustomerV.CustomerDetailsView"
+             xmlns:views="clr-namespace:ShopMenager.Views"
+             xmlns:vm="clr-namespace:ShopMenager.ViewModels.CustomerVM"
+             x:TypeArguments="vm:CustomerDetailViewModel"
+             >
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="20" Spacing="15">
+
+                <Label Text="Details" 
+                       FontSize="Large" 
+                       HorizontalOptions="Center" />
+
+                <StackLayout Spacing="10">
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Customer ID:" 
+                               FontAttributes="Bold" 
+                               WidthRequest="120"/>
+                        <Label Text="{Binding CustomerId, Mode=TwoWay}" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="First Name:" 
+                               FontAttributes="Bold" 
+                               WidthRequest="120"/>
+                        <Label Text="{Binding FirstName, Mode=TwoWay}" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Last Name:" 
+                               FontAttributes="Bold" 
+                               WidthRequest="120"/>
+                        <Label Text="{Binding LastName, Mode=TwoWay}" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Email:" 
+                               FontAttributes="Bold" 
+                               WidthRequest="120"/>
+                        <Label Text="{Binding Email, Mode=TwoWay}" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Phone:" 
+                               FontAttributes="Bold" 
+                               WidthRequest="120"/>
+                        <Label Text="{Binding Phone, Mode=TwoWay}" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Address:" 
+                               FontAttributes="Bold" 
+                               WidthRequest="120"/>
+                        <Label Text="{Binding Address, Mode=TwoWay}" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="City:" 
+                               FontAttributes="Bold" 
+                               WidthRequest="120"/>
+                        <Label Text="{Binding City, Mode=TwoWay}" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Photo Path:" 
+                               FontAttributes="Bold" 
+                               WidthRequest="120"/>
+                        <Label Text="{Binding PhotoPath, Mode=TwoWay}" />
+                    </StackLayout>
+                </StackLayout>
+
+                <Button Text="Edit"
+                        Command="{Binding UpdateCommand}"
+                        CommandParameter="{Binding CustomerId}" />
+                <Button Text="Delete"
+                        Command="{Binding DeleteCommand}"
+                        CommandParameter="{Binding CustomerId}" />
+                <Button Text="Back to List"
+                        Command="{Binding CancelCommand}" />
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</views:BasePage>

@@ -7,8 +7,22 @@ using System.Security.Authentication.ExtendedProtection;
 using System.Text;
 using ShopMenager.Models;
 using ShopMenager.Services.ApiService;
-using ShopMenager.Views.Popups;
-using ShopMenager.ViewModels.Popups;
+using ShopMenager.ViewModels.CustomerVM;
+using ShopMenager.ViewModels.DiscountVM;
+using ShopMenager.ViewModels.CategoryVM;
+using ShopMenager.ViewModels.EmployeeVM;
+using ShopMenager.ViewModels.OrderitemsVM;
+using ShopMenager.ViewModels.PaymentVM;
+using ShopMenager.ViewModels.ProductVM;
+using ShopMenager.ViewModels.ReviewsVM;
+using ShopMenager.Views.CustomerV;
+using ShopMenager.Views.OrderItemsV;
+using ShopMenager.Views.EmployeeV;
+using ShopMenager.Views.ReviewV;
+using ShopMenager.Views.PorductV;
+using ShopMenager.Views.DiscountV;
+using ShopMenager.Views.CategoryV;
+using ShopMenager.Views.PaymentsV;
 
 namespace ShopMenager.Services
 {
@@ -18,35 +32,31 @@ namespace ShopMenager.Services
         {
             var services = new ServiceCollection();
 
-            //Nav services
-            services.AddSingleton<CategoriesPageViewModel>();
+            // services
+            services.AddSingleton<CategoriesViewModel>();
             services.AddSingleton<CustomersPageViewModel>();
-            services.AddSingleton<DiscountsPageViewModel>();
-            services.AddSingleton<EmployeesPageViewModel>();
+            services.AddSingleton<DicountViewModel>();
+            services.AddSingleton<EmployeesViewModel>();
             services.AddSingleton<HomePageViewModel>();
-            services.AddSingleton<MorePageViewModel>();
-            services.AddSingleton<OrdersItemsViewModel> ();
-            services.AddSingleton<PaymentsPageViewModel>();
-            services.AddSingleton<ProductPageViewModel>();
-            services.AddSingleton<ReviewsPageViewModel>();
-            services.AddSingleton<SupplierPageViewModel>();
-            services.AddTransient<AddCustomerPopupViewModel>();
-            services.AddTransient<AddUpdateReviewPopioViewModel>();
+            services.AddSingleton<OrdersItemsViewModel>();
+            services.AddSingleton<PaymentsViewModel>();
+            services.AddSingleton<ProductViewModel>();
+            services.AddSingleton<ReviewsViewModel>();
+            services.AddTransient<AddCustomerViewModel>();
+            services.AddTransient<CustomerDetailViewModel>();
+
 
             services.AddSingleton<CategoriesPage>();
             services.AddSingleton<CustomersPage>();
             services.AddSingleton<DiscountsPage>();
             services.AddSingleton<EmployeesPage>();
             services.AddSingleton<HomePage>();
-            services.AddSingleton<MorePage>();
-            services.AddSingleton<OrdersItems>();
+            services.AddSingleton<OrdersItemView>();
             services.AddSingleton<PaymentsPage>();
             services.AddSingleton<ProductPage>();
             services.AddSingleton<ReviewsPage>();
-            services.AddSingleton<SupplierPage>();
-            services.AddTransient<AddCustomerPopup>();
-            services.AddTransient<AddUpdateReviewPopup>();
-            
+            services.AddTransient<AddCustomerView>();
+            services.AddTransient<CustomerDetailsView>();
 
 
             //Rest api connection services
@@ -60,7 +70,7 @@ namespace ShopMenager.Services
                 client.BaseAddress = new Uri("http://10.0.2.2:5005");
             });
 
-
+            
             return services.BuildServiceProvider();
 
 
