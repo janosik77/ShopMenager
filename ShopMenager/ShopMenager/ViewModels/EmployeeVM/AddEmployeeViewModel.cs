@@ -1,14 +1,13 @@
-﻿using ShopMenager.Models;
-using ShopMenager.Services;
+﻿
 using ShopMenager.Services.ApiService;
 using ShopMenager.ViewModels.Abstract;
 using System;
 
 namespace ShopMenager.ViewModels.EmployeeVM
 {
-    public class AddEmployeeViewModel : AAddItemViewModel<Employee>
+    public class AddEmployeeViewModel : AAddItemViewModel<Employees>
     {
-        public AddEmployeeViewModel(IApiService<Employee> itemService, INavigationService navigationService, string title) : base(itemService, navigationService, title)
+        public AddEmployeeViewModel(IDataStore<Employees> itemService, string title) : base(itemService, title)
         {
             HireDate = DateTime.Now;
         }
@@ -66,7 +65,7 @@ namespace ShopMenager.ViewModels.EmployeeVM
 
         #endregion
 
-        public override Employee SetItem() => new Employee
+        public override Employees SetItem() => new Employees
         {
             FirstName = FirstName,
             LastName = LastName,

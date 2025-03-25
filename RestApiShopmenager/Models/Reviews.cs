@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,7 +11,7 @@ public partial class Reviews
     public int ReviewId { get; set; }
 
     [Column("EmployeeID")]
-    public int EmployeeId { get; set; }
+    public int EmployeeID { get; set; }
 
     [Column("ProductID")]
     public int ProductId { get; set; }

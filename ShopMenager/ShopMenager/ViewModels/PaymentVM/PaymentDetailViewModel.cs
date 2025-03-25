@@ -1,16 +1,15 @@
-﻿using ShopMenager.Models;
-using ShopMenager.Services;
-using ShopMenager.Services.ApiService;
+﻿using ShopMenager.Services.ApiService;
 using ShopMenager.ViewModels.Abstract;
 using ShopMenager.Views.PaymentsV;
 using System;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace ShopMenager.ViewModels.PaymentVM
 {
-    public class PaymentDetailViewModel : ADetailsItemViewModel<Payment>
+    public class PaymentDetailViewModel : ADetailsItemViewModel<Payments>
     {
-        public PaymentDetailViewModel(IApiService<Payment> itemService, INavigationService navigationService) : base(itemService, navigationService, "Payment Detail")
+        public PaymentDetailViewModel(IDataStore<Payments> itemService) : base(itemService, "Payment Detail")
         {
         }
         #region Fields
@@ -18,8 +17,8 @@ namespace ShopMenager.ViewModels.PaymentVM
         private int _orderID;
         private DateTime _paymentDate;
         private decimal _amount;
-        private int _paymentMethod;
-        private int _paymentStatus;
+        private PaymentMethods _paymentMethod;
+        private PaymentStatuses _paymentStatus;
         #endregion
 
         #region Props
@@ -47,13 +46,13 @@ namespace ShopMenager.ViewModels.PaymentVM
             set => SetProperty(ref _amount, value);
         }
 
-        public int PaymentMethod
+        public PaymentMethods PaymentMethod
         {
             get => _paymentMethod;
             set => SetProperty(ref _paymentMethod, value);
         }
 
-        public int PaymentStatus
+        public PaymentStatuses PaymentStatus
         {
             get => _paymentStatus;
             set => SetProperty(ref _paymentStatus, value);
@@ -64,7 +63,7 @@ namespace ShopMenager.ViewModels.PaymentVM
         {
             try
             {
-                var payment = await ItemService.GetByIdAsync(id);
+                var payment = await ItemService.GetItemAsync(id);
                 if (payment != null)
                 {
                     PaymentID = payment.PaymentID;
@@ -82,6 +81,6 @@ namespace ShopMenager.ViewModels.PaymentVM
         }
 
         protected override Task GoToUpdatePage()
-            => NavService.NavigateToAsync($"{nameof(EditPaymentView)}?{nameof(EditPaymentViewModel.PaymentID)}={PaymentID}");
+            => Shell.Current.GoToAsync($"{nameof(EditPaymentView)}?{nameof(EditPaymentViewModel.PaymentID)}={PaymentID}");
     }
 }

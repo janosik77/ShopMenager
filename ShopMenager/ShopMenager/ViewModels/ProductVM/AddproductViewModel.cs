@@ -1,16 +1,13 @@
-﻿using ShopMenager.Models;
-using ShopMenager.Services;
+﻿
 using ShopMenager.Services.ApiService;
 using ShopMenager.ViewModels.Abstract;
-using System;
-using System.Collections.Generic;
-using System.Text;
+
 
 namespace ShopMenager.ViewModels.ProductVM
 {
-    public class AddproductViewModel : AAddItemViewModel<Product>
+    public class AddproductViewModel : AAddItemViewModel<Products>
     {
-        public AddproductViewModel(IApiService<Product> itemService, INavigationService navigationService, string title) : base(itemService, navigationService, title)
+        public AddproductViewModel(IDataStore<Products> itemService, string title) : base(itemService, title)
         {
         }
         #region Properties
@@ -59,7 +56,7 @@ namespace ShopMenager.ViewModels.ProductVM
 
         #endregion
 
-        public override Product SetItem() => new Product
+        public override Products SetItem() => new Products
         {
             CategoryID = CategoryID,
             ProductName = ProductName,

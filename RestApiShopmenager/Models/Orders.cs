@@ -10,13 +10,13 @@ public partial class Orders
 {
     [Key]
     [Column("OrderID")]
-    public int OrderId { get; set; }
+    public int OrderID { get; set; }
 
     [Column("CustomerID")]
-    public int CustomerId { get; set; }
+    public int CustomerID { get; set; }
 
     [Column("EmployeeID")]
-    public int EmployeeId { get; set; }
+    public int EmployeeID { get; set; }
 
     [Column(TypeName = "datetime")]
     public DateTime OrderDate { get; set; }

@@ -1,16 +1,16 @@
-﻿using ShopMenager.Models;
-using ShopMenager.Services;
+﻿
 using ShopMenager.Services.ApiService;
 using ShopMenager.ViewModels.Abstract;
 using ShopMenager.Views.PorductV;
 using System;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace ShopMenager.ViewModels.ProductVM
 {
-    public class ProductDetailViewModel : ADetailsItemViewModel<Product>
+    public class ProductDetailViewModel : ADetailsItemViewModel<Products>
     {
-        public ProductDetailViewModel(IApiService<Product> itemService, INavigationService navigationService) : base(itemService, navigationService, "Product Detail")
+        public ProductDetailViewModel(IDataStore<Products> itemService) : base(itemService, "Product Detail")
         {
         }
 
@@ -72,7 +72,7 @@ namespace ShopMenager.ViewModels.ProductVM
         {
             try
             {
-                var product = await ItemService.GetByIdAsync(id);
+                var product = await ItemService.GetItemAsync(id);
                 if (product != null)
                 {
                     ProductID = product.ProductID;
@@ -91,6 +91,6 @@ namespace ShopMenager.ViewModels.ProductVM
         }
 
         protected override Task GoToUpdatePage()
-            => NavService.NavigateToAsync($"{nameof(EditproductView)}?{nameof(EditProductViewModel.ProductID)}={ProductID}");
+            => Shell.Current.GoToAsync($"{nameof(EditproductView)}?{nameof(EditProductViewModel.ProductID)}={ProductID}");
     }
 }

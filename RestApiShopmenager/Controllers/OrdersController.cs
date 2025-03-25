@@ -47,7 +47,7 @@ namespace RestApiShopmenager.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutOrders(int id, Orders orders)
         {
-            if (id != orders.OrderId)
+            if (id != orders.OrderID)
             {
                 return BadRequest();
             }
@@ -81,7 +81,7 @@ namespace RestApiShopmenager.Controllers
             _context.Orders.Add(orders);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetOrders", new { id = orders.OrderId }, orders);
+            return CreatedAtAction("GetOrders", new { id = orders.OrderID }, orders);
         }
 
         // DELETE: api/Orders/5
@@ -102,7 +102,7 @@ namespace RestApiShopmenager.Controllers
 
         private bool OrdersExists(int id)
         {
-            return _context.Orders.Any(e => e.OrderId == id);
+            return _context.Orders.Any(e => e.OrderID == id);
         }
     }
 }

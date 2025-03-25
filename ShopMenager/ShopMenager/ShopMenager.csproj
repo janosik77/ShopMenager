@@ -7,14 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\**" />
     <Compile Remove="ViewModels\Popups\**" />
     <Compile Remove="ViewModels\tamplates\**" />
     <Compile Remove="Views\Popups\**" />
     <Compile Remove="Views\templates\**" />
+    <EmbeddedResource Remove="Models\**" />
     <EmbeddedResource Remove="ViewModels\Popups\**" />
     <EmbeddedResource Remove="ViewModels\tamplates\**" />
     <EmbeddedResource Remove="Views\Popups\**" />
     <EmbeddedResource Remove="Views\templates\**" />
+    <None Remove="Models\**" />
     <None Remove="ViewModels\Popups\**" />
     <None Remove="ViewModels\tamplates\**" />
     <None Remove="Views\Popups\**" />
@@ -22,14 +25,37 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Services\ApiService\ApiService.cs" />
+    <Compile Remove="Services\ApiService\CategoryService.cs" />
+    <Compile Remove="Services\ApiService\CustomerService.cs" />
+    <Compile Remove="Services\ApiService\DiscountService.cs" />
+    <Compile Remove="Services\ApiService\EmployeeService.cs" />
+    <Compile Remove="Services\ApiService\OrderDetailService.cs" />
+    <Compile Remove="Services\ApiService\OrderService.cs" />
+    <Compile Remove="Services\ApiService\PaymentService.cs" />
+    <Compile Remove="Services\ApiService\ProductService.cs" />
+    <Compile Remove="Services\ApiService\ReviewService.cs" />
     <Compile Remove="ViewModels\DiscountVM\DiscountsPageViewModel.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="9.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.3" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.3" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="NSwag.ApiDescription.Client" Version="14.2.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="NSwag.MSBuild" Version="14.2.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Rg.Plugins.Popup" Version="2.1.0" />
+    <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2545" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.7.1" />
   </ItemGroup>
@@ -131,5 +157,21 @@
     <EmbeddedResource Update="Views\ReviewV\ReviewdetailView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="obj\Debug\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <OpenApiReference Include="OpenAPIs\swagger3.json" CodeGenerator="NSwagCSharp" ClassName="OrderService">
+      <SourceUri>https://localhost:7265/swagger/v1/swagger.json</SourceUri>
+    </OpenApiReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="OpenAPIs\swagger.json" ClassName="OrderService" />
+    <None Update="OpenAPIs\swagger1.json" ClassName="OrderService" />
+    <None Update="OpenAPIs\swagger2.json" ClassName="OrderService" />
   </ItemGroup>
 </Project>

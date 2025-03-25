@@ -1,18 +1,16 @@
-﻿using ShopMenager.Models;
-using ShopMenager.Services;
+﻿
 using ShopMenager.Services.ApiService;
 using ShopMenager.ViewModels.Abstract;
 using ShopMenager.Views.ReviewV;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace ShopMenager.ViewModels.ReviewsVM
 {
-    public class ReviewDetailViewModel : ADetailsItemViewModel<Review>
+    public class ReviewDetailViewModel : ADetailsItemViewModel<Reviews>
     {
-        public ReviewDetailViewModel(IApiService<Review> itemService, INavigationService navigationService) : base(itemService, navigationService, "Review Detail")
+        public ReviewDetailViewModel(IDataStore<Reviews> itemService) : base(itemService, "Review Detail")
         {
         }
         #region Fields
@@ -81,17 +79,17 @@ namespace ShopMenager.ViewModels.ReviewsVM
         {
             try
             {
-                var review = await ItemService.GetByIdAsync(id);
+                var review = await ItemService.GetItemAsync(id);
                 if (review != null)
                 {
                     ReviewID = review.ReviewID;
                     Rating = review.Rating;
                     Comments = review.Comments;
                     ReviewDate = review.ReviewDate;
-                    EmployeeName = review.EmployeeName;
+                    //EmployeeName = review.EmployeeName;
                     EmployeeID = review.EmployeeID;
                     ProductID = review.ProductID;
-                    ProductName = review.ProductName;
+                    //ProductName = review.ProductName;
                 }
             }
             catch (Exception ex)
@@ -101,6 +99,6 @@ namespace ShopMenager.ViewModels.ReviewsVM
         }
 
         protected override Task GoToUpdatePage()
-            => NavService.NavigateToAsync($"{nameof(EditReviewView)}?{nameof(EditReviewViewModel.ReviewID)}={ReviewID}");
+            => Shell.Current.GoToAsync($"{nameof(EditReviewView)}?{nameof(EditReviewViewModel.ReviewID)}={ReviewID}");
     }
 }

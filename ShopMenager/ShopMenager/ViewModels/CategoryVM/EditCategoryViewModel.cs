@@ -1,15 +1,13 @@
-﻿using ShopMenager.Models;
-using ShopMenager.Services;
-using ShopMenager.Services.ApiService;
+﻿using ShopMenager.Services.ApiService;
 using ShopMenager.ViewModels.Abstract;
 using System;
 using System.Threading.Tasks;
 
 namespace ShopMenager.ViewModels.CategoryVM
 {
-    public class EditCategoryViewModel : AUpdateItemViewModel<Category>
+    public class EditCategoryViewModel : AUpdateItemViewModel<Categories>
     {
-        public EditCategoryViewModel(IApiService<Category> itemService, INavigationService navigationService) : base(itemService, navigationService, "Edit Category")
+        public EditCategoryViewModel(IDataStore<Categories> itemService) : base(itemService, "Edit Category")
         {
         }
         #region Fields
@@ -46,10 +44,10 @@ namespace ShopMenager.ViewModels.CategoryVM
         {
             try
             {
-                var category = await ItemService.GetByIdAsync(id);
+                var category = await ItemService.GetItemAsync(id);
                 if (category != null)
                 {
-                    CategoryID = category.CategoryID;
+                    CategoryID = category.CategoryId;
                     CategoryName = category.CategoryName;
                     CategoryDescription = category.CategoryDescription;
                 }
@@ -64,9 +62,9 @@ namespace ShopMenager.ViewModels.CategoryVM
             }
         }
 
-        public override Category SetItem() => new Category
+        public override Categories SetItem() => new Categories
         {
-            CategoryID = CategoryID,
+            CategoryId = CategoryID,
             CategoryName = CategoryName,
             CategoryDescription = CategoryDescription
         };

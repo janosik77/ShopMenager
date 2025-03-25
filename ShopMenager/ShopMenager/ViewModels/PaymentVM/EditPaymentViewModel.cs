@@ -1,15 +1,13 @@
-﻿using ShopMenager.Models;
-using ShopMenager.Services;
-using ShopMenager.Services.ApiService;
+﻿using ShopMenager.Services.ApiService;
 using ShopMenager.ViewModels.Abstract;
 using System;
 using System.Threading.Tasks;
 
 namespace ShopMenager.ViewModels.PaymentVM
 {
-    public class EditPaymentViewModel : AUpdateItemViewModel<Payment>
+    public class EditPaymentViewModel : AUpdateItemViewModel<Payments>
     {
-        public EditPaymentViewModel(IApiService<Payment> itemService, INavigationService navigationService) : base(itemService, navigationService, "Edit Payment")
+        public EditPaymentViewModel(IDataStore<Payments> itemService) : base(itemService, "Edit Payment")
         {
         }
 
@@ -19,8 +17,8 @@ namespace ShopMenager.ViewModels.PaymentVM
         private int _orderID;
         private DateTime _paymentDate;
         private decimal _amount;
-        private int _paymentMethod;
-        private int _paymentStatus;
+        private PaymentMethods _paymentMethod;
+        private PaymentStatuses _paymentStatus;
 
         #endregion
 
@@ -50,13 +48,13 @@ namespace ShopMenager.ViewModels.PaymentVM
             set => SetProperty(ref _amount, value);
         }
 
-        public int PaymentMethod
+        public PaymentMethods PaymentMethod
         {
             get => _paymentMethod;
             set => SetProperty(ref _paymentMethod, value);
         }
 
-        public int PaymentStatus
+        public PaymentStatuses PaymentStatus
         {
             get => _paymentStatus;
             set => SetProperty(ref _paymentStatus, value);
@@ -68,7 +66,7 @@ namespace ShopMenager.ViewModels.PaymentVM
         {
             try
             {
-                var payment = await ItemService.GetByIdAsync(id);
+                var payment = await ItemService.GetItemAsync(id);
                 if (payment != null)
                 {
                     PaymentID = payment.PaymentID;
@@ -85,7 +83,7 @@ namespace ShopMenager.ViewModels.PaymentVM
             }
         }
 
-        public override Payment SetItem() => new Payment
+        public override Payments SetItem() => new Payments
         {
             PaymentID = PaymentID,
             OrderID = OrderID,

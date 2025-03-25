@@ -1,9 +1,6 @@
 ﻿
 using ShopMenager.Services;
 using ShopMenager.Services.ApiService;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -12,7 +9,7 @@ namespace ShopMenager.ViewModels.Abstract
     [QueryProperty(nameof(ItemId), nameof(ItemId))]
     public abstract class ADetailsItemViewModel<T> : BaseViewModel<T> where T : class
     {
-        protected ADetailsItemViewModel(IApiService<T> itemService, INavigationService navigationService,string title) : base(itemService, navigationService)
+        protected ADetailsItemViewModel(IDataStore<T> itemService, string title) : base(itemService)
         {
             Title = title;
             CancelCommand = new Command(OnCancel);
@@ -21,17 +18,20 @@ namespace ShopMenager.ViewModels.Abstract
         }
 
         #region Fields
-        private int itemId;
+        private int _itemId;
         public int ItemId
         {
             get
             {
-                return itemId;
+                return _itemId;
             }
             set
             {
-                itemId = value;
-                LoadItem(value).GetAwaiter().GetResult();
+                if (SetProperty(ref _itemId, value))
+                {
+                    // Fire-and-forget
+                    _ = LoadItem(value);
+                }
             }
         }
         #endregion
@@ -44,10 +44,10 @@ namespace ShopMenager.ViewModels.Abstract
 
         #region Methodds
         private async void OnCancel()
-            => await NavService.NavigateToAsync("..");
+            => await Shell.Current.GoToAsync("..");
         private async void OnDelete()
         {
-            await ItemService.DeleteAsync(ItemId);
+            await ItemService.DeleteItemAsync(ItemId);
             await Shell.Current.GoToAsync("..");
         }
         private async void OnUpdate()

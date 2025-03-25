@@ -1,14 +1,12 @@
-﻿using ShopMenager.Models;
-using ShopMenager.Services;
+﻿
 using ShopMenager.Services.ApiService;
 using ShopMenager.ViewModels.Abstract;
 using System;
-using System.Runtime.InteropServices.ComTypes;
 namespace ShopMenager.ViewModels.DiscountVM
 {
-    public class AddDiscountsViewModel : AAddItemViewModel<Discount>
+    public class AddDiscountsViewModel : AAddItemViewModel<Discounts>
     {
-        public AddDiscountsViewModel(IApiService<Discount> itemService, INavigationService navigationService, string title) : base(itemService, navigationService, title)
+        public AddDiscountsViewModel(IDataStore<Discounts> itemService, string title) : base(itemService, title)
         {
             StartDate = DateTime.Now;
             EndDate = DateTime.Now;
@@ -45,7 +43,7 @@ namespace ShopMenager.ViewModels.DiscountVM
 
         #endregion
 
-        public override Discount SetItem() => new Discount
+        public override Discounts SetItem() => new Discounts
         {
             DiscountName = DiscountName,
             DiscountRate = DiscountRate,

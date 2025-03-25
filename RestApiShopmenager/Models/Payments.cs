@@ -10,10 +10,10 @@ public partial class Payments
 {
     [Key]
     [Column("PaymentID")]
-    public int PaymentId { get; set; }
+    public int PaymentID { get; set; }
 
     [Column("OrderID")]
-    public int OrderId { get; set; }
+    public int OrderID { get; set; }
 
     [Column(TypeName = "datetime")]
     public DateTime PaymentDate { get; set; }

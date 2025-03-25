@@ -47,7 +47,7 @@ namespace RestApiShopmenager.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCategories(int id, Categories categories)
         {
-            if (id != categories.CategoryId)
+            if (id != categories.CategoryID)
             {
                 return BadRequest();
             }
@@ -81,7 +81,7 @@ namespace RestApiShopmenager.Controllers
             _context.Categories.Add(categories);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCategories", new { id = categories.CategoryId }, categories);
+            return CreatedAtAction("GetCategories", new { id = categories.CategoryID }, categories);
         }
 
         // DELETE: api/Category/5
@@ -102,7 +102,7 @@ namespace RestApiShopmenager.Controllers
 
         private bool CategoriesExists(int id)
         {
-            return _context.Categories.Any(e => e.CategoryId == id);
+            return _context.Categories.Any(e => e.CategoryID == id);
         }
     }
 }

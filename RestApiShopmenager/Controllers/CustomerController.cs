@@ -84,7 +84,7 @@ namespace RestApiShopmenager.Controllers
             return CreatedAtAction("GetCustomers", new { id = customers.CustomerId }, customers);
         }
 
-        // DELETE: api/Customer/5
+        //DELETE: api/Customer/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCustomers(int id)
         {

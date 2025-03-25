@@ -1,13 +1,11 @@
-﻿using ShopMenager.Models;
-using ShopMenager.Services;
-using ShopMenager.Services.ApiService;
+﻿using ShopMenager.Services.ApiService;
 using ShopMenager.ViewModels.Abstract;
 
 namespace ShopMenager.ViewModels.CustomerVM
 {
-    public class AddCustomerViewModel : AAddItemViewModel<Customer>
+    public class AddCustomerViewModel : AAddItemViewModel<Customers>
     {
-        public AddCustomerViewModel(IApiService<Customer> itemService, INavigationService navigationService) : base(itemService, navigationService, "New Customer")
+        public AddCustomerViewModel(IDataStore<Customers> itemService) : base(itemService, "New Customer")
         {
         }
 
@@ -63,7 +61,7 @@ namespace ShopMenager.ViewModels.CustomerVM
 
         #endregion
 
-        public override Customer SetItem() => new Customer
+        public override Customers SetItem() => new Customers
         {
             FirstName = this.FirstName,
             LastName = this.LastName,

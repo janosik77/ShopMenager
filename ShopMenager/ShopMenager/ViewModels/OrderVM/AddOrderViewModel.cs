@@ -1,14 +1,12 @@
-﻿using ShopMenager.Models;
-using ShopMenager.Services;
-using ShopMenager.Services.ApiService;
+﻿using ShopMenager.Services.ApiService;
 using ShopMenager.ViewModels.Abstract;
 using System;
 
 namespace ShopMenager.ViewModels.OrderVM
 {
-    public class AddOrderViewModel : AAddItemViewModel<Order>
+    public class AddOrderViewModel : AAddItemViewModel<Orders>
     {
-        public AddOrderViewModel(IApiService<Order> itemService, INavigationService navigationService, string title) : base(itemService, navigationService, title)
+        public AddOrderViewModel(IDataStore<Orders> itemService, string title) : base(itemService, title)
         {
             OrderDate = DateTime.Now;
         }
@@ -45,7 +43,7 @@ namespace ShopMenager.ViewModels.OrderVM
 
         #endregion
 
-        public override Order SetItem() => new Order
+        public override Orders SetItem() => new Orders
         {
             CustomerID = CustomerID,
             EmployeeID = EmployeeID,

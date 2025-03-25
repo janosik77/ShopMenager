@@ -12,7 +12,7 @@ namespace ShopMenager.ViewModels.Abstract
     [QueryProperty(nameof(ItemId), nameof(ItemId))]
     public abstract class AUpdateItemViewModel<T> : BaseViewModel<T> where T : class
     {
-        protected AUpdateItemViewModel(IApiService<T> itemService, INavigationService navigationService,string title) : base(itemService, navigationService)
+        protected AUpdateItemViewModel(IDataStore<T> itemService, string title) : base(itemService)
         {
             Title = title;
             SaveCommand = new Command(OnSave, ValidateSave);

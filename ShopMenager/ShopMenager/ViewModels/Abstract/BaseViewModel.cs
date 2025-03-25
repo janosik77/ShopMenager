@@ -1,27 +1,25 @@
-﻿using ShopMenager.Models;
-using ShopMenager.Services;
-using ShopMenager.Services.ApiService;
+﻿using ShopMenager.Services.ApiService;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Xamarin.Forms;
 
 namespace ShopMenager.ViewModels.Abstract
 {
     public class BaseViewModel<T> : INotifyPropertyChanged
     {
         #region Constructor
-        public BaseViewModel(IApiService<T> itemService, INavigationService navigationService)
+        public BaseViewModel(IDataStore<T> itemService)
         {
-            NavService = navigationService;
+            
             ItemService = itemService;
         }
         #endregion
 
         #region Properties
-        protected readonly IApiService<T> ItemService;
-        protected readonly INavigationService NavService;
+        protected readonly IDataStore<T> ItemService;
+        
+        
         bool isBusy = false;
         public bool IsBusy
         {

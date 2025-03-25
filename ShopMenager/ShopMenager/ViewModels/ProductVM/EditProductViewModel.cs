@@ -1,15 +1,13 @@
-﻿using ShopMenager.Models;
-using ShopMenager.Services;
-using ShopMenager.Services.ApiService;
+﻿using ShopMenager.Services.ApiService;
 using ShopMenager.ViewModels.Abstract;
 using System;
 using System.Threading.Tasks;
 
 namespace ShopMenager.ViewModels.ProductVM
 {
-    public class EditProductViewModel : AUpdateItemViewModel<Product>
+    public class EditProductViewModel : AUpdateItemViewModel<Products>
     {
-        public EditProductViewModel(IApiService<Product> itemService, INavigationService navigationService) : base(itemService, navigationService, "Edit Product")
+        public EditProductViewModel(IDataStore<Products> itemService) : base(itemService, "Edit Product")
         {
         }
 
@@ -75,7 +73,7 @@ namespace ShopMenager.ViewModels.ProductVM
         {
             try
             {
-                var product = await ItemService.GetByIdAsync(id);
+                var product = await ItemService.GetItemAsync(id);
                 if (product != null)
                 {
                     ProductID = product.ProductID;
@@ -93,7 +91,7 @@ namespace ShopMenager.ViewModels.ProductVM
             }
         }
 
-        public override Product SetItem() => new Product
+        public override Products SetItem() => new Products
         {
             ProductID = ProductID,
             CategoryID = CategoryID,

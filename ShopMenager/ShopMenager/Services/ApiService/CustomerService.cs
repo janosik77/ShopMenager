@@ -8,36 +8,36 @@ using System.Threading.Tasks;
 
 namespace ShopMenager.Services.ApiService
 {
-    public class CustomerService : IApiService<Customer>
+    public class CustomersService : IApiService<Customers>
     {
         private readonly HttpClient _httpClient;
-        private const string Endpoint = "/api/Customer";
+        private const string Endpoint = "/api/Customers";
 
-        public CustomerService(HttpClient httpClient)
+        public CustomersService(HttpClient httpClient)
         {
             _httpClient = httpClient;
         }
 
-        public async Task<List<Customer>> GetAllAsync()
+        public async Task<List<Customers>> GetAllAsync()
         {
             var response = await _httpClient.GetAsync(Endpoint);
             response.EnsureSuccessStatusCode();
 
             var json = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<List<Customer>>(json);
+            return JsonConvert.DeserializeObject<List<Customers>>(json);
         }
 
-        public async Task<Customer> GetByIdAsync(int id)
+        public async Task<Customers> GetByIdAsync(int id)
         {
             var response = await _httpClient.GetAsync($"{Endpoint}/{id}");
             if (!response.IsSuccessStatusCode)
                 return null;
 
             var json = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<Customer>(json);
+            return JsonConvert.DeserializeObject<Customers>(json);
         }
 
-        public async Task<Customer> CreateAsync(Customer entity)
+        public async Task<Customers> CreateAsync(Customers entity)
         {
             var payload = JsonConvert.SerializeObject(entity);
             var content = new StringContent(payload, Encoding.UTF8, "application/json");
@@ -46,10 +46,10 @@ namespace ShopMenager.Services.ApiService
             response.EnsureSuccessStatusCode();
 
             var responseBody = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<Customer>(responseBody);
+            return JsonConvert.DeserializeObject<Customers>(responseBody);
         }
 
-        public async Task<bool> UpdateAsync(int id, Customer entity)
+        public async Task<bool> UpdateAsync(int id, Customers entity)
         {
             var payload = JsonConvert.SerializeObject(entity);
             var content = new StringContent(payload, Encoding.UTF8, "application/json");

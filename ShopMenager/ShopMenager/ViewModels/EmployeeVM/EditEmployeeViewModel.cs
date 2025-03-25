@@ -1,15 +1,13 @@
-﻿using ShopMenager.Models;
-using ShopMenager.Services;
-using ShopMenager.Services.ApiService;
+﻿using ShopMenager.Services.ApiService;
 using ShopMenager.ViewModels.Abstract;
 using System;
 using System.Threading.Tasks;
 
 namespace ShopMenager.ViewModels.EmployeeVM
 {
-    public class EditEmployeeViewModel : AUpdateItemViewModel<Employee>
+    public class EditEmployeeViewModel : AUpdateItemViewModel<Employees>
     {
-        public EditEmployeeViewModel(IApiService<Employee> itemService, INavigationService navigationService) : base(itemService, navigationService, "Edit Employee")
+        public EditEmployeeViewModel(IDataStore<Employees> itemService) : base(itemService, "Edit Employee")
         {
         }
 
@@ -82,7 +80,7 @@ namespace ShopMenager.ViewModels.EmployeeVM
         {
             try
             {
-                var employee = await ItemService.GetByIdAsync(id);
+                var employee = await ItemService.GetItemAsync(id);
                 if (employee != null)
                 {
                     EmployeeID = employee.EmployeeID;
@@ -101,7 +99,7 @@ namespace ShopMenager.ViewModels.EmployeeVM
             }
         }
 
-        public override Employee SetItem() => new Employee
+        public override Employees SetItem() => new Employees
         {
             EmployeeID = EmployeeID,
             FirstName = FirstName,

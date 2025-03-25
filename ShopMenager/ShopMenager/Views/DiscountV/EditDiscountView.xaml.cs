@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShopMenager.ViewModels.DiscountVM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ namespace ShopMenager.Views.DiscountV
 		public EditDiscountView ()
 		{
 			InitializeComponent ();
+			BindingContext = App.Services.GetService<EditDiscountsViewModel>();
 		}
 	}
 }

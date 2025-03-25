@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RestApiShopmenager.Models;
 using RestApiShopmenager.Models.Contexts;
@@ -47,7 +42,7 @@ namespace RestApiShopmenager.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutEmployees(int id, Employees employees)
         {
-            if (id != employees.EmployeeId)
+            if (id != employees.EmployeeID)
             {
                 return BadRequest();
             }
@@ -81,7 +76,7 @@ namespace RestApiShopmenager.Controllers
             _context.Employees.Add(employees);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetEmployees", new { id = employees.EmployeeId }, employees);
+            return CreatedAtAction("GetEmployees", new { id = employees.EmployeeID }, employees);
         }
 
         // DELETE: api/Employee/5
@@ -102,7 +97,7 @@ namespace RestApiShopmenager.Controllers
 
         private bool EmployeesExists(int id)
         {
-            return _context.Employees.Any(e => e.EmployeeId == id);
+            return _context.Employees.Any(e => e.EmployeeID == id);
         }
     }
 }

@@ -1,14 +1,11 @@
-﻿using ShopMenager.Models;
-using ShopMenager.Services;
-using ShopMenager.Services.ApiService;
+﻿using ShopMenager.Services.ApiService;
 using ShopMenager.ViewModels.Abstract;
-using System;
 
 namespace ShopMenager.ViewModels.CategoryVM
 {
-    public class AddCategoryViewModel : AAddItemViewModel<Category>
+    public class AddCategoryViewModel : AAddItemViewModel<Categories>
     {
-        public AddCategoryViewModel(IApiService<Category> itemService, INavigationService navigationService, string title) : base(itemService, navigationService, title)
+        public AddCategoryViewModel(IDataStore<Categories> itemService, string title) : base(itemService, title)
         {
         }
 
@@ -28,7 +25,7 @@ namespace ShopMenager.ViewModels.CategoryVM
         }
         #endregion
 
-        public override Category SetItem() => new Category
+        public override Categories SetItem() => new Categories
         {
             CategoryName = CategoryName,
             CategoryDescription = CategoryDescription

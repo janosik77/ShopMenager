@@ -1,5 +1,4 @@
-﻿using ShopMenager.Models;
-using ShopMenager.Services;
+﻿
 using ShopMenager.Services.ApiService;
 using ShopMenager.ViewModels.Abstract;
 using System;
@@ -7,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ShopMenager.ViewModels.OrderVM
 {
-    public class EditOrderViewModel : AUpdateItemViewModel<Order>
+    public class EditOrderViewModel : AUpdateItemViewModel<Orders>
     {
-        public EditOrderViewModel(IApiService<Order> itemService, INavigationService navigationService) : base(itemService, navigationService, "Edit Order")
+        public EditOrderViewModel(IDataStore<Orders> itemService) : base(itemService, "Edit Order")
         {
         }
 
@@ -61,7 +60,7 @@ namespace ShopMenager.ViewModels.OrderVM
         {
             try
             {
-                var order = await ItemService.GetByIdAsync(id);
+                var order = await ItemService.GetItemAsync(id);
                 if (order != null)
                 {
                     OrderID = order.OrderID;
@@ -77,7 +76,7 @@ namespace ShopMenager.ViewModels.OrderVM
             }
         }
 
-        public override Order SetItem() => new Order
+        public override Orders SetItem() => new Orders
         {
             OrderID = OrderID,
             CustomerID = CustomerID,

@@ -1,16 +1,11 @@
-﻿using ShopMenager.Services;
-using ShopMenager.Services.ApiService;
-using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Text;
+﻿using ShopMenager.Services.ApiService;
 using Xamarin.Forms;
 
 namespace ShopMenager.ViewModels.Abstract
 {
     public abstract class AAddItemViewModel<T> : BaseViewModel<T> where T : class
     {
-        protected AAddItemViewModel(IApiService<T> itemService, INavigationService navigationService, string title) : base(itemService, navigationService)
+        protected AAddItemViewModel(IDataStore<T> itemService, string title) : base(itemService)
         {
             Title = title;
             SaveCommand = new Command(OnSave, ValidateSave);
@@ -31,7 +26,7 @@ namespace ShopMenager.ViewModels.Abstract
         public abstract T SetItem();
         private async void OnSave()
         {
-            await ItemService.CreateAsync(SetItem());
+            await ItemService.AddItemAsync(SetItem());     /*CreateAsync(SetItem());*/
             await Shell.Current.GoToAsync("..");
         }
         #endregion

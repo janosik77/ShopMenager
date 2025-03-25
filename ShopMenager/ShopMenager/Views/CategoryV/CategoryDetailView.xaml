@@ -1,10 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<views:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                  x:Class="ShopMenager.Views.CategoryV.CategoryDetailView"
-                 xmlns:views="clr-namespace:ShopMenager.Views"
-                 xmlns:vm="clr-namespace:ShopMenager.ViewModels.CategoryVM"
-                 x:TypeArguments="vm:CategoryDetailViewModel"
+                 
                  >
     <ContentPage.Content>
         <ScrollView>
@@ -50,4 +48,4 @@
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
-</views:BasePage>
+</ContentPage>

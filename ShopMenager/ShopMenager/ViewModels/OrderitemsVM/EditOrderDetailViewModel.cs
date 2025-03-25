@@ -1,15 +1,13 @@
-﻿using ShopMenager.Models;
-using ShopMenager.Services;
-using ShopMenager.Services.ApiService;
+﻿using ShopMenager.Services.ApiService;
 using ShopMenager.ViewModels.Abstract;
 using System;
 using System.Threading.Tasks;
 
 namespace ShopMenager.ViewModels.OrderitemsVM
 {
-    public class EditOrderDetailViewModel : AUpdateItemViewModel<OrderDetail>
+    public class EditOrderDetailViewModel : AUpdateItemViewModel<OrderDetails>
     {
-        public EditOrderDetailViewModel(IApiService<OrderDetail> itemService, INavigationService navigationService) : base(itemService, navigationService, "Edit Order Detail")
+        public EditOrderDetailViewModel(IDataStore<OrderDetails> itemService) : base(itemService, "Edit Order Detail")
         {
         }
         #region Fields
@@ -67,7 +65,7 @@ namespace ShopMenager.ViewModels.OrderitemsVM
         {
             try
             {
-                var detail = await ItemService.GetByIdAsync(id);
+                var detail = await ItemService.GetItemAsync(id);
                 if (detail != null)
                 {
                     OrderDetailsId = detail.OrderDetailsId;
@@ -84,7 +82,7 @@ namespace ShopMenager.ViewModels.OrderitemsVM
             }
         }
 
-        public override OrderDetail SetItem() => new OrderDetail
+        public override OrderDetails SetItem() => new OrderDetails
         {
             OrderDetailsId = OrderDetailsId,
             OrderID = OrderID,

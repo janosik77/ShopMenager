@@ -1,5 +1,4 @@
-﻿using ShopMenager.Models;
-using ShopMenager.Services;
+﻿
 using ShopMenager.Services.ApiService;
 using ShopMenager.ViewModels.Abstract;
 using System;
@@ -7,9 +6,9 @@ using System;
 
 namespace ShopMenager.ViewModels.ReviewsVM
 {
-    public class AddReviewViewModel : AAddItemViewModel<Review>
+    public class AddReviewViewModel : AAddItemViewModel<Reviews>
     {
-        public AddReviewViewModel(IApiService<Review> itemService, INavigationService navigationService, string title) : base(itemService, navigationService, title)
+        public AddReviewViewModel(IDataStore<Reviews> itemService, string title) : base(itemService, title)
         {
             ReviewDate = DateTime.Now;
         }
@@ -67,12 +66,12 @@ namespace ShopMenager.ViewModels.ReviewsVM
 
         #endregion
 
-        public override Review SetItem() => new Review
+        public override Reviews SetItem() => new Reviews
         {
             EmployeeID = EmployeeID,
-            EmployeeName = EmployeeName,
+            //EmployeeName = EmployeeName,
             ProductID = ProductID,
-            ProductName = ProductName,
+            //ProductName = ProductName,
             Rating = Rating,
             Comments = Comments,
             ReviewDate = ReviewDate

@@ -1,10 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<views:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage    xmlns="http://xamarin.com/schemas/2014/forms"
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                 x:Class="ShopMenager.Views.EmployeeV.EmployeesPage"
-                xmlns:views="clr-namespace:ShopMenager.Views"
-                xmlns:vm="clr-namespace:ShopMenager.ViewModels.EmployeeVM"
-                x:TypeArguments="vm:EmployeesViewModel"
+                Title="{Binding Title}"
                 >
 
     <StackLayout Padding="15" Spacing="15">
@@ -126,4 +124,4 @@
 
     </StackLayout>
 
-</views:BasePage>
+</ContentPage>

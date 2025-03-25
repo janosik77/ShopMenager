@@ -1,24 +1,21 @@
-﻿using ShopMenager.Models;
-using ShopMenager.Services;
-using ShopMenager.Services.ApiService;
+﻿using ShopMenager.Services.ApiService;
 using ShopMenager.ViewModels.Abstract;
-using ShopMenager.ViewModels.CustomerVM;
-using ShopMenager.Views.CustomerV;
 using ShopMenager.Views.EmployeeV;
-using System;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace ShopMenager.ViewModels.EmployeeVM
 {
-    public class EmployeesViewModel : AListItemViewModel<Employee>
+    public class EmployeesViewModel : AListItemViewModel<Employees>
     {
-        public EmployeesViewModel(IApiService<Employee> itemService, INavigationService navigationService, string title) : base(itemService, navigationService, title)
+        public EmployeesViewModel(IDataStore<Employees> itemService) : base(itemService, "Employees")
         {
         }
 
-        public override Task GoToAddPage() => NavService.NavigateToAsync(nameof(AddEmployeeView));
+        public override Task GoToAddPage() => Shell.Current.GoToAsync(nameof(AddEmployeeView));
 
-        public override async Task GoToDetailsPage(Employee item) 
-            => await NavService.NavigateToAsync($"{nameof(EmployeeDetailsView)}?{nameof(EmployeeDetailViewModel.ItemId)}={item.EmployeeID}");
+        public override async Task GoToDetailsPage(Employees item) 
+            => await Shell.Current
+            .GoToAsync($"{nameof(EmployeeDetailsView)}?{nameof(EmployeeDetailViewModel.ItemId)}={item.EmployeeID}");
     }
 }

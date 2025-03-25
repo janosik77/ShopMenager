@@ -1,16 +1,15 @@
-﻿using ShopMenager.Models;
-using ShopMenager.Services;
-using ShopMenager.Services.ApiService;
+﻿using ShopMenager.Services.ApiService;
 using ShopMenager.ViewModels.Abstract;
 using ShopMenager.Views.EmployeeV;
 using System;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace ShopMenager.ViewModels.EmployeeVM
 {
-    public class EmployeeDetailViewModel : ADetailsItemViewModel<Employee>
+    public class EmployeeDetailViewModel : ADetailsItemViewModel<Employees>
     {
-        public EmployeeDetailViewModel(IApiService<Employee> itemService, INavigationService navigationService) : base(itemService, navigationService, "Employee Detail")
+        public EmployeeDetailViewModel(IDataStore<Employees> itemService) : base(itemService, "Employee Detail")
         {
         }
 
@@ -79,7 +78,7 @@ namespace ShopMenager.ViewModels.EmployeeVM
         {
             try
             {
-                var employee = await ItemService.GetByIdAsync(id);
+                var employee = await ItemService.GetItemAsync(id);
                 if (employee != null)
                 {
                     EmployeeID = employee.EmployeeID;
@@ -99,6 +98,6 @@ namespace ShopMenager.ViewModels.EmployeeVM
         }
 
         protected override Task GoToUpdatePage()
-            => NavService.NavigateToAsync($"{nameof(EditEmployeeView)}?{nameof(EditEmployeeViewModel.EmployeeID)}={EmployeeID}");
+            => Shell.Current.GoToAsync($"{nameof(EditEmployeeView)}?{nameof(EditEmployeeViewModel.EmployeeID)}={EmployeeID}");
     }
 }

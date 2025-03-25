@@ -1,23 +1,21 @@
-﻿using ShopMenager.Models;
-using ShopMenager.Services;
-using ShopMenager.Services.ApiService;
+﻿using ShopMenager.Services.ApiService;
 using ShopMenager.ViewModels.Abstract;
-using ShopMenager.ViewModels.CustomerVM;
 using ShopMenager.Views.CategoryV;
-using ShopMenager.Views.CustomerV;
-using System;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace ShopMenager.ViewModels.CategoryVM
 {
-    public class CategoriesViewModel : AListItemViewModel<Category>
+    public class CategoriesViewModel : AListItemViewModel<Categories>
     {
-        public CategoriesViewModel(IApiService<Category> itemService, INavigationService navigationService) : base(itemService, navigationService, "Categories")
+        public CategoriesViewModel(IDataStore<Categories> itemService) : base(itemService, "Categories")
         {
         }
 
-        public override Task GoToAddPage() => NavService.NavigateToAsync(nameof(AddCategoryView));
+        public override Task GoToAddPage() => Shell.Current.GoToAsync(nameof(AddCategoryView));
 
-        public override async Task GoToDetailsPage(Category item) => await NavService.NavigateToAsync($"{nameof(CategoryDetailView)}?{nameof(CategoryDetailViewModel.ItemId)}={item.CategoryID}");
+        public override async Task GoToDetailsPage(Categories item) 
+            => await Shell.Current.
+            GoToAsync($"{nameof(CategoryDetailView)}?{nameof(CategoryDetailViewModel.ItemId)}={item.CategoryId}");
     }
 }

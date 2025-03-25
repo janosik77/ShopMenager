@@ -10,10 +10,10 @@ public partial class Products
 {
     [Key]
     [Column("ProductID")]
-    public int ProductId { get; set; }
+    public int ProductID { get; set; }
 
     [Column("CategoryID")]
-    public int CategoryId { get; set; }
+    public int CategoryID { get; set; }
 
     [StringLength(100)]
     [Unicode(false)]

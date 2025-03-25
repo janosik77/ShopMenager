@@ -10,7 +10,7 @@ public partial class Employees
 {
     [Key]
     [Column("EmployeeID")]
-    public int EmployeeId { get; set; }
+    public int EmployeeID { get; set; }
 
     [StringLength(50)]
     [Unicode(false)]
@@ -28,7 +28,7 @@ public partial class Employees
     [Unicode(false)]
     public string? Phone { get; set; }
 
-    public DateOnly? HireDate { get; set; }
+    public DateTime? HireDate { get; set; }
 
     [Column(TypeName = "decimal(10, 2)")]
     public decimal? Salary { get; set; }

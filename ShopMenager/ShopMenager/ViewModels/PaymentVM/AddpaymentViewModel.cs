@@ -1,14 +1,12 @@
-﻿using ShopMenager.Models;
-using ShopMenager.Services;
-using ShopMenager.Services.ApiService;
+﻿using ShopMenager.Services.ApiService;
 using ShopMenager.ViewModels.Abstract;
 using System;
 
 namespace ShopMenager.ViewModels.PaymentVM
 {
-    public class AddpaymentViewModel : AAddItemViewModel<Payment>
+    public class AddpaymentViewModel : AAddItemViewModel<Payments>
     {
-        public AddpaymentViewModel(IApiService<Payment> itemService, INavigationService navigationService, string title) : base(itemService, navigationService, title)
+        public AddpaymentViewModel(IDataStore<Payments> itemService, string title) : base(itemService, title)
         {
             PaymentDate = DateTime.Now;
         }
@@ -36,15 +34,15 @@ namespace ShopMenager.ViewModels.PaymentVM
             set => SetProperty(ref _amount, value);
         }
 
-        private int _paymentMethod;
-        public int PaymentMethod
+        private PaymentMethods _paymentMethod;
+        public PaymentMethods PaymentMethod
         {
             get => _paymentMethod;
             set => SetProperty(ref _paymentMethod, value);
         }
 
-        private int _paymentStatus;
-        public int PaymentStatus
+        private PaymentStatuses _paymentStatus;
+        public PaymentStatuses PaymentStatus
         {
             get => _paymentStatus;
             set => SetProperty(ref _paymentStatus, value);
@@ -52,7 +50,7 @@ namespace ShopMenager.ViewModels.PaymentVM
 
         #endregion
 
-        public override Payment SetItem() => new Payment
+        public override Payments SetItem() => new Payments
         {
             OrderID = OrderID,
             PaymentDate = PaymentDate,

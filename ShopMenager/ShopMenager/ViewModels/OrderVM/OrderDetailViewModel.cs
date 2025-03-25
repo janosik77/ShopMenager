@@ -1,16 +1,15 @@
-﻿using ShopMenager.Models;
-using ShopMenager.Services;
-using ShopMenager.Services.ApiService;
+﻿using ShopMenager.Services.ApiService;
 using ShopMenager.ViewModels.Abstract;
 using ShopMenager.Views.OrderV;
 using System;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace ShopMenager.ViewModels.OrderVM
 {
-    public class OrderDetailViewModel : ADetailsItemViewModel<Order>
+    public class OrderDetailViewModel : ADetailsItemViewModel<Orders>
     {
-        public OrderDetailViewModel(IApiService<Order> itemService, INavigationService navigationService) : base(itemService, navigationService, "Order Detail")
+        public OrderDetailViewModel(IDataStore<Orders> itemService) : base(itemService, "Order Detail")
         {
         }
         #region Fields
@@ -57,7 +56,7 @@ namespace ShopMenager.ViewModels.OrderVM
         {
             try
             {
-                var order = await ItemService.GetByIdAsync(id);
+                var order = await ItemService.GetItemAsync(id);
                 if (order != null)
                 {
                     OrderID = order.OrderID;
@@ -74,6 +73,6 @@ namespace ShopMenager.ViewModels.OrderVM
         }
 
         protected override Task GoToUpdatePage()
-            => NavService.NavigateToAsync($"{nameof(EditorderView)}?{nameof(EditOrderViewModel.OrderID)}={OrderID}");
+            => Shell.Current.GoToAsync($"{nameof(EditorderView)}?{nameof(EditOrderViewModel.OrderID)}={OrderID}");
     }
 }

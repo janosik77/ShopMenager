@@ -9,7 +9,7 @@ namespace ShopMenager.ViewModels.Abstract
 {
     public abstract class AListItemViewModel<T> : BaseViewModel<T> where T : class
     {
-        public AListItemViewModel(IApiService<T> itemService, INavigationService navigationService, string title) : base(itemService, navigationService)
+        public AListItemViewModel(IDataStore<T> itemService, string title) : base(itemService)
         {
             Title = title;
             Items = new ObservableCollection<T>();
@@ -47,7 +47,7 @@ namespace ShopMenager.ViewModels.Abstract
             try
             {
                 Items.Clear();
-                var items = await ItemService.GetAllAsync();
+                var items = await ItemService.GetItemsAsync();
                 foreach (var item in items)
                 {
                     Items.Add(item);
@@ -78,9 +78,21 @@ namespace ShopMenager.ViewModels.Abstract
         public abstract Task GoToDetailsPage(T item);
         async void OnItemSelected(T item)
         {
-            if (item == null)
-                return;
-            await GoToDetailsPage(item);
+            try
+            {
+                if (item == null)
+                    return;
+                await GoToDetailsPage(item);
+            }
+            catch (Exception ex) 
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    $"Cannot load customers: {ex.Message}",
+                    "OK"
+                );
+            }
+            
         }
         #endregion
     }

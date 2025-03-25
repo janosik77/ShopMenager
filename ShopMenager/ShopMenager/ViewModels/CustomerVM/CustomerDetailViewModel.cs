@@ -1,16 +1,15 @@
-﻿using ShopMenager.Models;
-using ShopMenager.Services;
-using ShopMenager.Services.ApiService;
+﻿using ShopMenager.Services.ApiService;
 using ShopMenager.ViewModels.Abstract;
 using System;
 using System.Threading.Tasks;
 using ShopMenager.Views.CustomerV;
+using Xamarin.Forms;
 
 namespace ShopMenager.ViewModels.CustomerVM
 {
-    public class CustomerDetailViewModel : ADetailsItemViewModel<Customer>
+    public class CustomerDetailViewModel : ADetailsItemViewModel<Customers>
     {
-        public CustomerDetailViewModel(IApiService<Customer> itemService, INavigationService navigationService) : base(itemService, navigationService, "Customer Detail")
+        public CustomerDetailViewModel(IDataStore<Customers> itemService) : base(itemService, "Customer Detail")
         {
         }
 
@@ -81,7 +80,7 @@ namespace ShopMenager.ViewModels.CustomerVM
         {
             try
             {
-                var customer = await ItemService.GetByIdAsync(id);
+                var customer = await ItemService.GetItemAsync(id);
                 if (customer != null)
                 {
                     CustomerId = customer.CustomerId;
@@ -105,6 +104,6 @@ namespace ShopMenager.ViewModels.CustomerVM
             }
         }
 
-        protected override Task GoToUpdatePage() => NavService.NavigateToAsync($"{nameof(EditCustomerViwe)}?{nameof(EditCustomerViewModel.CustomerId)}={CustomerId}");
+        protected override Task GoToUpdatePage() => Shell.Current.GoToAsync($"{nameof(EditCustomerViwe)}?{nameof(EditCustomerViewModel.CustomerId)}={CustomerId}");
     }
 }

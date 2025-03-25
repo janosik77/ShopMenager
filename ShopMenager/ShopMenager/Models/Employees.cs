@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ShopMenager.Models
 {
-    public class Employee
+    public class Employees
     {
         public int EmployeeID { get; set; }
         public string FirstName { get; set; }

@@ -1,16 +1,15 @@
-﻿using ShopMenager.Models;
-using ShopMenager.Services;
-using ShopMenager.Services.ApiService;
+﻿using ShopMenager.Services.ApiService;
 using ShopMenager.ViewModels.Abstract;
 using ShopMenager.Views.CategoryV;
 using System;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace ShopMenager.ViewModels.CategoryVM
 {
-    public class CategoryDetailViewModel : ADetailsItemViewModel<Category>
+    public class CategoryDetailViewModel : ADetailsItemViewModel<Categories>
     {
-        public CategoryDetailViewModel(IApiService<Category> itemService, INavigationService navigationService) : base(itemService, navigationService, "Category Detail")
+        public CategoryDetailViewModel(IDataStore<Categories> itemService) : base(itemService, "Category Detail")
         {
         }
 
@@ -44,10 +43,10 @@ namespace ShopMenager.ViewModels.CategoryVM
         {
             try
             {
-                var category = await ItemService.GetByIdAsync(id);
+                var category = await ItemService.GetItemAsync(id);
                 if (category != null)
                 {
-                    CategoryID = category.CategoryID;
+                    CategoryID = category.CategoryId;
                     CategoryName = category.CategoryName;
                     CategoryDescription = category.CategoryDescription;
                 }
@@ -63,6 +62,6 @@ namespace ShopMenager.ViewModels.CategoryVM
         }
 
         protected override Task GoToUpdatePage()
-            => NavService.NavigateToAsync($"{nameof(EditCategoryView)}?{nameof(EditCategoryViewModel.CategoryID)}={CategoryID}");
+            => Shell.Current.GoToAsync($"{nameof(EditCategoryView)}?{nameof(EditCategoryViewModel.CategoryID)}={CategoryID}");
     }
 }

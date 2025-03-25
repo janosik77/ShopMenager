@@ -1,17 +1,13 @@
-﻿using ShopMenager.Models;
-using ShopMenager.Services;
-using ShopMenager.Services.ApiService;
+﻿using ShopMenager.Services.ApiService;
 using ShopMenager.ViewModels.Abstract;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ShopMenager.ViewModels.ReviewsVM
 {
-    public class EditReviewViewModel : AUpdateItemViewModel<Review>
+    public class EditReviewViewModel : AUpdateItemViewModel<Reviews>
     {
-        public EditReviewViewModel(IApiService<Review> itemService, INavigationService navigationService) : base(itemService, navigationService, "Edit Review")
+        public EditReviewViewModel(IDataStore<Reviews> itemService) : base(itemService, "Edit Review")
         {
         }
 
@@ -84,17 +80,17 @@ namespace ShopMenager.ViewModels.ReviewsVM
         {
             try
             {
-                var review = await ItemService.GetByIdAsync(id);
+                var review = await ItemService.GetItemAsync(id);
                 if (review != null)
                 {
                     ReviewID = review.ReviewID;
                     Rating = review.Rating;
                     Comments = review.Comments;
                     ReviewDate = review.ReviewDate;
-                    EmployeeName = review.EmployeeName;
+                    //EmployeeName = review.EmployeeName;
                     EmployeeID = review.EmployeeID;
                     ProductID = review.ProductID;
-                    ProductName = review.ProductName;
+                    //ProductName = review.ProductName;
                 }
             }
             catch (Exception ex)
@@ -103,16 +99,16 @@ namespace ShopMenager.ViewModels.ReviewsVM
             }
         }
 
-        public override Review SetItem() => new Review
+        public override Reviews SetItem() => new Reviews
         {
             ReviewID = ReviewID,
             Rating = Rating,
             Comments = Comments,
             ReviewDate = ReviewDate,
-            EmployeeName = EmployeeName,
+            //EmployeeName = EmployeeName,
             EmployeeID = EmployeeID,
             ProductID = ProductID,
-            ProductName = ProductName
+            //ProductName = ProductName
         };
 
         public override bool ValidateSave()

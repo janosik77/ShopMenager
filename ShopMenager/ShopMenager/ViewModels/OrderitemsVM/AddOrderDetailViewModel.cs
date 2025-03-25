@@ -1,16 +1,12 @@
-﻿using ShopMenager.Models;
-using ShopMenager.Services;
-using ShopMenager.Services.ApiService;
+﻿using ShopMenager.Services.ApiService;
 using ShopMenager.ViewModels.Abstract;
-using ShopMenager.Views;
-using System;
 
 
 namespace ShopMenager.ViewModels.OrderitemsVM
 {
-    public class AddOrderDetailViewModel : AAddItemViewModel<OrderDetail>
+    public class AddOrderDetailViewModel : AAddItemViewModel<OrderDetails>
     {
-        public AddOrderDetailViewModel(IApiService<OrderDetail> itemService, INavigationService navigationService, string title) : base(itemService, navigationService, title)
+        public AddOrderDetailViewModel(IDataStore<OrderDetails> itemService, string title) : base(itemService, title)
         {
         }
         #region Properties
@@ -52,7 +48,7 @@ namespace ShopMenager.ViewModels.OrderitemsVM
 
         #endregion
 
-        public override OrderDetail SetItem() => new OrderDetail
+        public override OrderDetails SetItem() => new OrderDetails
         {
             OrderID = OrderID,
             ProductID = ProductID,

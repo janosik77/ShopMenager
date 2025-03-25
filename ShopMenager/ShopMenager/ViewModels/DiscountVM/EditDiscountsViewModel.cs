@@ -1,15 +1,13 @@
-﻿using ShopMenager.Models;
-using ShopMenager.Services;
-using ShopMenager.Services.ApiService;
+﻿using ShopMenager.Services.ApiService;
 using ShopMenager.ViewModels.Abstract;
 using System;
 using System.Threading.Tasks;
 
 namespace ShopMenager.ViewModels.DiscountVM
 {
-    public class EditDiscountsViewModel : AUpdateItemViewModel<Discount>
+    public class EditDiscountsViewModel : AUpdateItemViewModel<Discounts>
     {
-        public EditDiscountsViewModel(IApiService<Discount> itemService, INavigationService navigationService) : base(itemService, navigationService, "Edit Discount")
+        public EditDiscountsViewModel(IDataStore<Discounts> itemService) : base(itemService, "Edit Discount")
         {
         }
         #region Fields
@@ -60,10 +58,10 @@ namespace ShopMenager.ViewModels.DiscountVM
         {
             try
             {
-                var discount = await ItemService.GetByIdAsync(id);
+                var discount = await ItemService.GetItemAsync(id);
                 if (discount != null)
                 {
-                    DiscountID = discount.DiscountID;
+                    DiscountID = discount.DiscountId;
                     DiscountName = discount.DiscountName;
                     DiscountRate = discount.DiscountRate;
                     StartDate = discount.StartDate;
@@ -76,9 +74,9 @@ namespace ShopMenager.ViewModels.DiscountVM
             }
         }
 
-        public override Discount SetItem() => new Discount
+        public override Discounts SetItem() => new Discounts
         {
-            DiscountID = DiscountID,
+            DiscountId = DiscountID,
             DiscountName = DiscountName,
             DiscountRate = DiscountRate,
             StartDate = StartDate,

@@ -1,4 +1,5 @@
 ﻿using ShopMenager.ViewModels.CategoryVM;
+using ShopMenager.ViewModels.ReviewsVM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +12,12 @@ using Xamarin.Forms.Xaml;
 namespace ShopMenager.Views.CategoryV
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class EditCategoryView : BasePage<EditCategoryViewModel>
+	public partial class EditCategoryView : ContentPage
 	{
 		public EditCategoryView ()
 		{
 			InitializeComponent ();
-		}
+            BindingContext = App.Services.GetService<EditCategoryViewModel>();
+        }
 	}
 }

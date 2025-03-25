@@ -10,7 +10,7 @@ public partial class Categories
 {
     [Key]
     [Column("CategoryID")]
-    public int CategoryId { get; set; }
+    public int CategoryID { get; set; }
 
     [StringLength(100)]
     [Unicode(false)]

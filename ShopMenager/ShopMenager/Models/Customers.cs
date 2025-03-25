@@ -1,11 +1,8 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ShopMenager.Models
 {
-    public class Customer
+    public class Customers
     {
         [JsonProperty(Required = Required.Always)]
         public int CustomerId { get; set; }

@@ -1,16 +1,15 @@
-﻿using ShopMenager.Models;
-using ShopMenager.Services;
-using ShopMenager.Services.ApiService;
+﻿using ShopMenager.Services.ApiService;
 using ShopMenager.ViewModels.Abstract;
 using ShopMenager.Views.DiscountV;
 using System;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace ShopMenager.ViewModels.DiscountVM
 {
-    public class DiscountsDetailsViewModel : ADetailsItemViewModel<Discount>
+    public class DiscountsDetailsViewModel : ADetailsItemViewModel<Discounts>
     {
-        public DiscountsDetailsViewModel(IApiService<Discount> itemService, INavigationService navigationService) : base(itemService, navigationService, "Discount Detail")
+        public DiscountsDetailsViewModel(IDataStore<Discounts> itemService) : base(itemService, "Discount Detail")
         {
         }
 
@@ -58,10 +57,10 @@ namespace ShopMenager.ViewModels.DiscountVM
         {
             try
             {
-                var discount = await ItemService.GetByIdAsync(id);
+                var discount = await ItemService.GetItemAsync(id);
                 if (discount != null)
                 {
-                    DiscountID = discount.DiscountID;
+                    DiscountID = discount.DiscountId;
                     DiscountName = discount.DiscountName;
                     DiscountRate = discount.DiscountRate;
                     StartDate = discount.StartDate;
@@ -75,6 +74,6 @@ namespace ShopMenager.ViewModels.DiscountVM
         }
 
         protected override Task GoToUpdatePage()
-            => NavService.NavigateToAsync($"{nameof(EditDiscountView)}?{nameof(EditDiscountsViewModel.DiscountID)}={DiscountID}");
+            => Shell.Current.GoToAsync($"{nameof(EditDiscountView)}?{nameof(EditDiscountsViewModel.DiscountID)}={DiscountID}");
     }
 }

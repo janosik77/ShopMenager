@@ -1,11 +1,7 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace ShopMenager.Models
 {
-    public class Category
+    public class Categories
     {
         public int CategoryID { get; set; }
         public string CategoryName { get; set; }

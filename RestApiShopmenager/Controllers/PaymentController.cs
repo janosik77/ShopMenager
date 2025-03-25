@@ -47,7 +47,7 @@ namespace RestApiShopmenager.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutPayments(int id, Payments payments)
         {
-            if (id != payments.PaymentId)
+            if (id != payments.PaymentID)
             {
                 return BadRequest();
             }
@@ -81,7 +81,7 @@ namespace RestApiShopmenager.Controllers
             _context.Payments.Add(payments);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPayments", new { id = payments.PaymentId }, payments);
+            return CreatedAtAction("GetPayments", new { id = payments.PaymentID }, payments);
         }
 
         // DELETE: api/Payment/5
@@ -102,7 +102,7 @@ namespace RestApiShopmenager.Controllers
 
         private bool PaymentsExists(int id)
         {
-            return _context.Payments.Any(e => e.PaymentId == id);
+            return _context.Payments.Any(e => e.PaymentID == id);
         }
     }
 }

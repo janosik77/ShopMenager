@@ -9,10 +9,10 @@ namespace RestApiShopmenager.Models;
 public partial class OrderDetails
 {
     [Column("OrderID")]
-    public int OrderId { get; set; }
+    public int OrderID { get; set; }
 
     [Column("ProductID")]
-    public int ProductId { get; set; }
+    public int ProductID { get; set; }
 
     public int Quantity { get; set; }
 
