@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using RestApiShopmenager.DTOs;
 using RestApiShopmenager.Models;
 using RestApiShopmenager.Models.Contexts;
 
@@ -23,36 +19,86 @@ namespace RestApiShopmenager.Controllers
 
         // GET: api/Product
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Products>>> GetProducts()
+        public async Task<ActionResult<IEnumerable<ProductDto>>> GetProducts()
         {
-            return await _context.Products.ToListAsync();
+            // Eager loading kategorii, by mieć CategoryName
+            var products = await _context.Products
+                .Include(p => p.Category)
+                .ToListAsync();
+
+            // Mapowanie encji -> DTO
+            var dtos = products.Select(p => new ProductDto
+            {
+                ProductID = p.ProductID,
+                CategoryID = p.CategoryID,
+                CategoryName = p.Category != null
+                    ? p.Category.CategoryName
+                    : "N/A",
+                ProductName = p.ProductName,
+                Price = p.Price,
+                Stock = p.Stock,
+                Description = p.Description,
+                PhotoPath = p.PhotoPath
+            });
+
+            return Ok(dtos);
         }
 
         // GET: api/Product/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Products>> GetProducts(int id)
+        public async Task<ActionResult<ProductDto>> GetProduct(int id)
         {
-            var products = await _context.Products.FindAsync(id);
+            // Znajdujemy produkt z wczytaniem kategorii
+            var product = await _context.Products
+                .Include(p => p.Category)
+                .FirstOrDefaultAsync(p => p.ProductID == id);
 
-            if (products == null)
+            if (product == null)
             {
                 return NotFound();
             }
 
-            return products;
+            // Mapowanie encji -> DTO
+            var dto = new ProductDto
+            {
+                ProductID = product.ProductID,
+                CategoryID = product.CategoryID,
+                CategoryName = product.Category?.CategoryName ?? "N/A",
+                ProductName = product.ProductName,
+                Price = product.Price,
+                Stock = product.Stock,
+                Description = product.Description,
+                PhotoPath = product.PhotoPath
+            };
+
+            return Ok(dto);
         }
 
         // PUT: api/Product/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProducts(int id, Products products)
+        public async Task<IActionResult> PutProduct(int id, ProductDto dto)
         {
-            if (id != products.ProductID)
+            if (id != dto.ProductID)
             {
-                return BadRequest();
+                return BadRequest("ID w URL i DTO nie są zgodne.");
             }
 
-            _context.Entry(products).State = EntityState.Modified;
+            // Szukamy encji w bazie
+            var product = await _context.Products.FindAsync(id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            // Mapowanie DTO -> encja
+            product.CategoryID = dto.CategoryID;
+            product.ProductName = dto.ProductName;
+            product.Price = dto.Price;
+            product.Stock = dto.Stock;
+            product.Description = dto.Description;
+            product.PhotoPath = dto.PhotoPath;
+
+            _context.Entry(product).State = EntityState.Modified;
 
             try
             {
@@ -74,27 +120,52 @@ namespace RestApiShopmenager.Controllers
         }
 
         // POST: api/Product
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Products>> PostProducts(Products products)
+        public async Task<ActionResult<ProductDto>> PostProduct(ProductDto dto)
         {
-            _context.Products.Add(products);
+            // Tworzymy encję i mapujemy z DTO
+            var product = new Products
+            {
+                CategoryID = dto.CategoryID,
+                ProductName = dto.ProductName,
+                Price = dto.Price,
+                Stock = dto.Stock,
+                Description = dto.Description,
+                PhotoPath = dto.PhotoPath
+            };
+
+            _context.Products.Add(product);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetProducts", new { id = products.ProductID }, products);
+            // Odczytujemy klucz wygenerowany w bazie
+            // Możemy też dołączyć CategoryName, ale trzeba by wczytać encję
+            var createdDto = new ProductDto
+            {
+                ProductID = product.ProductID,
+                CategoryID = product.CategoryID,
+                CategoryName = "N/A", // Ewentualnie wczytać ponownie
+                ProductName = product.ProductName,
+                Price = product.Price,
+                Stock = product.Stock,
+                Description = product.Description,
+                PhotoPath = product.PhotoPath
+            };
+
+            // Zwracamy 201 Created
+            return CreatedAtAction(nameof(GetProduct), new { id = product.ProductID }, createdDto);
         }
 
         // DELETE: api/Product/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProducts(int id)
+        public async Task<IActionResult> DeleteProduct(int id)
         {
-            var products = await _context.Products.FindAsync(id);
-            if (products == null)
+            var product = await _context.Products.FindAsync(id);
+            if (product == null)
             {
                 return NotFound();
             }
 
-            _context.Products.Remove(products);
+            _context.Products.Remove(product);
             await _context.SaveChangesAsync();
 
             return NoContent();

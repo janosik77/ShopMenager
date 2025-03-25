@@ -16,10 +16,10 @@ namespace ShopMenager.Views.ReviewV
             try
             {
                 BindingContext = App.Services.GetService<ReviewsViewModel>();
-            }
-            catch (Exception ex) { System.Diagnostics.Debug.WriteLine(ex.ToString()); if (ex.InnerException != null) System.Diagnostics.Debug.WriteLine("Inner:" + ex.InnerException.ToString()); }
-
         }
+            catch (Exception ex) { System.Diagnostics.Debug.WriteLine(ex.ToString()); if (ex.InnerException != null) System.Diagnostics.Debug.WriteLine("Blad ########################:" + ex.InnerException.ToString()); }
+
+}
 
     }
 }
