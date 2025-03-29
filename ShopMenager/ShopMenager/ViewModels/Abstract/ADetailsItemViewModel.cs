@@ -1,5 +1,4 @@
 ﻿
-using ShopMenager.Services;
 using ShopMenager.Services.ApiService;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -52,6 +51,7 @@ namespace ShopMenager.ViewModels.Abstract
         }
         private async void OnUpdate()
             => await GoToUpdatePage();
+        protected abstract Task GoToUpdatePage(T item);
         protected abstract Task GoToUpdatePage();
         public abstract Task LoadItem(int id);
         #endregion

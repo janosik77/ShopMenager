@@ -8,10 +8,17 @@ namespace ShopMenager.Views.DiscountV
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DiscountsPage : ContentPage
     {
+        DicountViewModel _viewModel;
         public DiscountsPage()
         {
             InitializeComponent();
-            BindingContext = App.Services.GetService<DicountViewModel>();
+            BindingContext = _viewModel = App.Services.GetService<DicountViewModel>();
+        }
+        protected override void OnAppearing()
+        {
+            //base.OnAppearing();
+            _viewModel.OnAppearing();
+
         }
     }
 }

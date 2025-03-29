@@ -10,6 +10,7 @@ using ShopMenager.ViewModels.PaymentVM;
 using ShopMenager.ViewModels.ProductVM;
 using ShopMenager.ViewModels.ReviewsVM;
 using ShopMenager.Services.ApiService;
+using ShopMenager.ViewModels.OrderVM;
 
 namespace ShopMenager.Services
 {
@@ -25,23 +26,31 @@ namespace ShopMenager.Services
             services.AddSingleton<DicountViewModel>();
             services.AddSingleton<EmployeesViewModel>();
             services.AddSingleton<HomePageViewModel>();
-            services.AddSingleton<OrdersItemsViewModel>();
+            services.AddSingleton<OrdersViewModel>();
             services.AddSingleton<PaymentsViewModel>();
             services.AddSingleton<ProductViewModel>();
             services.AddSingleton<ReviewsViewModel>();
             services.AddTransient<AddCustomerViewModel>();
+            services.AddSingleton<DiscountsDetailsViewModel>();
+            services.AddSingleton<EmployeeDetailViewModel>();
+            services.AddSingleton<OrderDetailViewModel>();
+            services.AddSingleton<PaymentDetailViewModel>();
+            services.AddSingleton<ProductDetailViewModel>();
+            services.AddSingleton<ReviewDetailViewModel>();
+            services.AddSingleton<CategoryDetailViewModel>();
             services.AddSingleton<CustomerDetailViewModel>();
 
+
             //Rest api connection services           
-            services.AddSingleton<IDataStore<Categories>, CategoryDataStore>();
+            services.AddSingleton<IDataStore<CategoryDto>, CategoryDataStore>();
             services.AddSingleton<IDataStore<Discounts>, DiscountDataStore>();
-            services.AddSingleton<IDataStore<Employees>, EmployeeDataStore>();
+            services.AddSingleton<IDataStore<EmployeeDto>, EmployeeDataStore>();
             services.AddSingleton<IDataStore<OrderDetails>, OrderDetailItemDataStore>();
-            services.AddSingleton<IDataStore<Orders>, OrderDataStore>();
-            services.AddSingleton<IDataStore<Payments>, PaymentDataStore>();
-            services.AddSingleton<IDataStore<Reviews>, ReviewDataStore>();
-            services.AddSingleton<IDataStore<Customers>, CustomerDataStore>();
-            services.AddSingleton<IDataStore<Products>, ProductDataStore>();
+            services.AddSingleton<IDataStore<OrderDto>, OrderDataStore>();
+            services.AddSingleton<IDataStore<PaymentDto>, PaymentDataStore>();
+            services.AddSingleton<IDataStore<ReviewsDto>, ReviewDataStore>();
+            services.AddSingleton<IDataStore<CustomerDto>, CustomerDataStore>();
+            services.AddSingleton<IDataStore<ProductDto>, ProductDataStore>();
 
             services.AddSingleton<INavigationService, NavigationService>();
             return services.BuildServiceProvider();

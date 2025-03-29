@@ -1,36 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                x:Class="ShopMenager.Views.PorductV.ProductPage"
-                Title="{Binding Title}">
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShopMenager.Views.PorductV.ProductPage"
+             xmlns:vm="clr-namespace:ShopMenager.ViewModels.ProductVM"
+             Title="{Binding Title}">
 
-    <StackLayout Padding="15" Spacing="15">
+    <StackLayout Padding="15" Spacing="15" BackgroundColor="{StaticResource Primary}">
+    
 
-        <!-- Search Bar -->
         <Grid ColumnSpacing="5" VerticalOptions="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-
-            <Frame Grid.Column="0"
-                   CornerRadius="10"
-                   Padding="0"
-                   BackgroundColor="White"
-                   HeightRequest="45"
-                   VerticalOptions="Center"
-                   HasShadow="False">
+            
+            <Frame Grid.Column="0" Style="{StaticResource SearchFrame}">
                 <Entry x:Name="SearchEntry"
+                       Style="{StaticResource SearchEntryStyle}"
                        Placeholder="Search for product"
-                       BackgroundColor="Transparent"
-                       Margin="15,0"
-                       VerticalOptions="Center"
-                       FontSize="14"/>
+                       Text="{Binding SearchText}" />
             </Frame>
-
+            
             <Button Grid.Column="1"
                     Text="🔍"
                     BackgroundColor="Transparent"
@@ -38,90 +31,86 @@
                     HeightRequest="45"
                     FontSize="18"
                     HorizontalOptions="End"
-                    VerticalOptions="Center" />
+                    VerticalOptions="Center"
+                    Command="{Binding SearchCommand}" />
         </Grid>
+        
+        <RefreshView x:Name="ProductsRefreshView"
+                     VerticalOptions="FillAndExpand"
+                     Command="{Binding LoadItemsCommand}"
+                     IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
 
-        <!-- Products List -->
-        <CollectionView x:Name="ProductsList" ItemsSource="{Binding Products}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame BackgroundColor="White"
-                           CornerRadius="15"
-                           Padding="10"
-                           Margin="0,5"
-                           HasShadow="True">
-                        <Grid ColumnSpacing="10">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
+            <CollectionView x:Name="ProductsList" 
+                            ItemsSource="{Binding Items}" 
+                            ItemSizingStrategy="MeasureAllItems">
 
-                            <!-- Product Image -->
-                            <Image Source="{Binding Image}"
-                                   WidthRequest="60"
-                                   HeightRequest="60"
-                                   Aspect="AspectFill"
-                                   VerticalOptions="Center"
-                                   HorizontalOptions="Start"
-                                   Grid.Column="0"
-                                   BackgroundColor="#E0E0E0"
-                                   Clip="EllipseGeometry Center='30,30' RadiusX='30' RadiusY='30'" />
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" 
+                                     Span="2" 
+                                     />
+                </CollectionView.ItemsLayout>
+                
+                <CollectionView.ItemTemplate >
+                    <DataTemplate>
+                        <Frame BackgroundColor="{StaticResource Primary}" Padding="10">
+                            <Frame Style="{StaticResource ProdTile}" HorizontalOptions="FillAndExpand" Margin="0">
 
-                            <!-- Product Info -->
-                            <StackLayout Grid.Column="1" VerticalOptions="Center">
-                                <Label Text="{Binding Name}"
-                                       FontAttributes="Bold"
-                                       FontSize="16"
-                                       TextColor="#333" />
-                                <Label Text="{Binding Category}"
-                                       FontSize="13"
-                                       TextColor="#777" />
-                                <Label Text="{Binding Price, StringFormat='Price: {0:C}'}"
-                                       FontSize="12"
-                                       TextColor="#777" />
-                                <Label Text="{Binding Stock, StringFormat='Stock: {0}'}"
-                                       FontSize="12"
-                                       TextColor="#777" />
-                                <Label Text="{Binding Rating, StringFormat='Rating: {0:F1}'}"
-                                       FontSize="12"
-                                       TextColor="#777" />
-                            </StackLayout>
 
-                            <!-- Edit/Delete Buttons -->
-                            <StackLayout Grid.Column="2"
-                                         VerticalOptions="Center"
-                                         Spacing="10">
-                                <Button Text="✏️"
-                                        BackgroundColor="#4CAF50"
-                                        WidthRequest="35"
-                                        HeightRequest="35"
-                                        CornerRadius="10"
-                                        FontSize="14"
-                                        TextColor="White" />
-                                <Button Text="🗑️"
-                                        BackgroundColor="#F44336"
-                                        WidthRequest="35"
-                                        HeightRequest="35"
-                                        CornerRadius="10"
-                                        FontSize="14"
-                                        TextColor="White" />
-                            </StackLayout>
-                        </Grid>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1"
+                                                          Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ProductViewModel}}, Path=ItemTapped}"
+                                                          CommandParameter="{Binding .}" />
+                                </Frame.GestureRecognizers>
 
-        <!-- Add Product Button -->
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="2*" />
+                                        <RowDefinition Height="1*" />
+                                        
+                                    </Grid.RowDefinitions>
+
+
+                                    <Frame Grid.Row="0" Style="{StaticResource ProductImg}">
+                                        <Image Source="{Binding PhotoPath}"
+                                               WidthRequest="60" HeightRequest="60"
+                                               Aspect="AspectFill" 
+                                               />
+                                    </Frame >
+                                    
+                                    <Grid Grid.Row="1" HeightRequest="60">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Label Grid.Row="0" Text="{Binding ProductName}"
+                                               FontAttributes="Bold"
+                                               FontSize="16"
+                                               VerticalOptions="Start"
+                                               HorizontalOptions="Center"
+                                               TextColor="{StaticResource TextColor}" />
+
+                                        <Label Grid.Row="1"
+                                               Text="{Binding Price, StringFormat='{0:C}'}"
+                                               FontSize="18"
+                                               VerticalOptions="Start"
+                                               HorizontalOptions="Center"
+                                               TextColor="{StaticResource MainButtons}"/>
+                                    </Grid>
+                                    
+                                </Grid>
+                            </Frame>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+        
+
         <Button Text="＋ ADD PRODUCT"
-                BackgroundColor="#2196F3"
-                TextColor="White"
-                CornerRadius="10"
                 FontSize="16"
                 HeightRequest="50"
-                VerticalOptions="End" />
-
+                VerticalOptions="End"
+                Command="{Binding AddCommand}" />
+                
     </StackLayout>
-
 </ContentPage>

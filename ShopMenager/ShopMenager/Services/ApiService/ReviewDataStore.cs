@@ -6,7 +6,7 @@ using Xamarin.Forms;
 
 namespace ShopMenager.Services.ApiService
 {
-    public class ReviewDataStore : AListDataStore<Reviews>
+    public class ReviewDataStore : AListDataStore<ReviewsDto>
     {
         public ReviewDataStore()
         {
@@ -17,20 +17,20 @@ namespace ShopMenager.Services.ApiService
                                      .ToList();
         }
 
-        public override async Task<bool> AddItemToService(Reviews item)
+        public override async Task<bool> AddItemToService(ReviewsDto item)
             => await DependencyService.Get<OrderService>()
                                       .ReviewPOSTAsync(item)
                                       .HandleRequest();
 
-        public override Task<bool> DeleteItemFromService(Reviews item)
+        public override Task<bool> DeleteItemFromService(ReviewsDto item)
             => DependencyService.Get<OrderService>()
                                 .ReviewDELETEAsync(item.ReviewID)
                                 .HandleRequest();
 
-        public override Reviews Find(Reviews item)
+        public override ReviewsDto Find(ReviewsDto item)
             => items.FirstOrDefault(r => r.ReviewID == item.ReviewID);
 
-        public override Reviews Find(int id)
+        public override ReviewsDto Find(int id)
             => items.FirstOrDefault(r => r.ReviewID == id);
 
         public override async Task Refresh()
@@ -38,7 +38,7 @@ namespace ShopMenager.Services.ApiService
                                               .ReviewAllAsync())
                                               .ToList();
 
-        public override async Task<bool> UpdateItemInService(Reviews item)
+        public override async Task<bool> UpdateItemInService(ReviewsDto item)
             => await DependencyService.Get<OrderService>()
                                       .ReviewPUTAsync(item.ReviewID, item)
                                       .HandleRequest();

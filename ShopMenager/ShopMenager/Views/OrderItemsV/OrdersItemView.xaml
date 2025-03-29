@@ -5,9 +5,9 @@
                  xmlns:vm="clr-namespace:ShopMenager.ViewModels.OrderitemsVM"
                  Title="{Binding Title}"
               >
-    
 
-    <StackLayout Padding="15" Spacing="15">
+
+    <StackLayout Padding="15" Spacing="15" BackgroundColor="{DynamicResource Primary}">
 
         <!-- Search Bar -->
         <Grid ColumnSpacing="5" VerticalOptions="Center">

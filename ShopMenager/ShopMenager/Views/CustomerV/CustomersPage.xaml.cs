@@ -16,9 +16,9 @@ namespace ShopMenager.Views.CustomerV
 
         protected override void OnAppearing()
         {
-            base.OnAppearing();
+            //base.OnAppearing();
             _viewModel.OnAppearing();
-            
+
         }
     }
 }

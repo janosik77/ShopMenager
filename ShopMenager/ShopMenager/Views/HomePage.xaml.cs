@@ -4,7 +4,7 @@ using Xamarin.Forms.Xaml;
 namespace ShopMenager.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class HomePage : BasePage<HomePageViewModel>
+    public partial class HomePage
     {
         public HomePage()
         {

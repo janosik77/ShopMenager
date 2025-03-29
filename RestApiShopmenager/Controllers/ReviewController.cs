@@ -32,7 +32,7 @@ namespace RestApiShopmenager.Controllers
                 Rating = r.Rating,
                 Comments = r.Comments,
                 ReviewDate = r.ReviewDate,
-                EmployeeID = r.EmployeeID,
+                EmployeeID = r.EmployeeId,
                 ProductID = r.ProductId,
                 EmployeeName = r.Employee != null
                     ? $"{r.Employee.FirstName} {r.Employee.LastName}"
@@ -65,7 +65,7 @@ namespace RestApiShopmenager.Controllers
                 Rating = review.Rating,
                 Comments = review.Comments,
                 ReviewDate = review.ReviewDate,
-                EmployeeID = review.EmployeeID,
+                EmployeeID = review.EmployeeId,
                 ProductID = review.ProductId,
                 EmployeeName = review.Employee != null
                     ? review.Employee.FirstName + " " + review.Employee.LastName
@@ -98,7 +98,7 @@ namespace RestApiShopmenager.Controllers
             review.Rating = dto.Rating;
             review.Comments = dto.Comments;
             review.ReviewDate = dto.ReviewDate;
-            review.EmployeeID = dto.EmployeeID;
+            review.EmployeeId = dto.EmployeeID;
             review.ProductId = dto.ProductID;
 
             _context.Entry(review).State = EntityState.Modified;
@@ -132,7 +132,7 @@ namespace RestApiShopmenager.Controllers
                 Rating = dto.Rating,
                 Comments = dto.Comments,
                 ReviewDate = dto.ReviewDate,
-                EmployeeID = dto.EmployeeID,
+                EmployeeId = dto.EmployeeID,
                 ProductId = dto.ProductID
                 // ReviewId jest nadawane przez bazę (Identity)
             };
@@ -149,7 +149,7 @@ namespace RestApiShopmenager.Controllers
                 Rating = review.Rating,
                 Comments = review.Comments,
                 ReviewDate = review.ReviewDate,
-                EmployeeID = review.EmployeeID,
+                EmployeeID = review.EmployeeId,
                 ProductID = review.ProductId,
                 // Możemy dołączyć Employee/Product, ale wymagałoby eager loadingu; 
                 //   w tym przykładzie zwrócimy je puste lub "N/A".

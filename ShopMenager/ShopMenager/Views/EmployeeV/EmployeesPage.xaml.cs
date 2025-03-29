@@ -1,5 +1,4 @@
 ﻿using ShopMenager.ViewModels.EmployeeVM;
-using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -9,15 +8,22 @@ namespace ShopMenager.Views.EmployeeV
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EmployeesPage : ContentPage
     {
+        EmployeesViewModel _viewModel;
         public EmployeesPage()
+
         {
             InitializeComponent();
-            try
-            {
-                BindingContext = App.Services.GetService<EmployeesViewModel>();
-            }
-            catch(Exception ex) { System.Diagnostics.Debug.WriteLine(ex); }
+
+            BindingContext = _viewModel = App.Services.GetService<EmployeesViewModel>();
             
+            
+        }
+
+        protected override void OnAppearing()
+        {
+            //base.OnAppearing();
+            _viewModel.OnAppearing();
+
         }
     }
 }

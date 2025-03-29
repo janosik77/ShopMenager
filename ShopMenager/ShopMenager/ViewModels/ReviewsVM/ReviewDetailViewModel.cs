@@ -8,9 +8,9 @@ using Xamarin.Forms;
 
 namespace ShopMenager.ViewModels.ReviewsVM
 {
-    public class ReviewDetailViewModel : ADetailsItemViewModel<Reviews>
+    public class ReviewDetailViewModel : ADetailsItemViewModel<ReviewsDto>
     {
-        public ReviewDetailViewModel(IDataStore<Reviews> itemService) : base(itemService, "Review Detail")
+        public ReviewDetailViewModel(IDataStore<ReviewsDto> itemService) : base(itemService, "Review Detail")
         {
         }
         #region Fields
@@ -86,10 +86,10 @@ namespace ShopMenager.ViewModels.ReviewsVM
                     Rating = review.Rating;
                     Comments = review.Comments;
                     ReviewDate = review.ReviewDate;
-                    //EmployeeName = review.EmployeeName;
+                    EmployeeName = review.EmployeeName;
                     EmployeeID = review.EmployeeID;
                     ProductID = review.ProductID;
-                    //ProductName = review.ProductName;
+                    ProductName = review.ProductName;
                 }
             }
             catch (Exception ex)
@@ -100,5 +100,9 @@ namespace ShopMenager.ViewModels.ReviewsVM
 
         protected override Task GoToUpdatePage()
             => Shell.Current.GoToAsync($"{nameof(EditReviewView)}?{nameof(EditReviewViewModel.ReviewID)}={ReviewID}");
+        protected override Task GoToUpdatePage(ReviewsDto item)
+        {
+            return null;
+        }
     }
 }

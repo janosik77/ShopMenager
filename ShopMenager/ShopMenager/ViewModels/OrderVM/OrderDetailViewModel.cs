@@ -2,14 +2,16 @@
 using ShopMenager.ViewModels.Abstract;
 using ShopMenager.Views.OrderV;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace ShopMenager.ViewModels.OrderVM
 {
-    public class OrderDetailViewModel : ADetailsItemViewModel<Orders>
+    public class OrderDetailViewModel : ADetailsItemViewModel<OrderDto>
     {
-        public OrderDetailViewModel(IDataStore<Orders> itemService) : base(itemService, "Order Detail")
+        public OrderDetailViewModel(IDataStore<OrderDto> itemService) : base(itemService, "Order Detail")
         {
         }
         #region Fields
@@ -18,6 +20,9 @@ namespace ShopMenager.ViewModels.OrderVM
         private int _employeeID;
         private DateTime _orderDate;
         private string _status;
+        private string _customerName;
+        private string _employeeName;
+        private List<OrderDetailDto> _orderPositions;
         #endregion
 
         #region Props
@@ -50,6 +55,22 @@ namespace ShopMenager.ViewModels.OrderVM
             get => _status;
             set => SetProperty(ref _status, value);
         }
+        public string CustomerName 
+        { 
+            get => _customerName; 
+            set => SetProperty(ref _customerName, value); 
+        }
+        public string EmployeeName 
+        {
+            get => _employeeName; 
+            set => SetProperty(ref _employeeName, value); 
+        }
+        public List<OrderDetailDto> OrderPositions 
+        { 
+            get => _orderPositions; 
+            set => SetProperty(ref _orderPositions, value) ; 
+        }
+
         #endregion
 
         public override async Task LoadItem(int id)
@@ -64,6 +85,9 @@ namespace ShopMenager.ViewModels.OrderVM
                     EmployeeID = order.EmployeeID;
                     OrderDate = order.OrderDate;
                     Status = order.Status;
+                    CustomerName = order.CustomerName;
+                    EmployeeName = order.EmployeeName;
+                    OrderPositions = order.OrderDetails.ToList();
                 }
             }
             catch (Exception ex)
@@ -74,5 +98,9 @@ namespace ShopMenager.ViewModels.OrderVM
 
         protected override Task GoToUpdatePage()
             => Shell.Current.GoToAsync($"{nameof(EditorderView)}?{nameof(EditOrderViewModel.OrderID)}={OrderID}");
+        protected override Task GoToUpdatePage(OrderDto item)
+        {
+            return null;
+        }
     }
 }

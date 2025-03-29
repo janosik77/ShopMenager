@@ -75,5 +75,9 @@ namespace ShopMenager.ViewModels.DiscountVM
 
         protected override Task GoToUpdatePage()
             => Shell.Current.GoToAsync($"{nameof(EditDiscountView)}?{nameof(EditDiscountsViewModel.DiscountID)}={DiscountID}");
+        protected override Task GoToUpdatePage(Discounts item)
+        {
+            return null;
+        }
     }
 }

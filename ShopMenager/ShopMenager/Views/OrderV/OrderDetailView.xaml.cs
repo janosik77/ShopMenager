@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ShopMenager.ViewModels.EmployeeVM;
+using ShopMenager.ViewModels.OrderVM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +17,7 @@ namespace ShopMenager.Views.OrderV
 		public OrderDetailView ()
 		{
 			InitializeComponent ();
-		}
+            BindingContext = App.Services.GetService<OrderDetailViewModel>();
+        }
 	}
 }

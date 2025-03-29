@@ -4,9 +4,9 @@ using System;
 
 namespace ShopMenager.ViewModels.OrderVM
 {
-    public class AddOrderViewModel : AAddItemViewModel<Orders>
+    public class AddOrderViewModel : AAddItemViewModel<OrderDto>
     {
-        public AddOrderViewModel(IDataStore<Orders> itemService, string title) : base(itemService, title)
+        public AddOrderViewModel(IDataStore<OrderDto> itemService) : base(itemService, "Create Order")
         {
             OrderDate = DateTime.Now;
         }
@@ -43,12 +43,15 @@ namespace ShopMenager.ViewModels.OrderVM
 
         #endregion
 
-        public override Orders SetItem() => new Orders
+        public override OrderDto SetItem() => new OrderDto
         {
             CustomerID = CustomerID,
             EmployeeID = EmployeeID,
             OrderDate = OrderDate,
-            Status = Status
+            Status = Status,
+            //CustomerName = ,
+            //EmployeeName = ,
+            //OrderDetails = 
         };
 
         public override bool ValidateSave()

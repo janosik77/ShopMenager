@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using RestApiShopmenager.DTOs;
 using RestApiShopmenager.Models;
 using RestApiShopmenager.Models.Contexts;
 
@@ -16,38 +17,84 @@ namespace RestApiShopmenager.Controllers
             _context = context;
         }
 
-        // GET: api/Employee
+        // GET: api/Employees
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Employees>>> GetEmployees()
+        public async Task<ActionResult<IEnumerable<EmployeeDto>>> GetEmployees()
         {
-            return await _context.Employees.ToListAsync();
+            var employees = await _context.Employees.ToListAsync();
+            var result = employees.Select(e => MapToDto(e)).ToList();
+            return Ok(result);
         }
 
-        // GET: api/Employee/5
+        // GET: api/Employees/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Employees>> GetEmployees(int id)
+        public async Task<ActionResult<EmployeeDto>> GetEmployee(int id)
         {
-            var employees = await _context.Employees.FindAsync(id);
-
-            if (employees == null)
+            var employee = await _context.Employees.FindAsync(id);
+            if (employee == null)
             {
                 return NotFound();
             }
 
-            return employees;
+            return MapToDto(employee);
         }
 
-        // PUT: api/Employee/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutEmployees(int id, Employees employees)
+        // POST: api/Employees
+        [HttpPost]
+        public async Task<ActionResult<EmployeeDto>> PostEmployee(EmployeeDto dto)
         {
-            if (id != employees.EmployeeID)
+            // Mapowanie DTO -> encja
+            var employee = new Employees
             {
-                return BadRequest();
+                FirstName = dto.FirstName,
+                LastName = dto.LastName,
+                Email = dto.Email,
+                Phone = dto.Phone,
+                HireDate = (dto.HireDate == default)
+                    ? null
+                    : dto.HireDate,
+                Salary = dto.Salary,
+                PhotoPath = dto.PhotoPath
+            };
+
+            _context.Employees.Add(employee);
+            await _context.SaveChangesAsync();
+
+            // Wczytujemy dane z bazy, np. ID
+            // Mapujemy z powrotem do DTO
+            var resultDto = MapToDto(employee);
+
+            // Zwracamy 201 (Created) z nowym ID
+            return CreatedAtAction(nameof(GetEmployee), new { id = employee.EmployeeId }, resultDto);
+        }
+
+        // PUT: api/Employees/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutEmployee(int id, EmployeeDto dto)
+        {
+            if (id != dto.EmployeeID)
+            {
+                return BadRequest("Employee ID in path does not match DTO");
             }
 
-            _context.Entry(employees).State = EntityState.Modified;
+            var employee = await _context.Employees.FindAsync(id);
+            if (employee == null)
+            {
+                return NotFound();
+            }
+
+            // Aktualizacja pól
+            employee.FirstName = dto.FirstName;
+            employee.LastName = dto.LastName;
+            employee.Email = dto.Email;
+            employee.Phone = dto.Phone;
+            employee.HireDate = (dto.HireDate == default)
+                ? null
+                : dto.HireDate;
+            employee.Salary = dto.Salary;
+            employee.PhotoPath = dto.PhotoPath;
+
+            _context.Entry(employee).State = EntityState.Modified;
 
             try
             {
@@ -55,7 +102,7 @@ namespace RestApiShopmenager.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!EmployeesExists(id))
+                if (!EmployeeExists(id))
                 {
                     return NotFound();
                 }
@@ -68,36 +115,48 @@ namespace RestApiShopmenager.Controllers
             return NoContent();
         }
 
-        // POST: api/Employee
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Employees>> PostEmployees(Employees employees)
-        {
-            _context.Employees.Add(employees);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetEmployees", new { id = employees.EmployeeID }, employees);
-        }
-
-        // DELETE: api/Employee/5
+        // DELETE: api/Employees/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteEmployees(int id)
+        public async Task<IActionResult> DeleteEmployee(int id)
         {
-            var employees = await _context.Employees.FindAsync(id);
-            if (employees == null)
+            var employee = await _context.Employees.FindAsync(id);
+            if (employee == null)
             {
                 return NotFound();
             }
 
-            _context.Employees.Remove(employees);
+            _context.Employees.Remove(employee);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool EmployeesExists(int id)
+        private bool EmployeeExists(int id)
         {
-            return _context.Employees.Any(e => e.EmployeeID == id);
+            return _context.Employees.Any(e => e.EmployeeId == id);
+        }
+
+        // ─────────────────────────────────────────────────────────
+        // Mapowanie encja -> DTO
+        // ─────────────────────────────────────────────────────────
+        private EmployeeDto MapToDto(Employees e)
+        {
+            // Konwersja z DateOnly? na DateTime
+            var hireDate = e.HireDate.HasValue
+                ? new DateTime(e.HireDate.Value.Year, e.HireDate.Value.Month, e.HireDate.Value.Day)
+                : default;
+
+            return new EmployeeDto
+            {
+                EmployeeID = e.EmployeeId,
+                FirstName = e.FirstName,
+                LastName = e.LastName,
+                Email = e.Email ?? "",
+                Phone = e.Phone ?? "",
+                HireDate = hireDate,
+                Salary = e.Salary ?? 0, // 0 jeśli null w bazie
+                PhotoPath = e.PhotoPath ?? ""
+            };
         }
     }
 }

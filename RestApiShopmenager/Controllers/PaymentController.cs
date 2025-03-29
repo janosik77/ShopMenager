@@ -3,10 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using RestApiShopmenager.DTOs;
 using RestApiShopmenager.Models;
 using RestApiShopmenager.Models.Contexts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace RestApiShopmenager.Controllers
 {
@@ -25,26 +22,25 @@ namespace RestApiShopmenager.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PaymentDto>>> GetPayments()
         {
-            // Pobieramy płatności wraz z powiązaniami
             var payments = await _context.Payments
                 .Include(p => p.Order)
                     .ThenInclude(o => o.Customer)
                 .Include(p => p.PaymentMethod)
-                // .Include(p => p.PaymentStatus) // jeśli chcesz wczytywać status
+                .Include(p => p.PaymentStatus)
                 .ToListAsync();
 
-            // Mapujemy encje na DTO
             var result = payments.Select(p => new PaymentDto
             {
-                PaymentID = p.PaymentID,
-                OrderID = p.OrderID,
-                CustomerID = p.Order?.CustomerID ?? 0,
-                CustomerName = p.Order?.Customer?.FirstName + " " + p.Order?.Customer.LastName ?? "",
+                PaymentID = p.PaymentId,
+                OrderID = p.OrderId,
+                CustomerID = p.Order?.CustomerId ?? 0,
+                CustomerName = (p.Order?.Customer?.FirstName ?? "") + " " + (p.Order?.Customer?.LastName ?? ""),
                 PaymentDate = p.PaymentDate,
                 Amount = p.Amount,
-                PaymentMethodID = p.PaymentMethodId.ToString(),
+                PaymentMethodID = p.PaymentMethodId, // int
                 PaymentMethodName = p.PaymentMethod?.MethodName ?? "",
-                // PaymentStatus? => Można dopisać, jeśli chcesz w DTO
+                PaymentStatusID = p.PaymentStatusId,
+                PaymentStatusName = p.PaymentStatus?.StatusName ?? ""
             }).ToList();
 
             return Ok(result);
@@ -58,24 +54,27 @@ namespace RestApiShopmenager.Controllers
                 .Include(p => p.Order)
                     .ThenInclude(o => o.Customer)
                 .Include(p => p.PaymentMethod)
-                .FirstOrDefaultAsync(p => p.PaymentID == id);
+                .Include(p => p.PaymentStatus)
+                .FirstOrDefaultAsync(p => p.PaymentId == id);
 
             if (payment == null)
             {
                 return NotFound();
             }
 
-            // Mapa encja -> DTO
+            // Mapowanie Entity -> DTO
             var dto = new PaymentDto
             {
-                PaymentID = payment.PaymentID,
-                OrderID = payment.OrderID,
-                CustomerID = payment.Order?.CustomerID ?? 0,
-                CustomerName = payment.Order?.Customer?.FirstName + " " + payment.Order?.Customer.LastName ?? "",
+                PaymentID = payment.PaymentId,
+                OrderID = payment.OrderId,
+                CustomerID = payment.Order?.CustomerId ?? 0,
+                CustomerName = (payment.Order?.Customer?.FirstName ?? "") + " " + (payment.Order?.Customer?.LastName ?? ""),
                 PaymentDate = payment.PaymentDate,
                 Amount = payment.Amount,
-                PaymentMethodID = payment.PaymentMethodId.ToString(),
+                PaymentMethodID = payment.PaymentMethodId,
                 PaymentMethodName = payment.PaymentMethod?.MethodName ?? "",
+                PaymentStatusID = payment.PaymentStatusId,
+                PaymentStatusName = payment.PaymentStatus?.StatusName ?? ""
             };
 
             return Ok(dto);
@@ -97,13 +96,13 @@ namespace RestApiShopmenager.Controllers
                 return NotFound();
             }
 
-            // Mapowanie DTO -> encja
-            payment.OrderID = dto.OrderID;
+            // Mapowanie DTO -> Entity
+            payment.OrderId = dto.OrderID;
             payment.PaymentDate = dto.PaymentDate;
             payment.Amount = dto.Amount;
-            payment.PaymentMethodId = int.Parse(dto.PaymentMethodID);
+            payment.PaymentMethodId = dto.PaymentMethodID; // int, bez parsowania
 
-            // Losowanie PaymentStatus (1..3)
+            // Losowanie PaymentStatusId (1..3)
             payment.PaymentStatusId = new Random().Next(1, 4);
 
             _context.Entry(payment).State = EntityState.Modified;
@@ -131,42 +130,44 @@ namespace RestApiShopmenager.Controllers
         [HttpPost]
         public async Task<ActionResult<PaymentDto>> PostPayment(PaymentDto dto)
         {
-            // Tworzymy nową encję
+            // Tworzymy nową encję na podstawie DTO
             var payment = new Payments
             {
-                OrderID = dto.OrderID,
+                OrderId = dto.OrderID,
                 PaymentDate = dto.PaymentDate,
                 Amount = dto.Amount,
-                PaymentMethodId = int.Parse(dto.PaymentMethodID),
+                PaymentMethodId = dto.PaymentMethodID,
                 PaymentStatusId = new Random().Next(1, 4) // losowo 1-3
             };
 
             _context.Payments.Add(payment);
             await _context.SaveChangesAsync();
 
-            // Po zapisaniu do bazy możemy wczytać powiązania, by uzupełnić Dto
+            // Po zapisaniu, ładujemy powiązane dane
             await _context.Entry(payment).Reference(p => p.Order).LoadAsync();
             await _context.Entry(payment).Reference(p => p.PaymentMethod).LoadAsync();
-            // i ewentualnie wczytać Customer
+            await _context.Entry(payment).Reference(p => p.PaymentStatus).LoadAsync();
             if (payment.Order != null)
             {
                 await _context.Entry(payment.Order).Reference(o => o.Customer).LoadAsync();
             }
 
-            // Mapujemy z powrotem do DTO, aby zwrócić aktualne dane
+            // Mapowanie do DTO
             var resultDto = new PaymentDto
             {
-                PaymentID = payment.PaymentID,
-                OrderID = payment.OrderID,
-                CustomerID = payment.Order?.CustomerID ?? 0,
-                CustomerName = payment.Order?.Customer?.FirstName ?? "",
+                PaymentID = payment.PaymentId,
+                OrderID = payment.OrderId,
+                CustomerID = payment.Order?.CustomerId ?? 0,
+                CustomerName = (payment.Order?.Customer?.FirstName ?? "") + " " + (payment.Order?.Customer?.LastName ?? ""),
                 PaymentDate = payment.PaymentDate,
                 Amount = payment.Amount,
-                PaymentMethodID = payment.PaymentMethodId.ToString(),
+                PaymentMethodID = payment.PaymentMethodId,
                 PaymentMethodName = payment.PaymentMethod?.MethodName ?? "",
+                PaymentStatusID = payment.PaymentStatusId,
+                PaymentStatusName = payment.PaymentStatus?.StatusName ?? ""
             };
 
-            return CreatedAtAction(nameof(GetPayment), new { id = payment.PaymentID }, resultDto);
+            return CreatedAtAction(nameof(GetPayment), new { id = payment.PaymentId }, resultDto);
         }
 
         // DELETE: api/Payment/5
@@ -187,7 +188,7 @@ namespace RestApiShopmenager.Controllers
 
         private bool PaymentExists(int id)
         {
-            return _context.Payments.Any(e => e.PaymentID == id);
+            return _context.Payments.Any(e => e.PaymentId == id);
         }
     }
 }

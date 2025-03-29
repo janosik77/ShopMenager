@@ -7,9 +7,9 @@ using Xamarin.Forms;
 
 namespace ShopMenager.ViewModels.EmployeeVM
 {
-    public class EmployeeDetailViewModel : ADetailsItemViewModel<Employees>
+    public class EmployeeDetailViewModel : ADetailsItemViewModel<EmployeeDto>
     {
-        public EmployeeDetailViewModel(IDataStore<Employees> itemService) : base(itemService, "Employee Detail")
+        public EmployeeDetailViewModel(IDataStore<EmployeeDto> itemService) : base(itemService, "Employee Detail")
         {
         }
 
@@ -99,5 +99,9 @@ namespace ShopMenager.ViewModels.EmployeeVM
 
         protected override Task GoToUpdatePage()
             => Shell.Current.GoToAsync($"{nameof(EditEmployeeView)}?{nameof(EditEmployeeViewModel.EmployeeID)}={EmployeeID}");
+        protected override Task GoToUpdatePage(EmployeeDto item)
+        {
+            return null;
+        }
     }
 }

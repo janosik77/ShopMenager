@@ -7,9 +7,9 @@ using Xamarin.Forms;
 
 namespace ShopMenager.ViewModels.CategoryVM
 {
-    public class CategoryDetailViewModel : ADetailsItemViewModel<Categories>
+    public class CategoryDetailViewModel : ADetailsItemViewModel<CategoryDto>
     {
-        public CategoryDetailViewModel(IDataStore<Categories> itemService) : base(itemService, "Category Detail")
+        public CategoryDetailViewModel(IDataStore<CategoryDto> itemService) : base(itemService, "Category Detail")
         {
         }
 
@@ -46,7 +46,7 @@ namespace ShopMenager.ViewModels.CategoryVM
                 var category = await ItemService.GetItemAsync(id);
                 if (category != null)
                 {
-                    CategoryID = category.CategoryId;
+                    CategoryID = category.CategoryID;
                     CategoryName = category.CategoryName;
                     CategoryDescription = category.CategoryDescription;
                 }
@@ -63,5 +63,9 @@ namespace ShopMenager.ViewModels.CategoryVM
 
         protected override Task GoToUpdatePage()
             => Shell.Current.GoToAsync($"{nameof(EditCategoryView)}?{nameof(EditCategoryViewModel.CategoryID)}={CategoryID}");
+        protected override Task GoToUpdatePage(CategoryDto item)
+        {
+            return null;
+        }
     }
 }

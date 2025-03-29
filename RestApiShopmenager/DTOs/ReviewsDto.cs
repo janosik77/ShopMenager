@@ -10,8 +10,8 @@ namespace RestApiShopmenager.DTOs
         public string? Comments { get; set; }
         public DateTime ReviewDate { get; set; }
 
-        public string EmployeeName { get; set; }
-        public string ProductName { get; set; }
+        public required string EmployeeName { get; set; }
+        public required string ProductName { get; set; }
         public int EmployeeID { get; set; }
         public int ProductID { get; set; }
     }

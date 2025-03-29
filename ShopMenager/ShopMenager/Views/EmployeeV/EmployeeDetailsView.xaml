@@ -1,86 +1,143 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ShopMenager.Views.EmployeeV.EmployeeDetailsView"
-             >
-    
-    <ContentPage.Content>
-        <ScrollView>
-            <StackLayout Padding="20" Spacing="15">
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ShopMenager.Views.EmployeeV.EmployeeDetailsView"
+    BackgroundColor="{StaticResource Primary}"
+    Title="{Binding Title}">
 
-                <Label Text="Details"
-                       FontSize="Large"
-                       HorizontalOptions="Center" />
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
-                <StackLayout Spacing="10">
+        <ScrollView Grid.Row="0">
+            <Frame BackgroundColor="{StaticResource Primary}"
+                   Margin="15,0"
+                   HasShadow="False"
+                   CornerRadius="15">
+                <StackLayout Padding="20" Spacing="15">
 
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Employee ID:"
-                               FontAttributes="Bold"
-                               WidthRequest="120"/>
-                        <Label Text="{Binding EmployeeID}" />
-                    </StackLayout>
+                    <Frame Style="{StaticResource ImgFrame}"
+                           CornerRadius="10"
+                           HeightRequest="120"
+                           WidthRequest="120"
+                           HorizontalOptions="Center">
+                        <Image Source="{Binding PhotoPath}"
+                               Aspect="AspectFill"
+                               VerticalOptions="Center"/>
+                    </Frame>
 
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="First Name:"
-                               FontAttributes="Bold"
-                               WidthRequest="120"/>
-                        <Label Text="{Binding FirstName}" />
-                    </StackLayout>
+ 
+                    <StackLayout Spacing="10" Margin="0,15">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
 
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Last Name:"
-                               FontAttributes="Bold"
-                               WidthRequest="120"/>
-                        <Label Text="{Binding LastName}" />
-                    </StackLayout>
+               
+                            <Label Grid.Row="0" Grid.Column="0" 
+                                   Text="Employee ID:" 
+                                   Style="{StaticResource DetailLabel}"
+                                   HorizontalOptions="Start" 
+                                   FontAttributes="Bold" />
+                            <Label Grid.Row="0" Grid.Column="1" 
+                                   Text="{Binding EmployeeID}" 
+                                   Style="{StaticResource DetailLabel}"
+                                   TextColor="{StaticResource DetailsTextColor}"
+                                   HorizontalOptions="End" />
 
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Email:"
-                               FontAttributes="Bold"
-                               WidthRequest="120"/>
-                        <Label Text="{Binding Email}" />
-                    </StackLayout>
+                            <Label Grid.Row="1" Grid.Column="0" 
+                                   Text="First Name:" 
+                                   Style="{StaticResource DetailLabel}"
+                                   HorizontalOptions="Start" 
+                                   FontAttributes="Bold" />
+                            <Label Grid.Row="1" Grid.Column="1" 
+                                   Text="{Binding FirstName}" 
+                                   Style="{StaticResource DetailLabel}"
+                                   TextColor="{StaticResource DetailsTextColor}"
+                                   HorizontalOptions="End" />
 
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Phone:"
-                               FontAttributes="Bold"
-                               WidthRequest="120"/>
-                        <Label Text="{Binding Phone}" />
-                    </StackLayout>
+                            <Label Grid.Row="2" Grid.Column="0" 
+                                   Text="Last Name:" 
+                                   Style="{StaticResource DetailLabel}"
+                                   HorizontalOptions="Start" 
+                                   FontAttributes="Bold" />
+                            <Label Grid.Row="2" Grid.Column="1" 
+                                   Text="{Binding LastName}" 
+                                   Style="{StaticResource DetailLabel}"
+                                   TextColor="{StaticResource DetailsTextColor}"
+                                   HorizontalOptions="End" />
 
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Hire Date:"
-                               FontAttributes="Bold"
-                               WidthRequest="120"/>
-                        <Label Text="{Binding HireDate}" />
-                    </StackLayout>
+                            <Label Grid.Row="3" Grid.Column="0" 
+                                   Text="Email:" 
+                                   Style="{StaticResource DetailLabel}"
+                                   HorizontalOptions="Start" 
+                                   FontAttributes="Bold" />
+                            <Label Grid.Row="3" Grid.Column="1" 
+                                   Text="{Binding Email}" 
+                                   Style="{StaticResource DetailLabel}"
+                                   TextColor="{StaticResource DetailsTextColor}"
+                                   HorizontalOptions="End" />
 
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Salary:"
-                               FontAttributes="Bold"
-                               WidthRequest="120"/>
-                        <Label Text="{Binding Salary}" />
-                    </StackLayout>
+                            <Label Grid.Row="4" Grid.Column="0" 
+                                   Text="Phone:" 
+                                   Style="{StaticResource DetailLabel}"
+                                   HorizontalOptions="Start" 
+                                   FontAttributes="Bold" />
+                            <Label Grid.Row="4" Grid.Column="1" 
+                                   Text="{Binding Phone}" 
+                                   Style="{StaticResource DetailLabel}"
+                                   TextColor="{StaticResource DetailsTextColor}"
+                                   HorizontalOptions="End" />
 
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Photo Path:"
-                               FontAttributes="Bold"
-                               WidthRequest="120"/>
-                        <Label Text="{Binding PhotoPath}" />
+                            <Label Grid.Row="5" Grid.Column="0" 
+                                   Text="Hire Date:" 
+                                   Style="{StaticResource DetailLabel}"
+                                   HorizontalOptions="Start" 
+                                   FontAttributes="Bold" />
+                            <Label Grid.Row="5" Grid.Column="1" 
+                                   Text="{Binding HireDate, StringFormat='{0:MM/dd/yyyy}'}" 
+                                   Style="{StaticResource DetailLabel}"
+                                   TextColor="{StaticResource DetailsTextColor}"
+                                   HorizontalOptions="End" />
+
+                            <Label Grid.Row="6" Grid.Column="0" 
+                                   Text="Salary:" 
+                                   Style="{StaticResource DetailLabel}"
+                                   HorizontalOptions="Start" 
+                                   FontAttributes="Bold" />
+                            <Label Grid.Row="6" Grid.Column="1" 
+                                   Text="{Binding Salary, StringFormat='{0:C}'}" 
+                                   Style="{StaticResource DetailLabel}"
+                                   TextColor="{StaticResource DetailsTextColor}"
+                                   HorizontalOptions="End" />
+                        </Grid>
                     </StackLayout>
                 </StackLayout>
-
-                <Button Text="Edit"
-                        Command="{Binding EditCommand}"
-                        CommandParameter="{Binding EmployeeID}" />
-                <Button Text="Delete"
-                        Command="{Binding DeleteCommand}"
-                        CommandParameter="{Binding EmployeeID}" />
-                <Button Text="Back to List"
-                        Command="{Binding BackCommand}" />
-
-            </StackLayout>
+            </Frame>
         </ScrollView>
-    </ContentPage.Content>
+
+        <StackLayout Grid.Row="1" Padding="20" Spacing="15">
+            <Button Text="Edit"
+                    Command="{Binding UpdateCommand}"
+                    CommandParameter="{Binding EmployeeID}" />
+            <Button Text="Delete"
+                    Command="{Binding DeleteCommand}"
+                    CommandParameter="{Binding EmployeeID}" />
+            <Button Text="Back to List"
+                    Command="{Binding CancelCommand}" />
+        </StackLayout>
+    </Grid>
 </ContentPage>

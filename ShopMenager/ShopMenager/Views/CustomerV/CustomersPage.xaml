@@ -5,9 +5,8 @@
                 xmlns:vm="clr-namespace:ShopMenager.ViewModels.CustomerVM"
                 Title="{Binding Title}">
 
-    <StackLayout Padding="15" Spacing="15">
+    <StackLayout Padding="15" Spacing="15" BackgroundColor="{StaticResource Primary}">
 
-        <!-- Search Bar -->
         <Grid ColumnSpacing="5" VerticalOptions="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -17,19 +16,8 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
-            <Frame Grid.Column="0"
-                   CornerRadius="10"
-                   Padding="0"
-                   BackgroundColor="White"
-                   HeightRequest="45"
-                   VerticalOptions="Center"
-                   HasShadow="False">
-                <Entry x:Name="SearchEntry"
-                       Placeholder="Search for customer"
-                       BackgroundColor="Transparent"
-                       Margin="15,0"
-                       VerticalOptions="Center"
-                       FontSize="14"/>
+            <Frame Style="{StaticResource SearchFrame}">
+                <Entry Style="{StaticResource SearchEntryStyle}" />
             </Frame>
 
             <Button Grid.Column="1"
@@ -42,7 +30,6 @@
                     VerticalOptions="Center" />
         </Grid>
 
-        <!-- RefreshView opakowuje CollectionView -->
         <RefreshView
             x:Name="CustomersRefreshView"
             VerticalOptions="FillAndExpand"
@@ -51,17 +38,15 @@
 
             <CollectionView
                 x:Name="CustomersList"
-                ItemsSource="{Binding Items}">
-
-                <CollectionView.ItemTemplate>
+                ItemsSource="{Binding Items}"
+                >
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="15"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate >
                     <DataTemplate>
-                        <Frame BackgroundColor="White"
-                               CornerRadius="15"
-                               Padding="10"
-                               Margin="0,5"
-                               HasShadow="True">
+                        <Frame Style="{StaticResource Tile}">
 
-                            <!-- Dodajemy TapGestureRecognizer do Frame -->
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer
                                     NumberOfTapsRequired="1"
@@ -69,35 +54,35 @@
                                     CommandParameter="{Binding .}" />
                             </Frame.GestureRecognizers>
 
-                            <Grid ColumnSpacing="10">
+                            <Grid ColumnSpacing="10" >
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
-                                <!-- Customer Image -->
-                                <Image Source="{Binding PhotoPath}"
-                                       WidthRequest="60"
-                                       HeightRequest="60"
-                                       Aspect="AspectFill"
-                                       VerticalOptions="Center"
-                                       HorizontalOptions="Start"
-                                       Grid.Column="0"
-                                       BackgroundColor="#E0E0E0" />
+                                <Frame Style="{StaticResource ImgFrame}">
+                                    <Image Source="{Binding PhotoPath}"
+                                           WidthRequest="60"
+                                           HeightRequest="60"
+                                           Aspect="AspectFill" />
+                                </Frame>
 
-                                <!-- Customer Info -->
-                                <StackLayout Grid.Column="1" VerticalOptions="Center">
-                                    <Label Text="{Binding FirstName}"
-                                           FontAttributes="Bold"
-                                           FontSize="16"
-                                           TextColor="#333" />
-                                    <Label Text="{Binding Phone}"
-                                           FontSize="13"
-                                           TextColor="#777" />
-                                    <Label Text="{Binding Email}"
-                                           FontSize="12"
-                                           TextColor="#777" />
+                                <StackLayout  Grid.Column="1" VerticalOptions="Center" >
+                                    <Label FontAttributes="Bold"
+                                           FontSize="20"
+                                           TextColor="{StaticResource TextColor}">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding FirstName}" />
+                                                <Span Text=" " />
+                                                <Span Text="{Binding LastName}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label Text="{Binding Phone, StringFormat='Phone: {0}!'}"
+                                           FontSize="14"
+                                           TextColor="{StaticResource TextColor}"  />
                                 </StackLayout>
                             </Grid>
                         </Frame>
@@ -106,11 +91,7 @@
             </CollectionView>
         </RefreshView>
 
-        <!-- Add Customer Button -->
-        <Button Text="＋ Add Customer"
-                BackgroundColor="#2196F3"
-                TextColor="White"
-                CornerRadius="10"
+        <Button Text="＋ Add Customer"             
                 FontSize="16"
                 HeightRequest="50"
                 VerticalOptions="End"

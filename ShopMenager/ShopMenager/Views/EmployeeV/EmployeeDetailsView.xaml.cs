@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ShopMenager.ViewModels.CustomerVM;
+using ShopMenager.ViewModels.EmployeeVM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +17,7 @@ namespace ShopMenager.Views.EmployeeV
 		public EmployeeDetailsView ()
 		{
 			InitializeComponent ();
-		}
+            BindingContext = App.Services.GetService<EmployeeDetailViewModel>();
+        }
 	}
 }

@@ -8,8 +8,10 @@
         public required string CustomerName { get; set; }
         public DateTime PaymentDate { get; set; }
         public decimal Amount { get; set; }
-        public required string PaymentMethodName { get; set; }
-        public required string PaymentMethodID { get; set; }
-    
+        public string? PaymentMethodName { get; set; }
+        public required int PaymentMethodID { get; set; }
+        public int PaymentStatusID { get; set; }
+        public string? PaymentStatusName { get; set; }
+
     }
 }

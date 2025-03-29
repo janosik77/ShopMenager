@@ -8,15 +8,15 @@ using Xamarin.Forms;
 
 namespace ShopMenager.ViewModels.OrderitemsVM
 {
-    public class OrdersItemsViewModel : AListItemViewModel<OrdersItemView>
+    public class OrdersItemsViewModel : AListItemViewModel<OrderDetailDto>
     {
-        public OrdersItemsViewModel(IDataStore<OrdersItemView> itemService) : base(itemService, " Order Items Details")
+        public OrdersItemsViewModel(IDataStore<OrderDetailDto> itemService) : base(itemService, " Order Items Details")
         {
         }
 
         public override Task GoToAddPage() => Shell.Current.GoToAsync(nameof(AddOrderItemView));
 
-        public override async Task GoToDetailsPage(OrdersItemView item) { }
+        public override async Task GoToDetailsPage(OrderDetailDto item) { }
             //=> await NavService.NavigateToAsync($"{nameof(OrderItemDetailView)}?{nameof(OrderPozDetailPageViewModel.ItemId)}={item.OrderDetailsId}");
     }
 }

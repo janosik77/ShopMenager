@@ -1,12 +1,13 @@
 ﻿using ShopMenager.Services.ApiService;
 using ShopMenager.ViewModels.Abstract;
+using ShopMenager.Views.PorductV;
 
 
 namespace ShopMenager.ViewModels.OrderitemsVM
 {
-    public class AddOrderDetailViewModel : AAddItemViewModel<OrderDetails>
+    public class AddOrderDetailViewModel : AAddItemViewModel<OrderDetailDto>
     {
-        public AddOrderDetailViewModel(IDataStore<OrderDetails> itemService, string title) : base(itemService, title)
+        public AddOrderDetailViewModel(IDataStore<OrderDetailDto> itemService) : base(itemService, "Order Details Items")
         {
         }
         #region Properties
@@ -48,13 +49,15 @@ namespace ShopMenager.ViewModels.OrderitemsVM
 
         #endregion
 
-        public override OrderDetails SetItem() => new OrderDetails
+        public override OrderDetailDto SetItem() => new OrderDetailDto
         {
-            OrderID = OrderID,
+            OrderDetailID = OrderID,
             ProductID = ProductID,
-            Quantity = Quantity,
-            UnitPrice = UnitPrice,
-            Discount = Discount
+            //ProductName =
+            //Quantity = Quantity,
+            //UnitPrice = UnitPrice,
+            //DiscountID =
+            //DiscountName = Discount
         };
 
         public override bool ValidateSave()

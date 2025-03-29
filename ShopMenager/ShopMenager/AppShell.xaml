@@ -12,7 +12,29 @@
        xmlns:payV="clr-namespace:ShopMenager.Views.PaymentsV"
        xmlns:revV="clr-namespace:ShopMenager.Views.ReviewV"
        Title="ShopMenager"
-       x:Class="ShopMenager.AppShell">
+       x:Class="ShopMenager.AppShell"
+       FlyoutBackgroundColor="#454645"
+       >
+
+    <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <StackLayout BackgroundColor="#454645" Padding="20">
+                <Label VerticalTextAlignment="Center" Text="Shop Menager" FontSize="24" HeightRequest="80" TextColor="White"/>
+            </StackLayout>
+        </DataTemplate>
+    </Shell.FlyoutHeaderTemplate>
+
+    <Shell.FlyoutFooterTemplate>
+        <DataTemplate>
+            <StackLayout BackgroundColor="#454645" Padding="20">
+                <Label VerticalTextAlignment="Center"
+                   HorizontalTextAlignment="Center"
+                   Text="© 2025 Sylwester Kubeł"
+                   FontSize="14"
+                   TextColor="#dcdcdc"/>
+            </StackLayout>
+        </DataTemplate>
+    </Shell.FlyoutFooterTemplate>
 
     <!--
         The overall app visual hierarchy is defined here, along with navigation. 
@@ -43,12 +65,52 @@
     <FlyoutItem Title="Payments" Icon="payments.png">
         <ShellContent ContentTemplate="{DataTemplate payV:PaymentsPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Reviews" Icon="reviews.png">
+    <FlyoutItem Title="Team Chat" Icon="reviews.png">
         <ShellContent ContentTemplate="{DataTemplate revV:ReviewsPage}" />
     </FlyoutItem>
 
 
-    
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label"
+                   Class="FlyoutItemLabelStyle">
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="TextColor"
+                        Value="White" />
+            </Style>
+            <Style Class="FlyoutItemLayoutStyle" TargetType="Layout" ApplyToDerivedTypes="True">
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <!-- Tło w stanie niewybranym -->
+                                    <Setter Property="BackgroundColor" Value="Transparent" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Selected">
+                                <VisualState.Setters>
+                                    <!-- Tło w stanie wybranym -->
+                                    <Setter Property="BackgroundColor" Value="Black" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+            <Style x:Key="BaseStyle" TargetType="Element">
+                <Setter Property="Shell.BackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="Shell.TitleColor" Value="White" />
+                <Setter Property="Shell.UnselectedColor" Value="White" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="White" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
+                <Setter Property="Shell.TabBarUnselectedColor" Value="White"/>
+            </Style>
+
+            <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
+            <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}" />
+        </ResourceDictionary>
+    </Shell.Resources>
 
     <!--
     

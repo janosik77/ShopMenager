@@ -2,13 +2,91 @@
 <ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                      >
-    
-    <Color x:Key="Primary">#1E88E5</Color>
+
+    <Color x:Key="Primary">#0a0a0a</Color>
+    <Color x:Key="TextColor">#FFFFFF</Color>
+    <Color x:Key="MainButtons" >#5de651</Color>
+    <Color x:Key="Clauds" >#454645</Color>
     <Color x:Key="SecondaryColor">#FF9800</Color>
-    <Color x:Key="BackgroundColor">#F5F5F5</Color>
-    <Color x:Key="SurfaceColor">#FFFFFF</Color>
-    <Color x:Key="TextColor">#212121</Color>
-    <Color x:Key="DisabledColor">#B4FFFFFF</Color>
-    <Color x:Key="UnselectedColor">#95FFFFFF</Color>
-    
+    <Color x:Key="DetailsTextColor">#DDDD</Color>
+
+
+   
+
+
+    <Style TargetType="Shell" >
+        <Setter Property="FlyoutBackgroundColor" Value="{StaticResource Primary}"/>
+    </Style>
+    <Style TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource MainButtons}"/>
+        <Setter Property="TextColor" Value="{StaticResource Primary}"/>
+        <Setter Property="CornerRadius" Value="35"/>
+    </Style>
+
+    <Style x:Key="Tile" TargetType="Frame">
+        <Setter Property="BackgroundColor" Value="#454645"/>
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="Margin" Value="0,5"/>
+        <Setter Property="CornerRadius" Value="15"/>
+        <Setter Property="HasShadow" Value="True"/>
+    </Style>
+
+    <Style x:Key="ImgFrame" TargetType="Frame">
+        <Setter Property="Grid.Column" Value="0" />
+        <Setter Property="WidthRequest" Value="80" />
+        <Setter Property="HeightRequest" Value="80" />
+        <Setter Property="CornerRadius" Value="40" />
+        <Setter Property="Margin" Value="20,0,0,0" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="HorizontalOptions" Value="Start" />
+        <Setter Property="BackgroundColor" Value="#E0E0E0" />
+        <Setter Property="HasShadow" Value="False" />
+    </Style>
+
+    <Style x:Key="SearchFrame" TargetType="Frame">
+        <Setter Property="Grid.Column" Value="0" />
+        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="BackgroundColor" Value="#454645" />
+        <Setter Property="HeightRequest" Value="45" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="HasShadow" Value="False" />
+        <Setter Property="BorderColor" Value="#959895"/>
+    </Style>
+
+    <Style x:Key="SearchEntryStyle" TargetType="Entry">
+        <Setter Property="Placeholder" Value="Search for customer" />
+        <Setter Property="Margin" Value="15,0" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="TextColor" Value="{StaticResource TextColor}"/>
+        <Setter Property="PlaceholderColor" Value="{StaticResource TextColor}"/>
+
+    </Style>
+
+    <Style x:Key="ProductImg" TargetType="Frame">
+        <Setter Property="WidthRequest" Value="190" />
+        <Setter Property="HeightRequest" Value="140" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="VerticalOptions" Value="Start" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="BackgroundColor" Value="#E0E0E0" />
+        <Setter Property="HasShadow" Value="False" />
+    </Style>
+
+    <Style x:Key="ProdTile" TargetType="Frame">
+        <Setter Property="BackgroundColor" Value="#454645"/>
+        <Setter Property="CornerRadius" Value="10"/>
+        <Setter Property="HasShadow" Value="True"/>
+        <Setter Property="WidthRequest" Value="100" />
+        <Setter Property="Padding" Value="0" />
+    </Style>
+
+    <Style x:Key="DetailLabel" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource TextColor}"/>
+        <Setter Property="FontSize" Value="18"/>
+    </Style>
+
+
 </ResourceDictionary>

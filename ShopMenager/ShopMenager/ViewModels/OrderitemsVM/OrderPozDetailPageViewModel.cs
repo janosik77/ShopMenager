@@ -7,9 +7,9 @@ using Xamarin.Forms;
 
 namespace ShopMenager.ViewModels.OrderitemsVM
 {
-    public class OrderPozDetailPageViewModel : ADetailsItemViewModel<OrderDetails>
+    public class OrderPozDetailPageViewModel : ADetailsItemViewModel<OrderDetailDto>
     {
-        public OrderPozDetailPageViewModel(IDataStore<OrderDetails> itemService) : base(itemService, "Pozition Detail")
+        public OrderPozDetailPageViewModel(IDataStore<OrderDetailDto> itemService) : base(itemService, "Pozition Detail")
         {
         }
         #region Fields
@@ -66,12 +66,12 @@ namespace ShopMenager.ViewModels.OrderitemsVM
                 var detail = await ItemService.GetItemAsync(id);
                 if (detail != null)
                 {
-                    OrderDetailsId = detail.OrderDetailsId;
-                    OrderID = detail.OrderID;
-                    ProductID = detail.ProductID;
-                    Quantity = detail.Quantity;
-                    UnitPrice = detail.UnitPrice;
-                    Discount = detail.Discount;
+                    //OrderDetailsId = detail.OrderDetailsId;
+                    //OrderID = detail.OrderID;
+                    //ProductID = detail.ProductID;
+                    //Quantity = detail.Quantity;
+                    //UnitPrice = detail.UnitPrice;
+                    //Discount = detail.Discount;
                 }
             }
             catch (Exception ex)
@@ -82,5 +82,9 @@ namespace ShopMenager.ViewModels.OrderitemsVM
 
         protected override Task GoToUpdatePage()
             => Shell.Current.GoToAsync($"{nameof(EditOrderItemView)}?{nameof(EditOrderDetailViewModel.OrderDetailsId)}={OrderDetailsId}");
+        protected override Task GoToUpdatePage(OrderDetailDto item)
+        {
+            return null;
+        }
     }
 }

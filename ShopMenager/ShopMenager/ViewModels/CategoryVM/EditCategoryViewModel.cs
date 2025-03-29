@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace ShopMenager.ViewModels.CategoryVM
 {
-    public class EditCategoryViewModel : AUpdateItemViewModel<Categories>
+    public class EditCategoryViewModel : AUpdateItemViewModel<CategoryDto>
     {
-        public EditCategoryViewModel(IDataStore<Categories> itemService) : base(itemService, "Edit Category")
+        public EditCategoryViewModel(IDataStore<CategoryDto> itemService) : base(itemService, "Edit Category")
         {
         }
         #region Fields
@@ -47,7 +47,7 @@ namespace ShopMenager.ViewModels.CategoryVM
                 var category = await ItemService.GetItemAsync(id);
                 if (category != null)
                 {
-                    CategoryID = category.CategoryId;
+                    CategoryID = category.CategoryID;
                     CategoryName = category.CategoryName;
                     CategoryDescription = category.CategoryDescription;
                 }
@@ -62,9 +62,9 @@ namespace ShopMenager.ViewModels.CategoryVM
             }
         }
 
-        public override Categories SetItem() => new Categories
+        public override CategoryDto SetItem() => new CategoryDto
         {
-            CategoryId = CategoryID,
+            CategoryID = CategoryID,
             CategoryName = CategoryName,
             CategoryDescription = CategoryDescription
         };

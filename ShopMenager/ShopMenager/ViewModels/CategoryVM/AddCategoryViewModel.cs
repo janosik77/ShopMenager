@@ -3,9 +3,9 @@ using ShopMenager.ViewModels.Abstract;
 
 namespace ShopMenager.ViewModels.CategoryVM
 {
-    public class AddCategoryViewModel : AAddItemViewModel<Categories>
+    public class AddCategoryViewModel : AAddItemViewModel<CategoryDto>
     {
-        public AddCategoryViewModel(IDataStore<Categories> itemService, string title) : base(itemService, title)
+        public AddCategoryViewModel(IDataStore<CategoryDto> itemService) : base(itemService, "Create Category")
         {
         }
 
@@ -25,7 +25,7 @@ namespace ShopMenager.ViewModels.CategoryVM
         }
         #endregion
 
-        public override Categories SetItem() => new Categories
+        public override CategoryDto SetItem() => new CategoryDto
         {
             CategoryName = CategoryName,
             CategoryDescription = CategoryDescription

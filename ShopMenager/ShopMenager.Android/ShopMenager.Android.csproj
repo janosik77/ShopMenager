@@ -69,6 +69,7 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.7.1" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Effects\TintImageEffectRenderer.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -118,6 +119,25 @@
     <AndroidResource Include="Resources\drawable\cust1.jpg" />
     <AndroidResource Include="Resources\drawable\cust2.jpg" />
     <AndroidResource Include="Resources\drawable\cust3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\cust4.jpg" />
+    <AndroidResource Include="Resources\drawable\cust5.jpg" />
+    <AndroidResource Include="Resources\drawable\cust6.jpg" />
+    <AndroidResource Include="Resources\drawable\emp1.jpg" />
+    <AndroidResource Include="Resources\drawable\emp2.jpg" />
+    <AndroidResource Include="Resources\drawable\emp3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\emp4.jpg" />
+    <AndroidResource Include="Resources\drawable\emp5.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\prod1.jpg" />
+    <AndroidResource Include="Resources\drawable\prod2.jpg" />
+    <AndroidResource Include="Resources\drawable\prod3.jpg" />
+    <AndroidResource Include="Resources\drawable\prod4.jpg" />
+    <AndroidResource Include="Resources\drawable\prod5.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

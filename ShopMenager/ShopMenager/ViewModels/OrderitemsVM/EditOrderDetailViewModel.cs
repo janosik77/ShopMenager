@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace ShopMenager.ViewModels.OrderitemsVM
 {
-    public class EditOrderDetailViewModel : AUpdateItemViewModel<OrderDetails>
+    public class EditOrderDetailViewModel : AUpdateItemViewModel<OrderDetailDto>
     {
-        public EditOrderDetailViewModel(IDataStore<OrderDetails> itemService) : base(itemService, "Edit Order Detail")
+        public EditOrderDetailViewModel(IDataStore<OrderDetailDto> itemService) : base(itemService, "Edit Order Detail")
         {
         }
         #region Fields
@@ -68,12 +68,12 @@ namespace ShopMenager.ViewModels.OrderitemsVM
                 var detail = await ItemService.GetItemAsync(id);
                 if (detail != null)
                 {
-                    OrderDetailsId = detail.OrderDetailsId;
-                    OrderID = detail.OrderID;
-                    ProductID = detail.ProductID;
-                    Quantity = detail.Quantity;
-                    UnitPrice = detail.UnitPrice;
-                    Discount = detail.Discount;
+                    //OrderDetailsId = detail.OrderDetailID;
+                    //OrderID = detail.OrderID;
+                    //ProductID = detail.ProductID;
+                    //Quantity = detail.Quantity;
+                    //UnitPrice = detail.UnitPrice;
+                    //Discount = detail.Discount;
                 }
             }
             catch (Exception ex)
@@ -82,14 +82,14 @@ namespace ShopMenager.ViewModels.OrderitemsVM
             }
         }
 
-        public override OrderDetails SetItem() => new OrderDetails
+        public override OrderDetailDto SetItem() => new OrderDetailDto
         {
-            OrderDetailsId = OrderDetailsId,
-            OrderID = OrderID,
-            ProductID = ProductID,
-            Quantity = Quantity,
-            UnitPrice = UnitPrice,
-            Discount = Discount
+            //OrderDetailsId = OrderDetailsId,
+            //OrderID = OrderID,
+            //ProductID = ProductID,
+            //Quantity = Quantity,
+            //UnitPrice = UnitPrice,
+            //Discount = Discount
         };
 
         public override bool ValidateSave()

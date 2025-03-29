@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,7 +8,7 @@ public partial class Categories
 {
     [Key]
     [Column("CategoryID")]
-    public int CategoryID { get; set; }
+    public int CategoryId { get; set; }
 
     [StringLength(100)]
     [Unicode(false)]

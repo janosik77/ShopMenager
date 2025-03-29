@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using RestApiShopmenager.DTOs;
 using RestApiShopmenager.Models;
-using RestApiShopmenager.Models.Contexts; // <-- Zależnie od Twojej struktury
+using RestApiShopmenager.Models.Contexts; // <-- Zależnie od struktury twojego projektu
 
 namespace RestApiShopmenager.Controllers
 {
@@ -21,15 +21,17 @@ namespace RestApiShopmenager.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<OrderDto>>> GetOrders()
         {
-            // Ładujemy zamówienia wraz z powiązanymi encjami
+            // Ładujemy zamówienia wraz z powiązaniami
             var orders = await _context.Orders
                 .Include(o => o.Customer)
                 .Include(o => o.Employee)
                 .Include(o => o.OrderDetails)
                     .ThenInclude(od => od.Product)
+                .Include(o => o.OrderDetails)
+                    .ThenInclude(od => od.Discount)
                 .ToListAsync();
 
-            // Mapujemy encje na DTO
+            // Mapujemy encje -> DTO
             var result = orders.Select(o => MapOrderToDto(o)).ToList();
             return Ok(result);
         }
@@ -43,12 +45,12 @@ namespace RestApiShopmenager.Controllers
                 .Include(o => o.Employee)
                 .Include(o => o.OrderDetails)
                     .ThenInclude(od => od.Product)
-                .FirstOrDefaultAsync(o => o.OrderID == id);
+                .Include(o => o.OrderDetails)
+                    .ThenInclude(od => od.Discount)
+                .FirstOrDefaultAsync(o => o.OrderId == id);
 
             if (order == null)
-            {
                 return NotFound();
-            }
 
             return MapOrderToDto(order);
         }
@@ -60,8 +62,8 @@ namespace RestApiShopmenager.Controllers
             // Tworzymy encję Orders
             var order = new Orders
             {
-                CustomerID = dto.CustomerID,
-                EmployeeID = dto.EmployeeID,
+                CustomerId = dto.CustomerID,
+                EmployeeId = dto.EmployeeID,
                 OrderDate = dto.OrderDate,
                 Status = dto.Status
             };
@@ -69,27 +71,28 @@ namespace RestApiShopmenager.Controllers
             // Dodajemy powiązane OrderDetails
             order.OrderDetails = dto.OrderDetails.Select(d => new OrderDetails
             {
-                ProductID = d.ProductID,
+                ProductId = d.ProductID,
                 UnitPrice = d.UnitPrice,
                 Quantity = d.Quantity,
-                Discount = d.DiscountID, // Rzutowanie int -> decimal, zależnie od logiki
+                DiscountId = d.DiscountID == 0 ? null : d.DiscountID // null jeśli 0
             }).ToList();
 
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
 
-            // Opcjonalnie wczytujemy nawigacje (Customer, Employee, Product)
+            // Opcjonalnie wczytujemy nawigacje, by zwrócić aktualne dane
             await _context.Entry(order).Reference(o => o.Customer).LoadAsync();
             await _context.Entry(order).Reference(o => o.Employee).LoadAsync();
             foreach (var od in order.OrderDetails)
             {
                 await _context.Entry(od).Reference(x => x.Product).LoadAsync();
+                await _context.Entry(od).Reference(x => x.Discount).LoadAsync();
             }
 
-            // Mapujemy do DTO, aby zwrócić aktualne dane (z nowym OrderID itp.)
+            // Mapujemy do DTO
             var resultDto = MapOrderToDto(order);
 
-            return CreatedAtAction(nameof(GetOrder), new { id = order.OrderID }, resultDto);
+            return CreatedAtAction(nameof(GetOrder), new { id = order.OrderId }, resultDto);
         }
 
         // PUT: api/Orders/5
@@ -97,23 +100,19 @@ namespace RestApiShopmenager.Controllers
         public async Task<IActionResult> PutOrder(int id, OrderDto dto)
         {
             if (id != dto.OrderID)
-            {
                 return BadRequest("Order ID in path does not match DTO");
-            }
 
             // Szukamy istniejącego zamówienia
             var order = await _context.Orders
                 .Include(o => o.OrderDetails)
-                .FirstOrDefaultAsync(o => o.OrderID == id);
+                .FirstOrDefaultAsync(o => o.OrderId == id);
 
             if (order == null)
-            {
                 return NotFound();
-            }
 
             // Aktualizujemy podstawowe pola
-            order.CustomerID = dto.CustomerID;
-            order.EmployeeID = dto.EmployeeID;
+            order.CustomerId = dto.CustomerID;
+            order.EmployeeId = dto.EmployeeID;
             order.OrderDate = dto.OrderDate;
             order.Status = dto.Status;
 
@@ -125,15 +124,14 @@ namespace RestApiShopmenager.Controllers
             {
                 var detail = new OrderDetails
                 {
-                    ProductID = d.ProductID,
+                    ProductId = d.ProductID,
                     UnitPrice = d.UnitPrice,
                     Quantity = d.Quantity,
-                    Discount = d.DiscountID
+                    DiscountId = d.DiscountID == 0 ? null : d.DiscountID
                 };
                 order.OrderDetails.Add(detail);
             }
 
-            // Oznaczamy Order jako zmodyfikowany
             _context.Entry(order).State = EntityState.Modified;
 
             try
@@ -143,13 +141,9 @@ namespace RestApiShopmenager.Controllers
             catch (DbUpdateConcurrencyException)
             {
                 if (!OrderExists(id))
-                {
                     return NotFound();
-                }
                 else
-                {
                     throw;
-                }
             }
 
             return NoContent();
@@ -161,9 +155,7 @@ namespace RestApiShopmenager.Controllers
         {
             var order = await _context.Orders.FindAsync(id);
             if (order == null)
-            {
                 return NotFound();
-            }
 
             _context.Orders.Remove(order);
             await _context.SaveChangesAsync();
@@ -173,40 +165,41 @@ namespace RestApiShopmenager.Controllers
 
         private bool OrderExists(int id)
         {
-            return _context.Orders.Any(e => e.OrderID == id);
+            return _context.Orders.Any(e => e.OrderId == id);
         }
 
-        // ──────────────────────────────────────────────────────────────────────────
-        // ───────────────  MAPOWANIE encji <-> DTO  ─────────────────────────────
-        // ──────────────────────────────────────────────────────────────────────────
+        // ─────────────────────────────────────────────────────────
+        // MAPOWANIE encji -> DTO
+        // ─────────────────────────────────────────────────────────
 
-        /// <summary>
-        /// Zamienia encję Orders na OrderDto (wraz z OrderDetails).
-        /// </summary>
         private OrderDto MapOrderToDto(Orders order)
         {
             var dto = new OrderDto
             {
-                OrderID = order.OrderID,
-                CustomerID = order.CustomerID,
-                EmployeeID = order.EmployeeID,
+                OrderID = order.OrderId,
+                CustomerID = order.CustomerId,
+                EmployeeID = order.EmployeeId,
                 OrderDate = order.OrderDate,
                 Status = order.Status,
-                CustomerName = order.Customer?.FirstName ?? "",
+                CustomerName = order.Customer?.FirstName + " " + order.Customer?.LastName ?? "",
                 EmployeeName = order.Employee?.FirstName ?? "",
-                OrderDetails = order.OrderDetails.Select(od => new OrderDetailDto
+                OrderDetails = order.OrderDetails.Select(od =>
                 {
-                    OrderDetailID = od.OrderDetailsId,
-                    ProductID = od.ProductID,
-                    ProductName = od.Product?.ProductName ?? "",
-                    UnitPrice = od.UnitPrice,
-                    Quantity = od.Quantity,
-                    // Zakładamy, że Discount w bazie to decimal, a w DTO jest int
-                    // Poniżej rzutowanie decimal -> int (lub inna logika)
-                    DiscountID = (int)od.Discount,
-                    DiscountName = od.Discount > 0
-                        ? $"Discount {od.Discount}%"
-                        : "No discount"
+                    var discountName = od.Discount != null
+                        ? od.Discount.DiscountName
+                        : null;
+
+                    return new OrderDetailDto
+                    {
+                        OrderDetailID = od.OrderDetailsId,
+                        ProductID = od.ProductId,
+                        ProductName = od.Product?.ProductName ?? "",
+                        UnitPrice = od.UnitPrice,
+                        Quantity = od.Quantity,
+                        DiscountID = od.DiscountId ?? 0, // 0 jeśli null
+                        DiscountPerc = od.Discount.DiscountRate,
+                        Total = BuissnesLogic.BuissnesMath.CalculateTotal(od.Quantity,od.UnitPrice, od.Discount.DiscountRate)
+                    };
                 }).ToList()
             };
 

@@ -1,35 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage    xmlns="http://xamarin.com/schemas/2014/forms"
-                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                x:Class="ShopMenager.Views.EmployeeV.EmployeesPage"
-                Title="{Binding Title}"
-                >
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShopMenager.Views.EmployeeV.EmployeesPage"
+             xmlns:vm="clr-namespace:ShopMenager.ViewModels.EmployeeVM"
+             Title="{Binding Title}">
+    <StackLayout Padding="15" Spacing="15" BackgroundColor="{StaticResource Primary}">
 
-    <StackLayout Padding="15" Spacing="15">
-
-        <!-- Search Bar -->
         <Grid ColumnSpacing="5" VerticalOptions="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <Frame Grid.Column="0"
-                   CornerRadius="10"
-                   Padding="0"
-                   BackgroundColor="White"
-                   HeightRequest="45"
-                   VerticalOptions="Center"
-                   HasShadow="False">
+            <Frame Grid.Column="0" Style="{StaticResource SearchFrame}">
                 <Entry x:Name="SearchEntry"
-                       Placeholder="Search for employee"
-                       BackgroundColor="Transparent"
-                       Margin="15,0"
-                       VerticalOptions="Center"
-                       FontSize="14"/>
+                       Style="{StaticResource SearchEntryStyle}"
+                       Placeholder="Search for employee" />
             </Frame>
 
             <Button Grid.Column="1"
@@ -42,86 +31,76 @@
                     VerticalOptions="Center" />
         </Grid>
 
-        <!-- Employees List -->
-        <CollectionView x:Name="EmployeesList" ItemsSource="{Binding Employees}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame BackgroundColor="White"
-                           CornerRadius="15"
-                           Padding="10"
-                           Margin="0,5"
-                           HasShadow="True">
-                        <Grid ColumnSpacing="10">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
+        <!-- RefreshView opakowujący CollectionView -->
+        <RefreshView x:Name="EmployeesRefreshView"
+                     VerticalOptions="FillAndExpand"
+                     Command="{Binding LoadItemsCommand}"
+                     IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+            <CollectionView x:Name="EmployeesList"
+                            ItemsSource="{Binding Items}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="15" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Style="{StaticResource Tile}">
 
-                            <!-- Employee Image -->
-                            <Image Source="{Binding Image}"
-                                   WidthRequest="60"
-                                   HeightRequest="60"
-                                   Aspect="AspectFill"
-                                   VerticalOptions="Center"
-                                   HorizontalOptions="Start"
-                                   Grid.Column="0"
-                                   BackgroundColor="#E0E0E0"
-                                   Clip="EllipseGeometry Center='30,30' RadiusX='30' RadiusY='30'" />
+                            <!-- TapGestureRecognizer dla obsługi kliknięcia -->
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    NumberOfTapsRequired="1"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:EmployeesViewModel}}, Path=ItemTapped}"
+                                    CommandParameter="{Binding .}" />
+                            </Frame.GestureRecognizers>
 
-                            <!-- Employee Info -->
-                            <StackLayout Grid.Column="1" VerticalOptions="Center">
-                                <Label Text="{Binding Name}"
-                                       FontAttributes="Bold"
-                                       FontSize="16"
-                                       TextColor="#333" />
-                                <Label Text="{Binding ContactInfo}"
-                                       FontSize="13"
-                                       TextColor="#777" />
-                                <Label Text="{Binding Position}"
-                                       FontSize="12"
-                                       TextColor="#777" />
-                                <!-- Dodane pola: Salary i Tenure -->
-                                <Label Text="{Binding Salary, StringFormat='Salary: {0:C}'}"
-                                       FontSize="12"
-                                       TextColor="#777" />
-                                <Label Text="{Binding Tenure, StringFormat='Tenure: {0} years'}"
-                                       FontSize="12"
-                                       TextColor="#777" />
-                            </StackLayout>
+                            <Grid ColumnSpacing="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
 
-                            <!-- Edit/Delete Buttons -->
-                            <StackLayout Grid.Column="2" VerticalOptions="Center" Spacing="10">
-                                <Button Text="✏️"
-                                        BackgroundColor="#4CAF50"
-                                        WidthRequest="35"
-                                        HeightRequest="35"
-                                        CornerRadius="10"
-                                        FontSize="14"
-                                        TextColor="White" />
-                                <Button Text="🗑️"
-                                        BackgroundColor="#F44336"
-                                        WidthRequest="35"
-                                        HeightRequest="35"
-                                        CornerRadius="10"
-                                        FontSize="14"
-                                        TextColor="White" />
-                            </StackLayout>
-                        </Grid>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                                <!-- Employee Image -->
+                                <Frame Style="{StaticResource ImgFrame}">
+                                    <Image Source="{Binding PhotoPath}"
+                                           WidthRequest="60"
+                                           HeightRequest="60"
+                                           Aspect="AspectFill" />
+                                </Frame>
+
+                                <!-- Employee Info -->
+                                <StackLayout Grid.Column="1" VerticalOptions="Center">
+                                    <Label FontAttributes="Bold"
+                                           FontSize="20"
+                                           TextColor="{StaticResource TextColor}">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding FirstName}" />
+                                                <Span Text=" " />
+                                                <Span Text="{Binding LastName}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label Text="{Binding Phone, StringFormat='Phone: {0}!'}"
+                                           FontSize="14"
+                                           TextColor="{StaticResource TextColor}" />
+                                    <Label Text="{Binding Email, StringFormat='Email: {0}!'}"
+                                           FontSize="14"
+                                           TextColor="{StaticResource TextColor}" />
+                                </StackLayout>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
 
         <!-- Add Employee Button -->
-        <Button Text="＋ ADD EMPLOYEE"
-                BackgroundColor="#2196F3"
-                TextColor="White"
-                CornerRadius="10"
+        <Button Text="＋ Add Employee"
                 FontSize="16"
                 HeightRequest="50"
-                VerticalOptions="End" />
+                VerticalOptions="End"
+                Command="{Binding AddCommand}" />
 
     </StackLayout>
-
 </ContentPage>

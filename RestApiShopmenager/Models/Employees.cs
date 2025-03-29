@@ -10,7 +10,7 @@ public partial class Employees
 {
     [Key]
     [Column("EmployeeID")]
-    public int EmployeeID { get; set; }
+    public int EmployeeId { get; set; }
 
     [StringLength(50)]
     [Unicode(false)]

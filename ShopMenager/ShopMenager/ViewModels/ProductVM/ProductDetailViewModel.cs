@@ -8,9 +8,9 @@ using Xamarin.Forms;
 
 namespace ShopMenager.ViewModels.ProductVM
 {
-    public class ProductDetailViewModel : ADetailsItemViewModel<Products>
+    public class ProductDetailViewModel : ADetailsItemViewModel<ProductDto>
     {
-        public ProductDetailViewModel(IDataStore<Products> itemService) : base(itemService, "Product Detail")
+        public ProductDetailViewModel(IDataStore<ProductDto> itemService) : base(itemService, "Product Detail")
         {
         }
 
@@ -22,9 +22,15 @@ namespace ShopMenager.ViewModels.ProductVM
         private int _stock;
         private string _description;
         private string _photoPath;
+        private string _categoryName;
         #endregion
 
         #region Props
+        public string CategoryName 
+        {
+            get => _categoryName;
+            set => SetProperty(ref _categoryName, value); 
+        }
         public int ProductID
         {
             get => _productID;
@@ -78,6 +84,7 @@ namespace ShopMenager.ViewModels.ProductVM
                     ProductID = product.ProductID;
                     CategoryID = product.CategoryID;
                     ProductName = product.ProductName;
+                    CategoryName = product.CategoryName;
                     Price = product.Price;
                     Stock = product.Stock;
                     Description = product.Description;
@@ -92,5 +99,9 @@ namespace ShopMenager.ViewModels.ProductVM
 
         protected override Task GoToUpdatePage()
             => Shell.Current.GoToAsync($"{nameof(EditproductView)}?{nameof(EditProductViewModel.ProductID)}={ProductID}");
+        protected override Task GoToUpdatePage(ProductDto item)
+        {
+            return null;
+        }
     }
 }

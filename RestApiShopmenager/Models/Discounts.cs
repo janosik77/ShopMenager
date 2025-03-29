@@ -24,4 +24,7 @@ public partial class Discounts
 
     [Column(TypeName = "datetime")]
     public DateTime EndDate { get; set; }
+
+    [InverseProperty("Discount")]
+    public virtual ICollection<OrderDetails> OrderDetails { get; set; } = new List<OrderDetails>();
 }

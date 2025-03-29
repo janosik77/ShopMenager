@@ -4,9 +4,9 @@ using System;
 
 namespace ShopMenager.ViewModels.PaymentVM
 {
-    public class AddpaymentViewModel : AAddItemViewModel<Payments>
+    public class AddpaymentViewModel : AAddItemViewModel<PaymentDto>
     {
-        public AddpaymentViewModel(IDataStore<Payments> itemService, string title) : base(itemService, title)
+        public AddpaymentViewModel(IDataStore<PaymentDto> itemService, string title) : base(itemService, title)
         {
             PaymentDate = DateTime.Now;
         }
@@ -50,13 +50,15 @@ namespace ShopMenager.ViewModels.PaymentVM
 
         #endregion
 
-        public override Payments SetItem() => new Payments
+        public override PaymentDto SetItem() => new PaymentDto
         {
-            OrderID = OrderID,
-            PaymentDate = PaymentDate,
-            Amount = Amount,
-            PaymentMethod = PaymentMethod,
-            PaymentStatus = PaymentStatus
+            //OrderID = OrderID,
+            //CustomerID = CustomerID,
+            //Amount = Amount,
+            //CustomerName = CustomerName,
+            //PaymentDate = PaymentDate,
+            //PaymentMethodName = PaymentMethodName,
+            //PaymentMethodID = PaymentMethodID
         };
 
         public override bool ValidateSave()

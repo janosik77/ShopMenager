@@ -8,30 +8,30 @@ using Xamarin.Forms;
 
 namespace ShopMenager.Services.ApiService
 {
-    public class CustomerDataStore : AListDataStore<Customers>
+    public class CustomerDataStore : AListDataStore<CustomerDto>
     {
         public CustomerDataStore()
         {
-            items = DependencyService.Get<OrderService>().CustomerAllAsync().GetAwaiter().GetResult().ToList();
+            items = DependencyService.Get<OrderService>().CustomersAllAsync().GetAwaiter().GetResult().ToList();
         }
 
-        public override async Task<bool> AddItemToService(Customers item) 
-            => await DependencyService.Get<OrderService>().CustomerPOSTAsync(item).HandleRequest();
+        public override async Task<bool> AddItemToService(CustomerDto item) 
+            => await DependencyService.Get<OrderService>().CustomersPOSTAsync(item).HandleRequest();
          
 
-        public override Task<bool> DeleteItemFromService(Customers item)
-            => DependencyService.Get<OrderService>().CustomerDELETEAsync(item.CustomerId).HandleRequest();
+        public override Task<bool> DeleteItemFromService(CustomerDto item)
+            => DependencyService.Get<OrderService>().CustomersDELETEAsync(item.CustomerId).HandleRequest();
 
-        public override Customers Find(Customers item)
-            => items.Where((Customers c) => c.CustomerId == item.CustomerId).FirstOrDefault();
+        public override CustomerDto Find(CustomerDto item)
+            => items.Where((CustomerDto c) => c.CustomerId == item.CustomerId).FirstOrDefault();
 
-        public override Customers Find(int id)
+        public override CustomerDto Find(int id)
             => items.FirstOrDefault(s => s.CustomerId == id);
 
         public override async Task Refresh()
-            => items = (await DependencyService.Get<OrderService>().CustomerAllAsync()).ToList();
+            => items = (await DependencyService.Get<OrderService>().CustomersAllAsync()).ToList();
 
-        public override async Task<bool> UpdateItemInService(Customers item)
-            => await DependencyService.Get<OrderService>().CustomerPUTAsync(item.CustomerId, item).HandleRequest();
+        public override async Task<bool> UpdateItemInService(CustomerDto item)
+            => await DependencyService.Get<OrderService>().CustomersPUTAsync(item.CustomerId, item).HandleRequest();
     }
 }

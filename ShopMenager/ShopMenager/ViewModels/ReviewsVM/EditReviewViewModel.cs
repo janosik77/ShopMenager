@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace ShopMenager.ViewModels.ReviewsVM
 {
-    public class EditReviewViewModel : AUpdateItemViewModel<Reviews>
+    public class EditReviewViewModel : AUpdateItemViewModel<ReviewsDto>
     {
-        public EditReviewViewModel(IDataStore<Reviews> itemService) : base(itemService, "Edit Review")
+        public EditReviewViewModel(IDataStore<ReviewsDto> itemService) : base(itemService, "Edit Review")
         {
         }
 
@@ -87,10 +87,10 @@ namespace ShopMenager.ViewModels.ReviewsVM
                     Rating = review.Rating;
                     Comments = review.Comments;
                     ReviewDate = review.ReviewDate;
-                    //EmployeeName = review.EmployeeName;
+                    EmployeeName = review.EmployeeName;
                     EmployeeID = review.EmployeeID;
                     ProductID = review.ProductID;
-                    //ProductName = review.ProductName;
+                    ProductName = review.ProductName;
                 }
             }
             catch (Exception ex)
@@ -99,16 +99,16 @@ namespace ShopMenager.ViewModels.ReviewsVM
             }
         }
 
-        public override Reviews SetItem() => new Reviews
+        public override ReviewsDto SetItem() => new ReviewsDto
         {
             ReviewID = ReviewID,
             Rating = Rating,
             Comments = Comments,
             ReviewDate = ReviewDate,
-            //EmployeeName = EmployeeName,
+            EmployeeName = EmployeeName,
             EmployeeID = EmployeeID,
             ProductID = ProductID,
-            //ProductName = ProductName
+            ProductName = ProductName
         };
 
         public override bool ValidateSave()

@@ -6,16 +6,16 @@ using Xamarin.Forms;
 
 namespace ShopMenager.ViewModels.CategoryVM
 {
-    public class CategoriesViewModel : AListItemViewModel<Categories>
+    public class CategoriesViewModel : AListItemViewModel<CategoryDto>
     {
-        public CategoriesViewModel(IDataStore<Categories> itemService) : base(itemService, "Categories")
+        public CategoriesViewModel(IDataStore<CategoryDto> itemService) : base(itemService, "Categories")
         {
         }
 
         public override Task GoToAddPage() => Shell.Current.GoToAsync(nameof(AddCategoryView));
 
-        public override async Task GoToDetailsPage(Categories item) 
+        public override async Task GoToDetailsPage(CategoryDto item) 
             => await Shell.Current.
-            GoToAsync($"{nameof(CategoryDetailView)}?{nameof(CategoryDetailViewModel.ItemId)}={item.CategoryId}");
+            GoToAsync($"{nameof(CategoryDetailView)}?{nameof(CategoryDetailViewModel.ItemId)}={item.CategoryID}");
     }
 }

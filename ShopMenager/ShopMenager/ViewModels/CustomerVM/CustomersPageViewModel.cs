@@ -7,15 +7,15 @@ using Xamarin.Forms;
 
 namespace ShopMenager.ViewModels.CustomerVM
 {
-    public class CustomersPageViewModel : AListItemViewModel<Customers>
+    public class CustomersPageViewModel : AListItemViewModel<CustomerDto>
     {
-        public CustomersPageViewModel(IDataStore<Customers> itemService) : base(itemService, "Customers")
+        public CustomersPageViewModel(IDataStore<CustomerDto> itemService) : base(itemService, "Customers")
         {
         }
 
         public override Task GoToAddPage() => Shell.Current.GoToAsync(nameof(AddCustomerView));
 
-        public override async Task GoToDetailsPage(Customers item) 
+        public override async Task GoToDetailsPage(CustomerDto item) 
             => await Shell.Current
             .GoToAsync($"{nameof(CustomerDetailsView)}?{nameof(CustomerDetailViewModel.ItemId)}={item.CustomerId}");
     }

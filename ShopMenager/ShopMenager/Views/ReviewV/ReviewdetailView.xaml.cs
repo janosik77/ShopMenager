@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ShopMenager.ViewModels.EmployeeVM;
+using ShopMenager.ViewModels.ReviewsVM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +17,7 @@ namespace ShopMenager.Views.ReviewV
 		public ReviewdetailView ()
 		{
 			InitializeComponent ();
-		}
+            BindingContext = App.Services.GetService<ReviewDetailViewModel>();
+        }
 	}
 }

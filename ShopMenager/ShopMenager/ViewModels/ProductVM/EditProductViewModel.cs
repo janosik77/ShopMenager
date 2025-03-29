@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace ShopMenager.ViewModels.ProductVM
 {
-    public class EditProductViewModel : AUpdateItemViewModel<Products>
+    public class EditProductViewModel : AUpdateItemViewModel<ProductDto>
     {
-        public EditProductViewModel(IDataStore<Products> itemService) : base(itemService, "Edit Product")
+        public EditProductViewModel(IDataStore<ProductDto> itemService) : base(itemService, "Edit Product")
         {
         }
 
@@ -20,11 +20,15 @@ namespace ShopMenager.ViewModels.ProductVM
         private int _stock;
         private string _description;
         private string _photoPath;
-
+        private string _categoryName;
         #endregion
 
         #region Props
-
+        public string CategoryName
+        {
+            get => _categoryName;
+            set => SetProperty(ref _categoryName, value);
+        }
         public int ProductID
         {
             get => _productID;
@@ -78,6 +82,7 @@ namespace ShopMenager.ViewModels.ProductVM
                 {
                     ProductID = product.ProductID;
                     CategoryID = product.CategoryID;
+                    CategoryName = product.CategoryName;
                     ProductName = product.ProductName;
                     Price = product.Price;
                     Stock = product.Stock;
@@ -91,11 +96,12 @@ namespace ShopMenager.ViewModels.ProductVM
             }
         }
 
-        public override Products SetItem() => new Products
+        public override ProductDto SetItem() => new ProductDto
         {
-            ProductID = ProductID,
             CategoryID = CategoryID,
             ProductName = ProductName,
+            ProductID = ProductID,
+            CategoryName = CategoryName,
             Price = Price,
             Stock = Stock,
             Description = Description,

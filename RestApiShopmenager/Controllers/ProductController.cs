@@ -29,8 +29,8 @@ namespace RestApiShopmenager.Controllers
             // Mapowanie encji -> DTO
             var dtos = products.Select(p => new ProductDto
             {
-                ProductID = p.ProductID,
-                CategoryID = p.CategoryID,
+                ProductID = p.ProductId,
+                CategoryID = p.CategoryId,
                 CategoryName = p.Category != null
                     ? p.Category.CategoryName
                     : "N/A",
@@ -51,7 +51,7 @@ namespace RestApiShopmenager.Controllers
             // Znajdujemy produkt z wczytaniem kategorii
             var product = await _context.Products
                 .Include(p => p.Category)
-                .FirstOrDefaultAsync(p => p.ProductID == id);
+                .FirstOrDefaultAsync(p => p.ProductId == id);
 
             if (product == null)
             {
@@ -61,8 +61,8 @@ namespace RestApiShopmenager.Controllers
             // Mapowanie encji -> DTO
             var dto = new ProductDto
             {
-                ProductID = product.ProductID,
-                CategoryID = product.CategoryID,
+                ProductID = product.ProductId,
+                CategoryID = product.CategoryId,
                 CategoryName = product.Category?.CategoryName ?? "N/A",
                 ProductName = product.ProductName,
                 Price = product.Price,
@@ -91,7 +91,7 @@ namespace RestApiShopmenager.Controllers
             }
 
             // Mapowanie DTO -> encja
-            product.CategoryID = dto.CategoryID;
+            product.CategoryId = dto.CategoryID;
             product.ProductName = dto.ProductName;
             product.Price = dto.Price;
             product.Stock = dto.Stock;
@@ -126,7 +126,7 @@ namespace RestApiShopmenager.Controllers
             // Tworzymy encję i mapujemy z DTO
             var product = new Products
             {
-                CategoryID = dto.CategoryID,
+                CategoryId = dto.CategoryID,
                 ProductName = dto.ProductName,
                 Price = dto.Price,
                 Stock = dto.Stock,
@@ -141,8 +141,8 @@ namespace RestApiShopmenager.Controllers
             // Możemy też dołączyć CategoryName, ale trzeba by wczytać encję
             var createdDto = new ProductDto
             {
-                ProductID = product.ProductID,
-                CategoryID = product.CategoryID,
+                ProductID = product.ProductId,
+                CategoryID = product.ProductId,
                 CategoryName = "N/A", // Ewentualnie wczytać ponownie
                 ProductName = product.ProductName,
                 Price = product.Price,
@@ -152,7 +152,7 @@ namespace RestApiShopmenager.Controllers
             };
 
             // Zwracamy 201 Created
-            return CreatedAtAction(nameof(GetProduct), new { id = product.ProductID }, createdDto);
+            return CreatedAtAction(nameof(GetProduct), new { id = product.ProductId }, createdDto);
         }
 
         // DELETE: api/Product/5
@@ -173,7 +173,7 @@ namespace RestApiShopmenager.Controllers
 
         private bool ProductsExists(int id)
         {
-            return _context.Products.Any(e => e.ProductID == id);
+            return _context.Products.Any(e => e.ProductId == id);
         }
     }
 }

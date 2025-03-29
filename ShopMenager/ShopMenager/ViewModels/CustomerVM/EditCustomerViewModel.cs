@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace ShopMenager.ViewModels.CustomerVM
 {
-    public class EditCustomerViewModel : AUpdateItemViewModel<Customers>
+    public class EditCustomerViewModel : AUpdateItemViewModel<CustomerDto>
     {
-        public EditCustomerViewModel(IDataStore<Customers> itemService) : base(itemService, "Edit Customer")
+        public EditCustomerViewModel(IDataStore<CustomerDto> itemService) : base(itemService, "Edit Customer")
         {
         }
 
@@ -100,9 +100,9 @@ namespace ShopMenager.ViewModels.CustomerVM
             }
         }
 
-        public override Customers SetItem() => new Customers
+        public override CustomerDto SetItem() => new CustomerDto
         {
-            CustomerId = CustomerId,
+            CustomerId = ItemId,
             FirstName = FirstName,
             LastName = LastName,
             Email = Email,

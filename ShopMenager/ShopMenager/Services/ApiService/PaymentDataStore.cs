@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace ShopMenager.Services.ApiService
 {
-    public class PaymentDataStore : AListDataStore<Payments>
+    public class PaymentDataStore : AListDataStore<PaymentDto>
     {
         public PaymentDataStore()
         {
@@ -20,20 +20,20 @@ namespace ShopMenager.Services.ApiService
                                      .ToList();
         }
 
-        public override async Task<bool> AddItemToService(Payments item)
+        public override async Task<bool> AddItemToService(PaymentDto item)
             => await DependencyService.Get<OrderService>()
                                       .PaymentPOSTAsync(item)
                                       .HandleRequest();
 
-        public override Task<bool> DeleteItemFromService(Payments item)
+        public override Task<bool> DeleteItemFromService(PaymentDto item)
             => DependencyService.Get<OrderService>()
                                 .PaymentDELETEAsync(item.PaymentID)
                                 .HandleRequest();
 
-        public override Payments Find(Payments item)
+        public override PaymentDto Find(PaymentDto item)
             => items.FirstOrDefault(p => p.PaymentID == item.PaymentID);
 
-        public override Payments Find(int id)
+        public override PaymentDto Find(int id)
             => items.FirstOrDefault(p => p.PaymentID == id);
 
         public override async Task Refresh()
@@ -41,7 +41,7 @@ namespace ShopMenager.Services.ApiService
                                               .PaymentAllAsync())
                                               .ToList();
 
-        public override async Task<bool> UpdateItemInService(Payments item)
+        public override async Task<bool> UpdateItemInService(PaymentDto item)
             => await DependencyService.Get<OrderService>()
                                       .PaymentPUTAsync(item.PaymentID, item)
                                       .HandleRequest();

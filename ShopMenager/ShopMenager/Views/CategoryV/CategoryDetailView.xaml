@@ -1,51 +1,78 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                 x:Class="ShopMenager.Views.CategoryV.CategoryDetailView"
-                 
-                 >
-    <ContentPage.Content>
-        <ScrollView>
-            <StackLayout Padding="20" Spacing="15">
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ShopMenager.Views.CategoryV.CategoryDetailView"
+    BackgroundColor="{StaticResource Primary}"
+    Title="{Binding Title}">
 
-                <Label Text="Details"
-                       FontSize="Large"
-                       HorizontalOptions="Center" />
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
-                <StackLayout Spacing="10">
+        <ScrollView Grid.Row="0">
+            <Frame BackgroundColor="{StaticResource Primary}"
+                   Margin="15,0"
+                   HasShadow="False"
+                   CornerRadius="15">
+                <StackLayout Padding="20" Spacing="15" VerticalOptions="Start">
+                    <Label Text="{Binding CategoryName}" 
+                           Style="{StaticResource DetailLabel}"
+                           TextColor="{StaticResource SecondaryColor}"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Start"
+                           Margin="0,20,0,50"
+                           FontSize="32"/>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
 
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Category ID:"
-                               FontAttributes="Bold"
-                               WidthRequest="120"/>
-                        <Label Text="{Binding CategoryID}" />
-                    </StackLayout>
+                        <Label Grid.Row="0" Grid.Column="0"
+                               Text="Category ID:" 
+                               Style="{StaticResource DetailLabel}"
+                               HorizontalOptions="Start"
+                               FontAttributes="Bold" />
+                        <Label Grid.Row="0" Grid.Column="2"
+                               Text="{Binding CategoryID}" 
+                               Style="{StaticResource DetailLabel}"
+                               TextColor="{StaticResource DetailsTextColor}"
+                               HorizontalOptions="End" />
 
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Category Name:"
-                               FontAttributes="Bold"
-                               WidthRequest="120"/>
-                        <Label Text="{Binding CategoryName}" />
-                    </StackLayout>
-
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Description:"
-                               FontAttributes="Bold"
-                               WidthRequest="120"/>
-                        <Label Text="{Binding CategoryDescription}" />
-                    </StackLayout>
+                        <StackLayout Grid.Row="1" Grid.ColumnSpan="3" Margin="0,20">
+                            <Label Text="Description:" 
+                                   Style="{StaticResource DetailLabel}"
+                                   HorizontalOptions="Center"
+                                   FontAttributes="Bold" 
+                                   />
+                            <Label Text="{Binding CategoryDescription}" 
+                                   Style="{StaticResource DetailLabel}"
+                                   TextColor="{StaticResource DetailsTextColor}"
+                                   HorizontalOptions="Center" />
+                        </StackLayout>
+                        
+                    </Grid>
                 </StackLayout>
-
-                <Button Text="Edit"
-                        Command="{Binding EditCommand}"
-                        CommandParameter="{Binding CategoryID}" />
-                <Button Text="Delete"
-                        Command="{Binding DeleteCommand}"
-                        CommandParameter="{Binding CategoryID}" />
-                <Button Text="Back to List"
-                        Command="{Binding BackCommand}" />
-
-            </StackLayout>
+            </Frame>
         </ScrollView>
-    </ContentPage.Content>
+
+        <StackLayout Grid.Row="1" Padding="20" Spacing="15">
+            <Button Text="Edit"
+                    Command="{Binding EditCommand}"
+                    CommandParameter="{Binding CategoryID}" />
+            <Button Text="Delete"
+                    Command="{Binding DeleteCommand}"
+                    CommandParameter="{Binding CategoryID}" />
+            <Button Text="Back to List"
+                    Command="{Binding BackCommand}" />
+        </StackLayout>
+    </Grid>
 </ContentPage>

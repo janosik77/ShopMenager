@@ -3,9 +3,9 @@ using ShopMenager.ViewModels.Abstract;
 
 namespace ShopMenager.ViewModels.CustomerVM
 {
-    public class AddCustomerViewModel : AAddItemViewModel<Customers>
+    public class AddCustomerViewModel : AAddItemViewModel<CustomerDto>
     {
-        public AddCustomerViewModel(IDataStore<Customers> itemService) : base(itemService, "New Customer")
+        public AddCustomerViewModel(IDataStore<CustomerDto> itemService) : base(itemService, "New Customer")
         {
         }
 
@@ -61,7 +61,7 @@ namespace ShopMenager.ViewModels.CustomerVM
 
         #endregion
 
-        public override Customers SetItem() => new Customers
+        public override CustomerDto SetItem() => new CustomerDto
         {
             FirstName = this.FirstName,
             LastName = this.LastName,

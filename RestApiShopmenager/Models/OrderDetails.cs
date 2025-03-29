@@ -9,21 +9,25 @@ namespace RestApiShopmenager.Models;
 public partial class OrderDetails
 {
     [Column("OrderID")]
-    public int OrderID { get; set; }
+    public int OrderId { get; set; }
 
     [Column("ProductID")]
-    public int ProductID { get; set; }
+    public int ProductId { get; set; }
 
     public int Quantity { get; set; }
 
     [Column(TypeName = "decimal(10, 2)")]
     public decimal UnitPrice { get; set; }
 
-    [Column(TypeName = "decimal(5, 2)")]
-    public decimal Discount { get; set; }
-
     [Key]
     public int OrderDetailsId { get; set; }
+
+    [Column("DiscountID")]
+    public int? DiscountId { get; set; }
+
+    [ForeignKey("DiscountId")]
+    [InverseProperty("OrderDetails")]
+    public virtual Discounts? Discount { get; set; }
 
     [ForeignKey("OrderId")]
     [InverseProperty("OrderDetails")]

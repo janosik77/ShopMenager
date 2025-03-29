@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ShopMenager.ViewModels.DiscountVM;
+using ShopMenager.ViewModels.EmployeeVM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +17,7 @@ namespace ShopMenager.Views.DiscountV
 		public DiscountDetailView ()
 		{
 			InitializeComponent ();
-		}
+            BindingContext = App.Services.GetService<DiscountsDetailsViewModel>();
+        }
 	}
 }

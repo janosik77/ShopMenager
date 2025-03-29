@@ -7,9 +7,9 @@ using Xamarin.Forms;
 
 namespace ShopMenager.ViewModels.CustomerVM
 {
-    public class CustomerDetailViewModel : ADetailsItemViewModel<Customers>
+    public class CustomerDetailViewModel : ADetailsItemViewModel<CustomerDto>
     {
-        public CustomerDetailViewModel(IDataStore<Customers> itemService) : base(itemService, "Customer Detail")
+        public CustomerDetailViewModel(IDataStore<CustomerDto> itemService) : base(itemService, "Customer Detail")
         {
         }
 
@@ -75,7 +75,6 @@ namespace ShopMenager.ViewModels.CustomerVM
         #endregion
 
 
-
         public override async Task LoadItem(int id)
         {
             try
@@ -104,6 +103,11 @@ namespace ShopMenager.ViewModels.CustomerVM
             }
         }
 
-        protected override Task GoToUpdatePage() => Shell.Current.GoToAsync($"{nameof(EditCustomerViwe)}?{nameof(EditCustomerViewModel.CustomerId)}={CustomerId}");
+        protected override async Task GoToUpdatePage(CustomerDto item) 
+            => await Shell.Current
+            .GoToAsync($"{nameof(EditCustomerViwe)}?{nameof(EditCustomerViewModel.ItemId)}={item.CustomerId}");
+        protected override async Task GoToUpdatePage() 
+            => await Shell.Current
+            .GoToAsync($"{nameof(EditCustomerViwe)}?{nameof(EditCustomerViewModel.ItemId)}={CustomerId}");
     }
 }

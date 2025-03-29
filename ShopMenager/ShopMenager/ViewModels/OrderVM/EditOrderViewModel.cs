@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ShopMenager.ViewModels.OrderVM
 {
-    public class EditOrderViewModel : AUpdateItemViewModel<Orders>
+    public class EditOrderViewModel : AUpdateItemViewModel<OrderDto>
     {
-        public EditOrderViewModel(IDataStore<Orders> itemService) : base(itemService, "Edit Order")
+        public EditOrderViewModel(IDataStore<OrderDto> itemService) : base(itemService, "Edit Order")
         {
         }
 
@@ -68,6 +68,9 @@ namespace ShopMenager.ViewModels.OrderVM
                     EmployeeID = order.EmployeeID;
                     OrderDate = order.OrderDate;
                     Status = order.Status;
+                    //CustomerName = order.CustomerName;
+                    //EmployeeName = order.EmployeeName;
+                    //OrderList = order.OrderDetails;
                 }
             }
             catch (Exception ex)
@@ -76,7 +79,7 @@ namespace ShopMenager.ViewModels.OrderVM
             }
         }
 
-        public override Orders SetItem() => new Orders
+        public override OrderDto SetItem() => new OrderDto
         {
             OrderID = OrderID,
             CustomerID = CustomerID,

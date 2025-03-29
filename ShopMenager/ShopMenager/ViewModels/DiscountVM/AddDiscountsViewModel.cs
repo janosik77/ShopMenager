@@ -6,7 +6,7 @@ namespace ShopMenager.ViewModels.DiscountVM
 {
     public class AddDiscountsViewModel : AAddItemViewModel<Discounts>
     {
-        public AddDiscountsViewModel(IDataStore<Discounts> itemService, string title) : base(itemService, title)
+        public AddDiscountsViewModel(IDataStore<Discounts> itemService) : base(itemService, "Discounts")
         {
             StartDate = DateTime.Now;
             EndDate = DateTime.Now;

@@ -7,9 +7,9 @@ using Xamarin.Forms;
 
 namespace ShopMenager.ViewModels.PaymentVM
 {
-    public class PaymentDetailViewModel : ADetailsItemViewModel<Payments>
+    public class PaymentDetailViewModel : ADetailsItemViewModel<PaymentDto>
     {
-        public PaymentDetailViewModel(IDataStore<Payments> itemService) : base(itemService, "Payment Detail")
+        public PaymentDetailViewModel(IDataStore<PaymentDto> itemService) : base(itemService, "Payment Detail")
         {
         }
         #region Fields
@@ -17,8 +17,12 @@ namespace ShopMenager.ViewModels.PaymentVM
         private int _orderID;
         private DateTime _paymentDate;
         private decimal _amount;
-        private PaymentMethods _paymentMethod;
-        private PaymentStatuses _paymentStatus;
+        private int _paymentMethodID;
+        private string _paymentStatusName;
+        private int _paymentStatusID;
+        private string _paymentMethodName;
+        private string _customerName;
+        private int _customerID;
         #endregion
 
         #region Props
@@ -46,17 +50,38 @@ namespace ShopMenager.ViewModels.PaymentVM
             set => SetProperty(ref _amount, value);
         }
 
-        public PaymentMethods PaymentMethod
+        public int PaymentMethodID
         {
-            get => _paymentMethod;
-            set => SetProperty(ref _paymentMethod, value);
+            get => _paymentMethodID;
+            set => SetProperty(ref _paymentMethodID, value);
         }
 
-        public PaymentStatuses PaymentStatus
+        public string PaymentMethodName
         {
-            get => _paymentStatus;
-            set => SetProperty(ref _paymentStatus, value);
+            get => _paymentMethodName;
+            set => SetProperty(ref _paymentMethodName, value);
         }
+        public string PaymentStatusName
+        {
+            get => _paymentStatusName;
+            set => SetProperty(ref _paymentStatusName, value);
+        }
+        public int PaymentStatusID
+        {
+            get => _paymentStatusID;
+            set => SetProperty(ref _paymentStatusID, value);
+        }
+        public string CustomerName
+        {
+            get => _customerName;
+            set => SetProperty(ref _customerName, value);
+        }
+        public int CustomerID
+        {
+            get => _customerID;
+            set => SetProperty(ref _customerID, value);
+        }
+
         #endregion
 
         public override async Task LoadItem(int id)
@@ -68,10 +93,14 @@ namespace ShopMenager.ViewModels.PaymentVM
                 {
                     PaymentID = payment.PaymentID;
                     OrderID = payment.OrderID;
+                    CustomerID = payment.CustomerID;
+                    CustomerName = payment.CustomerName;
                     PaymentDate = payment.PaymentDate;
                     Amount = payment.Amount;
-                    PaymentMethod = payment.PaymentMethod;
-                    PaymentStatus = payment.PaymentStatus;
+                    PaymentMethodID = payment.PaymentMethodID;
+                    PaymentMethodName = payment.PaymentMethodName;
+                    PaymentStatusID = payment.PaymentStatusID;
+                    PaymentStatusName = payment.PaymentStatusName;
                 }
             }
             catch (Exception ex)
@@ -82,5 +111,9 @@ namespace ShopMenager.ViewModels.PaymentVM
 
         protected override Task GoToUpdatePage()
             => Shell.Current.GoToAsync($"{nameof(EditPaymentView)}?{nameof(EditPaymentViewModel.PaymentID)}={PaymentID}");
+        protected override Task GoToUpdatePage(PaymentDto item)
+        {
+            return null;
+        }
     }
 }

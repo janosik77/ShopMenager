@@ -164,14 +164,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <OpenApiReference Include="OpenAPIs\swagger3.json" CodeGenerator="NSwagCSharp" ClassName="OrderService">
+    <OpenApiReference Include="OpenAPIs\swagger.json" CodeGenerator="NSwagCSharp" ClassName="OrderService">
       <SourceUri>https://localhost:7265/swagger/v1/swagger.json</SourceUri>
     </OpenApiReference>
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="OpenAPIs\swagger.json" ClassName="OrderService" />
-    <None Update="OpenAPIs\swagger1.json" ClassName="OrderService" />
-    <None Update="OpenAPIs\swagger2.json" ClassName="OrderService" />
+    <None Update="OpenAPIs\index.html" ClassName="OrderService" />
   </ItemGroup>
 </Project>

@@ -6,7 +6,7 @@ using Xamarin.Forms;
 
 namespace ShopMenager.Services.ApiService
 {
-    public class CategoryDataStore : AListDataStore<Categories>
+    public class CategoryDataStore : AListDataStore<CategoryDto>
     {
         public CategoryDataStore()
         {
@@ -17,30 +17,30 @@ namespace ShopMenager.Services.ApiService
                                      .ToList();
         }
 
-        public override async Task<bool> AddItemToService(Categories item)
+        public override async Task<bool> AddItemToService(CategoryDto item)
             => await DependencyService.Get<OrderService>()
                                      .CategoryPOSTAsync(item)
                                      .HandleRequest();
 
-        public override Task<bool> DeleteItemFromService(Categories item)
+        public override Task<bool> DeleteItemFromService(CategoryDto item)
             => DependencyService.Get<OrderService>()
-                               .CategoryDELETEAsync(item.CategoryId)
+                               .CategoryDELETEAsync(item.CategoryID)
                                .HandleRequest();
 
-        public override Categories Find(Categories item)
-            => items.FirstOrDefault(c => c.CategoryId == item.CategoryId);
+        public override CategoryDto Find(CategoryDto item)
+            => items.FirstOrDefault(c => c.CategoryID == item.CategoryID);
 
-        public override Categories Find(int id)
-            => items.FirstOrDefault(s => s.CategoryId == id);
+        public override CategoryDto Find(int id)
+            => items.FirstOrDefault(s => s.CategoryID == id);
 
         public override async Task Refresh()
             => items = (await DependencyService.Get<OrderService>()
                                               .CategoryAllAsync())
                                               .ToList();
 
-        public override async Task<bool> UpdateItemInService(Categories item)
+        public override async Task<bool> UpdateItemInService(CategoryDto item)
             => await DependencyService.Get<OrderService>()
-                                     .CategoryPUTAsync(item.CategoryId, item)
+                                     .CategoryPUTAsync(item.CategoryID, item)
                                      .HandleRequest();
     }
 }

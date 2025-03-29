@@ -5,9 +5,9 @@ using System;
 
 namespace ShopMenager.ViewModels.EmployeeVM
 {
-    public class AddEmployeeViewModel : AAddItemViewModel<Employees>
+    public class AddEmployeeViewModel : AAddItemViewModel<EmployeeDto>
     {
-        public AddEmployeeViewModel(IDataStore<Employees> itemService, string title) : base(itemService, title)
+        public AddEmployeeViewModel(IDataStore<EmployeeDto> itemService) : base(itemService, "Create Employee")
         {
             HireDate = DateTime.Now;
         }
@@ -65,7 +65,7 @@ namespace ShopMenager.ViewModels.EmployeeVM
 
         #endregion
 
-        public override Employees SetItem() => new Employees
+        public override EmployeeDto SetItem() => new EmployeeDto
         {
             FirstName = FirstName,
             LastName = LastName,

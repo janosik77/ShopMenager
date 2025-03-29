@@ -5,9 +5,9 @@ using ShopMenager.ViewModels.Abstract;
 
 namespace ShopMenager.ViewModels.ProductVM
 {
-    public class AddproductViewModel : AAddItemViewModel<Products>
+    public class AddproductViewModel : AAddItemViewModel<ProductDto>
     {
-        public AddproductViewModel(IDataStore<Products> itemService, string title) : base(itemService, title)
+        public AddproductViewModel(IDataStore<ProductDto> itemService, string title) : base(itemService, title)
         {
         }
         #region Properties
@@ -17,6 +17,13 @@ namespace ShopMenager.ViewModels.ProductVM
         {
             get => _categoryID;
             set => SetProperty(ref _categoryID, value);
+        }
+
+        private string _categoryName;
+        public string CategoryName 
+        {
+            get => _categoryName;
+            set => SetProperty(ref _categoryName, value);
         }
 
         private string _productName;
@@ -56,9 +63,10 @@ namespace ShopMenager.ViewModels.ProductVM
 
         #endregion
 
-        public override Products SetItem() => new Products
+        public override ProductDto SetItem() => new ProductDto
         {
             CategoryID = CategoryID,
+            CategoryName = CategoryName,
             ProductName = ProductName,
             Price = Price,
             Stock = Stock,

@@ -1,72 +1,125 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ShopMenager.Views.PaymentsV.PaymentDetailView"
-             >
-    
-    <ContentPage.Content>
-        <ScrollView>
-            <StackLayout Padding="20" Spacing="15">
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ShopMenager.Views.PaymentsV.PaymentDetailView"
+    BackgroundColor="{StaticResource Primary}"
+    Title="{Binding Title}">
 
-                <Label Text="Details"
-                       FontSize="Large"
-                       HorizontalOptions="Center" />
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
-                <StackLayout Spacing="10">
+        <ScrollView Grid.Row="0">
+            <Frame BackgroundColor="{StaticResource Primary}"
+                   Margin="15,0"
+                   HasShadow="False"
+                   CornerRadius="15">
+                <StackLayout Padding="20" Spacing="15" VerticalOptions="Start">
+                    <Label Text="{Binding CustomerName}" 
+                           Style="{StaticResource DetailLabel}"
+                           TextColor="{StaticResource SecondaryColor}"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Start"
+                           Margin="0,20,0,30"
+                           FontSize="32"/>
 
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Payment ID:"
-                               FontAttributes="Bold"
-                               WidthRequest="120"/>
-                        <Label Text="{Binding PaymentID}" />
-                    </StackLayout>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
 
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Order ID:"
-                               FontAttributes="Bold"
-                               WidthRequest="120"/>
-                        <Label Text="{Binding OrderID}" />
-                    </StackLayout>
+                        <Label Grid.Row="0" Grid.Column="0"
+                               Text="Payment ID:" 
+                               Style="{StaticResource DetailLabel}"
+                               HorizontalOptions="Start"
+                               FontAttributes="Bold" />
+                        <Label Grid.Row="0" Grid.Column="1"
+                               Text="{Binding PaymentID}" 
+                               Style="{StaticResource DetailLabel}"
+                               TextColor="{StaticResource DetailsTextColor}"
+                               HorizontalOptions="End" />
 
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Payment Date:"
-                               FontAttributes="Bold"
-                               WidthRequest="120"/>
-                        <Label Text="{Binding PaymentDate}" />
-                    </StackLayout>
+                        <Label Grid.Row="1" Grid.Column="0"
+                               Text="Order ID:" 
+                               Style="{StaticResource DetailLabel}"
+                               HorizontalOptions="Start"
+                               FontAttributes="Bold" />
+                        <Label Grid.Row="1" Grid.Column="1"
+                               Text="{Binding OrderID}" 
+                               Style="{StaticResource DetailLabel}"
+                               TextColor="{StaticResource DetailsTextColor}"
+                               HorizontalOptions="End" />
 
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Amount:"
-                               FontAttributes="Bold"
-                               WidthRequest="120"/>
-                        <Label Text="{Binding Amount}" />
-                    </StackLayout>
+                        <Label Grid.Row="2" Grid.Column="0"
+                               Text="Payment Date:" 
+                               Style="{StaticResource DetailLabel}"
+                               HorizontalOptions="Start"
+                               FontAttributes="Bold" />
+                        <Label Grid.Row="2" Grid.Column="1"
+                               Text="{Binding PaymentDate, StringFormat='{0:MM/dd/yyyy}'}" 
+                               Style="{StaticResource DetailLabel}"
+                               TextColor="{StaticResource DetailsTextColor}"
+                               HorizontalOptions="End" />
 
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Method:"
-                               FontAttributes="Bold"
-                               WidthRequest="120"/>
-                        <Label Text="{Binding PaymentMethod}" />
-                    </StackLayout>
+                        <Label Grid.Row="3" Grid.Column="0"
+                               Text="Amount:" 
+                               Style="{StaticResource DetailLabel}"
+                               HorizontalOptions="Start"
+                               FontAttributes="Bold" />
+                        <Label Grid.Row="3" Grid.Column="1"
+                               Text="{Binding Amount, StringFormat='{0:C}'}" 
+                               Style="{StaticResource DetailLabel}"
+                               TextColor="{StaticResource DetailsTextColor}"
+                               HorizontalOptions="End" />
 
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Status:"
-                               FontAttributes="Bold"
-                               WidthRequest="120"/>
-                        <Label Text="{Binding PaymentStatus}" />
-                    </StackLayout>
+                        <Label Grid.Row="4" Grid.Column="0"
+                               Text="Method:" 
+                               Style="{StaticResource DetailLabel}"
+                               HorizontalOptions="Start"
+                               FontAttributes="Bold" />
+                        <Label Grid.Row="4" Grid.Column="1"
+                               Text="{Binding PaymentMethodName}" 
+                               Style="{StaticResource DetailLabel}"
+                               TextColor="{StaticResource DetailsTextColor}"
+                               HorizontalOptions="End" />
+
+                        <Label Grid.Row="5" Grid.Column="0"
+                               Text="Status:" 
+                               Style="{StaticResource DetailLabel}"
+                               HorizontalOptions="Start"
+                               FontAttributes="Bold" />
+                        <Label Grid.Row="5" Grid.Column="1"
+                               Text="{Binding PaymentStatusName}" 
+                               Style="{StaticResource DetailLabel}"
+                               TextColor="{StaticResource DetailsTextColor}"
+                               HorizontalOptions="End" />
+                    </Grid>
                 </StackLayout>
-
-                <Button Text="Edit"
-                        Command="{Binding EditCommand}"
-                        CommandParameter="{Binding PaymentID}" />
-                <Button Text="Delete"
-                        Command="{Binding DeleteCommand}"
-                        CommandParameter="{Binding PaymentID}" />
-                <Button Text="Back to List"
-                        Command="{Binding BackCommand}" />
-
-            </StackLayout>
+            </Frame>
         </ScrollView>
-    </ContentPage.Content>
+
+        <StackLayout Grid.Row="1" Padding="20" Spacing="15">
+            <Button Text="Edit"
+                    Command="{Binding EditCommand}"
+                    CommandParameter="{Binding PaymentID}" />
+            <Button Text="Delete"
+                    Command="{Binding DeleteCommand}"
+                    CommandParameter="{Binding PaymentID}" />
+            <Button Text="Back to List"
+                    Command="{Binding BackCommand}" />
+        </StackLayout>
+    </Grid>
 </ContentPage>

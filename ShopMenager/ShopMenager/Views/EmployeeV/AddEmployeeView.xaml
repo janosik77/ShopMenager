@@ -1,57 +1,89 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ShopMenager.Views.EmployeeV.AddEmployeeView"
-             >
-    
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ShopMenager.Views.EmployeeV.AddEmployeeView"
+    BackgroundColor="{StaticResource Primary}"
+    Title="Create Employee">
+
     <ContentPage.Content>
-        <ScrollView>
-            <StackLayout Padding="20" Spacing="15">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            
+            <ScrollView Grid.Row="0">
+                <StackLayout Padding="20" Spacing="15">
+                    <StackLayout Spacing="10" Margin="0,15">
 
+                        <Label Text="First Name" 
+                               Style="{StaticResource DetailLabel}"/>
+                        <Frame Style="{StaticResource SearchFrame}">
+                            <Entry Placeholder="Enter first name"
+                               Text="{Binding FirstName}"
+                               Style="{StaticResource SearchEntryStyle}" />
+                        </Frame>
 
-                <Label Text="Create Employee"
-                       FontSize="Large"
-                       HorizontalOptions="Center" />
+                        <Label Text="Last Name" 
+                               Style="{StaticResource DetailLabel}"/>
+                        <Frame Style="{StaticResource SearchFrame}">
+                            <Entry Placeholder="Enter last name"
+                               Text="{Binding LastName}"
+                               Style="{StaticResource SearchEntryStyle}" />
+                        </Frame>
 
-                <StackLayout Spacing="10">
+                        <Label Text="Email" 
+                               Style="{StaticResource DetailLabel}"/>
+                        <Frame Style="{StaticResource SearchFrame}">
+                            <Entry Placeholder="Enter email"
+                               Keyboard="Email"
+                               Text="{Binding Email}"
+                               Style="{StaticResource SearchEntryStyle}" />
+                        </Frame>
 
-                    <Label Text="First Name" />
-                    <Entry Placeholder="Enter first name"
-                           Text="{Binding FirstName}" />
+                        <Label Text="Phone" 
+                               Style="{StaticResource DetailLabel}"/>
+                        <Frame Style="{StaticResource SearchFrame}">
+                            <Entry Placeholder="Enter phone number"
+                               Keyboard="Telephone"
+                               Text="{Binding Phone}"
+                               Style="{StaticResource SearchEntryStyle}" />
+                        </Frame>
 
-                    <Label Text="Last Name" />
-                    <Entry Placeholder="Enter last name"
-                           Text="{Binding LastName}" />
+                        <Label Text="Hire Date" 
+                               Style="{StaticResource DetailLabel}"/>
+                        <Frame Style="{StaticResource SearchFrame}">
+                            <DatePicker Date="{Binding HireDate}"
+                                    Style="{StaticResource SearchEntryStyle}" />
+                        </Frame>
 
-                    <Label Text="Email" />
-                    <Entry Placeholder="Enter email"
-                           Keyboard="Email"
-                           Text="{Binding Email}" />
+                        <Label Text="Salary" 
+                               Style="{StaticResource DetailLabel}"/>
+                        <Frame Style="{StaticResource SearchFrame}">
+                            <Entry Placeholder="Enter salary"
+                               Keyboard="Numeric"
+                               Text="{Binding Salary}"
+                               Style="{StaticResource SearchEntryStyle}" />
+                        </Frame>
 
-                    <Label Text="Phone" />
-                    <Entry Placeholder="Enter phone number"
-                           Keyboard="Telephone"
-                           Text="{Binding Phone}" />
+                        <Label Text="Photo Path" 
+                               Style="{StaticResource DetailLabel}"/>
+                        <Frame Style="{StaticResource SearchFrame}">
+                            <Entry Placeholder="Enter photo path"
+                               Text="{Binding PhotoPath}"
+                               Style="{StaticResource SearchEntryStyle}" />
+                        </Frame>
 
-                    <Label Text="Hire Date" />
-                    <DatePicker Date="{Binding HireDate}" />
-
-                    <Label Text="Salary" />
-                    <Entry Placeholder="Enter salary"
-                           Keyboard="Numeric"
-                           Text="{Binding Salary}" />
-                    
-                    <Label Text="Photo Path" />
-                    <Entry Placeholder="Enter photo path"
-                           Text="{Binding PhotoPath}" />
-
-                    <Button Text="Create"
-                            Command="{Binding SaveCommand}" />
+                    </StackLayout>
                 </StackLayout>
-
+            </ScrollView>
+            <StackLayout Grid.Row="1" Padding="20" Spacing="15">
+                <Button Text="Create"
+                        Command="{Binding SaveCommand}" />
                 <Button Text="Back to List"
                         Command="{Binding CancelCommand}" />
             </StackLayout>
-        </ScrollView>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

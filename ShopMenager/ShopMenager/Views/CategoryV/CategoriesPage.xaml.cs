@@ -9,10 +9,18 @@ namespace ShopMenager.Views.CategoryV
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CategoriesPage : ContentPage
     {
+        CategoriesViewModel _viewModel;
         public CategoriesPage()
         {
             InitializeComponent();
-            BindingContext = App.Services.GetService<CategoriesViewModel>();
+            BindingContext = _viewModel = App.Services.GetService<CategoriesViewModel>();
+        }
+
+        protected override void OnAppearing()
+        {
+            //base.OnAppearing();
+            _viewModel.OnAppearing();
+
         }
     }
 }

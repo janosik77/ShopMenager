@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace ShopMenager.ViewModels.PaymentVM
 {
-    public class EditPaymentViewModel : AUpdateItemViewModel<Payments>
+    public class EditPaymentViewModel : AUpdateItemViewModel<PaymentDto>
     {
-        public EditPaymentViewModel(IDataStore<Payments> itemService) : base(itemService, "Edit Payment")
+        public EditPaymentViewModel(IDataStore<PaymentDto> itemService) : base(itemService, "Edit Payment")
         {
         }
 
@@ -69,12 +69,14 @@ namespace ShopMenager.ViewModels.PaymentVM
                 var payment = await ItemService.GetItemAsync(id);
                 if (payment != null)
                 {
-                    PaymentID = payment.PaymentID;
-                    OrderID = payment.OrderID;
-                    PaymentDate = payment.PaymentDate;
-                    Amount = payment.Amount;
-                    PaymentMethod = payment.PaymentMethod;
-                    PaymentStatus = payment.PaymentStatus;
+                    //PaymentID = payment.PaymentID;
+                    //OrderID = payment.OrderID;
+                    //CustomerID = payment.CustomerID;
+                    //CustomerName = payment.CustomerName;
+                    //PaymentDate = payment.PaymentDate;
+                    //Amount = payment.Amount;
+                    //PaymentMethod = payment.PaymentMethod;
+                    //PaymentStatus = payment.PaymentStatus;
                 }
             }
             catch (Exception ex)
@@ -83,14 +85,16 @@ namespace ShopMenager.ViewModels.PaymentVM
             }
         }
 
-        public override Payments SetItem() => new Payments
+        public override PaymentDto SetItem() => new PaymentDto
         {
-            PaymentID = PaymentID,
             OrderID = OrderID,
             PaymentDate = PaymentDate,
-            Amount = Amount,
-            PaymentMethod = PaymentMethod,
-            PaymentStatus = PaymentStatus
+            //Amount = Amount,
+            //CustomerID = CustomerID,
+            //CustomerName = CustomerName,
+            //PaymentDate = PaymentDate,
+            //PaymentMethod = PaymentMethod,
+            //PaymentStatus = PaymentStatus
         };
 
         public override bool ValidateSave()

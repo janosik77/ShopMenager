@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RestApiShopmenager.Models;
-using RestApiShopmenager.Models.Contexts;
+using RestApiShopmenager.Models.Contexts; // <-- Zależnie od Twojej struktury projektu
+using RestApiShopmenager.DTOs;           // <-- Namespace, w którym masz CategoryDto
 
 namespace RestApiShopmenager.Controllers
 {
@@ -23,36 +19,66 @@ namespace RestApiShopmenager.Controllers
 
         // GET: api/Category
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Categories>>> GetCategories()
+        public async Task<ActionResult<IEnumerable<CategoryDto>>> GetCategories()
         {
-            return await _context.Categories.ToListAsync();
+            var categories = await _context.Categories.ToListAsync();
+            var result = categories.Select(c => MapToDto(c)).ToList();
+            return Ok(result);
         }
 
         // GET: api/Category/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Categories>> GetCategories(int id)
+        public async Task<ActionResult<CategoryDto>> GetCategory(int id)
         {
-            var categories = await _context.Categories.FindAsync(id);
-
-            if (categories == null)
+            var category = await _context.Categories.FindAsync(id);
+            if (category == null)
             {
                 return NotFound();
             }
 
-            return categories;
+            return MapToDto(category);
+        }
+
+        // POST: api/Category
+        [HttpPost]
+        public async Task<ActionResult<CategoryDto>> PostCategory(CategoryDto dto)
+        {
+            // Mapowanie DTO -> encja
+            var category = new Categories
+            {
+                CategoryName = dto.CategoryName,
+                CategoryDescription = dto.CategoryDescription
+            };
+
+            _context.Categories.Add(category);
+            await _context.SaveChangesAsync();
+
+            // Mapujemy z powrotem do DTO, by zwrócić np. nowy CategoryID
+            var resultDto = MapToDto(category);
+
+            return CreatedAtAction(nameof(GetCategory), new { id = category.CategoryId }, resultDto);
         }
 
         // PUT: api/Category/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCategories(int id, Categories categories)
+        public async Task<IActionResult> PutCategory(int id, CategoryDto dto)
         {
-            if (id != categories.CategoryID)
+            if (id != dto.CategoryID)
             {
-                return BadRequest();
+                return BadRequest("Category ID in path does not match DTO");
             }
 
-            _context.Entry(categories).State = EntityState.Modified;
+            var category = await _context.Categories.FindAsync(id);
+            if (category == null)
+            {
+                return NotFound();
+            }
+
+            // Aktualizacja pól
+            category.CategoryName = dto.CategoryName;
+            category.CategoryDescription = dto.CategoryDescription;
+
+            _context.Entry(category).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +86,7 @@ namespace RestApiShopmenager.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CategoriesExists(id))
+                if (!CategoryExists(id))
                 {
                     return NotFound();
                 }
@@ -73,36 +99,36 @@ namespace RestApiShopmenager.Controllers
             return NoContent();
         }
 
-        // POST: api/Category
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Categories>> PostCategories(Categories categories)
-        {
-            _context.Categories.Add(categories);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetCategories", new { id = categories.CategoryID }, categories);
-        }
-
         // DELETE: api/Category/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCategories(int id)
+        public async Task<IActionResult> DeleteCategory(int id)
         {
-            var categories = await _context.Categories.FindAsync(id);
-            if (categories == null)
+            var category = await _context.Categories.FindAsync(id);
+            if (category == null)
             {
                 return NotFound();
             }
 
-            _context.Categories.Remove(categories);
+            _context.Categories.Remove(category);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool CategoriesExists(int id)
+        private bool CategoryExists(int id)
         {
-            return _context.Categories.Any(e => e.CategoryID == id);
+            return _context.Categories.Any(e => e.CategoryId == id);
+        }
+
+        // Mapowanie encja -> DTO
+        private CategoryDto MapToDto(Categories c)
+        {
+            return new CategoryDto
+            {
+                CategoryID = c.CategoryId,
+                CategoryName = c.CategoryName,
+                CategoryDescription = c.CategoryDescription
+            };
         }
     }
 }

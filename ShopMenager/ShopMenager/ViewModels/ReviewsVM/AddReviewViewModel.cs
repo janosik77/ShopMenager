@@ -6,9 +6,9 @@ using System;
 
 namespace ShopMenager.ViewModels.ReviewsVM
 {
-    public class AddReviewViewModel : AAddItemViewModel<Reviews>
+    public class AddReviewViewModel : AAddItemViewModel<ReviewsDto>
     {
-        public AddReviewViewModel(IDataStore<Reviews> itemService, string title) : base(itemService, title)
+        public AddReviewViewModel(IDataStore<ReviewsDto> itemService) : base(itemService, "Create Review")
         {
             ReviewDate = DateTime.Now;
         }
@@ -66,7 +66,7 @@ namespace ShopMenager.ViewModels.ReviewsVM
 
         #endregion
 
-        public override Reviews SetItem() => new Reviews
+        public override ReviewsDto SetItem() => new ReviewsDto
         {
             EmployeeID = EmployeeID,
             //EmployeeName = EmployeeName,

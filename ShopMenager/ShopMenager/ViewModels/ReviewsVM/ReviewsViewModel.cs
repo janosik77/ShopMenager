@@ -6,15 +6,15 @@ using Xamarin.Forms;
 
 namespace ShopMenager.ViewModels.ReviewsVM
 {
-    public class ReviewsViewModel : AListItemViewModel<Reviews>
+    public class ReviewsViewModel : AListItemViewModel<ReviewsDto>
     {
-        public ReviewsViewModel(IDataStore<Reviews> itemService) : base(itemService, "Reviews")
+        public ReviewsViewModel(IDataStore<ReviewsDto> itemService) : base(itemService, "Team Chat")
         {
         }
 
         public override Task GoToAddPage() => Shell.Current.GoToAsync(nameof(AddReviewView));
 
-        public override async Task GoToDetailsPage(Reviews item)
+        public override async Task GoToDetailsPage(ReviewsDto item)
         => await Shell.Current.GoToAsync($"{nameof(ReviewdetailView)}?{nameof(ReviewDetailViewModel.ItemId)}={item.ReviewID}");
     }
 }

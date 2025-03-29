@@ -6,7 +6,7 @@ using Xamarin.Forms;
 
 namespace ShopMenager.Services.ApiService
 {
-    public class EmployeeDataStore : AListDataStore<Employees>
+    public class EmployeeDataStore : AListDataStore<EmployeeDto>
     {
         public EmployeeDataStore()
         {
@@ -17,20 +17,20 @@ namespace ShopMenager.Services.ApiService
                                      .ToList();
         }
 
-        public override async Task<bool> AddItemToService(Employees item)
+        public override async Task<bool> AddItemToService(EmployeeDto item)
             => await DependencyService.Get<OrderService>()
                                      .EmployeePOSTAsync(item)
                                      .HandleRequest();
 
-        public override Task<bool> DeleteItemFromService(Employees item)
+        public override Task<bool> DeleteItemFromService(EmployeeDto item)
             => DependencyService.Get<OrderService>()
                                .EmployeeDELETEAsync(item.EmployeeID)
                                .HandleRequest();
 
-        public override Employees Find(Employees item)
+        public override EmployeeDto Find(EmployeeDto item)
             => items.FirstOrDefault(c => c.EmployeeID == item.EmployeeID);
 
-        public override Employees Find(int id)
+        public override EmployeeDto Find(int id)
             => items.FirstOrDefault(s => s.EmployeeID == id);
 
         public override async Task Refresh()
@@ -38,7 +38,7 @@ namespace ShopMenager.Services.ApiService
                                               .EmployeeAllAsync())
                                               .ToList();
 
-        public override async Task<bool> UpdateItemInService(Employees item)
+        public override async Task<bool> UpdateItemInService(EmployeeDto item)
             => await DependencyService.Get<OrderService>()
                                      .EmployeePUTAsync(item.EmployeeID, item)
                                      .HandleRequest();

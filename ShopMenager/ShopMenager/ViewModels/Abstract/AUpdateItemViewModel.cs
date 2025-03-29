@@ -1,9 +1,4 @@
-﻿using ShopMenager.Services;
-using ShopMenager.Services.ApiService;
-using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Text;
+﻿using ShopMenager.Services.ApiService;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -33,8 +28,10 @@ namespace ShopMenager.ViewModels.Abstract
             }
             set
             {
-                itemId = value;
-                LoadItem(value).GetAwaiter().GetResult();
+                if (SetProperty(ref itemId, value))
+                {
+                    _ = LoadItem(value); 
+                }
             }
         }
         #endregion

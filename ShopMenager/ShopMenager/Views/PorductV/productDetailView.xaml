@@ -1,79 +1,140 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ShopMenager.Views.PorductV.productDetailView"
-             >
-    
-    <ContentPage.Content>
-        <ScrollView>
-            <StackLayout Padding="20" Spacing="15">
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ShopMenager.Views.PorductV.productDetailView"
+    BackgroundColor="{StaticResource Primary}"
+    Title="{Binding Title}">
 
-                <Label Text="Details"
-                       FontSize="Large"
-                       HorizontalOptions="Center" />
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
-                <StackLayout Spacing="10">
+        <ScrollView Grid.Row="0">
+            <Frame BackgroundColor="{StaticResource Primary}"
+                   Margin="15,0"
+                   HasShadow="False"
+                   CornerRadius="15">
+                <StackLayout Padding="20" Spacing="15">
+                    <Frame Style="{StaticResource ImgFrame}"
+                           CornerRadius="10"
+                           HeightRequest="240"
+                           WidthRequest="240"
+                           HorizontalOptions="Center">
+                        <Image Source="{Binding PhotoPath}"
+                               Aspect="AspectFill"
+                               />
+                    </Frame>
 
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Product ID:"
-                               FontAttributes="Bold"
-                               WidthRequest="120"/>
-                        <Label Text="{Binding ProductID}" />
-                    </StackLayout>
+                    <StackLayout Spacing="10" Margin="0,15">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
 
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Category ID:"
-                               FontAttributes="Bold"
-                               WidthRequest="120"/>
-                        <Label Text="{Binding CategoryID}" />
-                    </StackLayout>
+                            <Label Grid.Row="0" Grid.Column="0" 
+                                   Text="Product ID:" 
+                                   Style="{StaticResource DetailLabel}"
+                                   HorizontalOptions="Start" 
+                                   FontAttributes="Bold" />
+                            <Label Grid.Row="0" Grid.Column="1" 
+                                   Text="{Binding ProductID}" 
+                                   Style="{StaticResource DetailLabel}"
+                                   TextColor="{StaticResource DetailsTextColor}"
+                                   HorizontalOptions="End" />
 
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Name:"
-                               FontAttributes="Bold"
-                               WidthRequest="120"/>
-                        <Label Text="{Binding ProductName}" />
-                    </StackLayout>
+                            <Label Grid.Row="1" Grid.Column="0" 
+                                   Text="Category Name:" 
+                                   Style="{StaticResource DetailLabel}"
+                                   HorizontalOptions="Start" 
+                                   FontAttributes="Bold" />
+                            <Label Grid.Row="1" Grid.Column="1" 
+                                   Text="{Binding CategoryName}" 
+                                   Style="{StaticResource DetailLabel}"
+                                   TextColor="{StaticResource DetailsTextColor}"
+                                   HorizontalOptions="End" />
 
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Price:"
-                               FontAttributes="Bold"
-                               WidthRequest="120"/>
-                        <Label Text="{Binding Price}" />
-                    </StackLayout>
+                            <Label Grid.Row="2" Grid.Column="0" 
+                                   Text="Name:" 
+                                   Style="{StaticResource DetailLabel}"
+                                   HorizontalOptions="Start" 
+                                   FontAttributes="Bold" />
+                            <Label Grid.Row="2" Grid.Column="1" 
+                                   Text="{Binding ProductName}" 
+                                   Style="{StaticResource DetailLabel}"
+                                   TextColor="{StaticResource DetailsTextColor}"
+                                   HorizontalOptions="End" />
 
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Stock:"
-                               FontAttributes="Bold"
-                               WidthRequest="120"/>
-                        <Label Text="{Binding Stock}" />
-                    </StackLayout>
+                            <Label Grid.Row="3" Grid.Column="0" 
+                                   Text="Price:" 
+                                   Style="{StaticResource DetailLabel}"
+                                   HorizontalOptions="Start" 
+                                   FontAttributes="Bold" />
+                            <Label Grid.Row="3" Grid.Column="1" 
+                                   Text="{Binding Price, StringFormat='{0:C}'}" 
+                                   Style="{StaticResource DetailLabel}"
+                                   TextColor="{StaticResource DetailsTextColor}"
+                                   HorizontalOptions="End" />
 
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Description:"
-                               FontAttributes="Bold"
-                               WidthRequest="120"/>
-                        <Label Text="{Binding Description}" />
-                    </StackLayout>
+                            <Label Grid.Row="4" Grid.Column="0" 
+                                   Text="Stock:" 
+                                   Style="{StaticResource DetailLabel}"
+                                   HorizontalOptions="Start" 
+                                   FontAttributes="Bold" />
+                            <Label Grid.Row="4" Grid.Column="1" 
+                                   Text="{Binding Stock}" 
+                                   Style="{StaticResource DetailLabel}"
+                                   TextColor="{StaticResource DetailsTextColor}"
+                                   HorizontalOptions="End" />
 
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Photo Path:"
-                               FontAttributes="Bold"
-                               WidthRequest="120"/>
-                        <Label Text="{Binding PhotoPath}" />
+                            <Label Grid.Row="5" Grid.Column="0" 
+                                   Text="Photo Path:" 
+                                   Style="{StaticResource DetailLabel}"
+                                   HorizontalOptions="Start" 
+                                   FontAttributes="Bold" />
+                            <Label Grid.Row="6" Grid.Column="1" 
+                                   Text="{Binding PhotoPath}" 
+                                   Style="{StaticResource DetailLabel}"
+                                   TextColor="{StaticResource DetailsTextColor}"
+                                   HorizontalOptions="End" />
+                            
+                            <Label Grid.Row="6" Grid.Column="0" 
+                                   Text="Description:" 
+                                   Style="{StaticResource DetailLabel}"
+                                   HorizontalOptions="Start" 
+                                   FontAttributes="Bold" />
+                                                        <Label Grid.Row="5" Grid.Column="1" 
+                                   Text="{Binding Description}" 
+                                   Style="{StaticResource DetailLabel}"
+                                   TextColor="{StaticResource DetailsTextColor}"
+                                   HorizontalOptions="End" />
+                        </Grid>
                     </StackLayout>
                 </StackLayout>
-
-                <Button Text="Edit"
-                        Command="{Binding EditCommand}"
-                        CommandParameter="{Binding ProductID}" />
-                <Button Text="Delete"
-                        Command="{Binding DeleteCommand}"
-                        CommandParameter="{Binding ProductID}" />
-                <Button Text="Back to List"
-                        Command="{Binding BackCommand}" />
-
-            </StackLayout>
+            </Frame>
         </ScrollView>
-    </ContentPage.Content>
+
+        <StackLayout Grid.Row="1" Padding="20" Spacing="15">
+            <Button Text="Edit"
+                    Command="{Binding EditCommand}"
+                    CommandParameter="{Binding ProductID}" />
+            <Button Text="Delete"
+                    Command="{Binding DeleteCommand}"
+                    CommandParameter="{Binding ProductID}" />
+            <Button Text="Back to List"
+                    Command="{Binding BackCommand}" />
+        </StackLayout>
+    </Grid>
 </ContentPage>

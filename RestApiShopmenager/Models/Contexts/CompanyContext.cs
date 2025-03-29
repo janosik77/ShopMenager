@@ -38,11 +38,15 @@ public partial class CompanyContext : DbContext
 
     public virtual DbSet<Reviews> Reviews { get; set; }
 
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Server=DESKTOP-A6PI8K2\\SQLEXPRESS;Initial Catalog=ShpMenager;Integrated Security=True;TrustServerCertificate=True;");
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Categories>(entity =>
         {
-            entity.HasKey(e => e.CategoryID).HasName("PK__Categori__19093A2B71E3FB79");
+            entity.HasKey(e => e.CategoryId).HasName("PK__Categori__19093A2B71E3FB79");
         });
 
         modelBuilder.Entity<Customers>(entity =>
@@ -57,11 +61,15 @@ public partial class CompanyContext : DbContext
 
         modelBuilder.Entity<Employees>(entity =>
         {
-            entity.HasKey(e => e.EmployeeID).HasName("PK__Employee__7AD04FF1DB3C1AC3");
+            entity.HasKey(e => e.EmployeeId).HasName("PK__Employee__7AD04FF1DB3C1AC3");
         });
 
         modelBuilder.Entity<OrderDetails>(entity =>
         {
+            entity.HasOne(d => d.Discount).WithMany(p => p.OrderDetails)
+                .OnDelete(DeleteBehavior.SetNull)
+                .HasConstraintName("FK_OrderDetails_Discounts");
+
             entity.HasOne(d => d.Order).WithMany(p => p.OrderDetails).HasConstraintName("FK_OrderDetails_Orders");
 
             entity.HasOne(d => d.Product).WithMany(p => p.OrderDetails).HasConstraintName("FK_OrderDetails_Products");
@@ -69,7 +77,7 @@ public partial class CompanyContext : DbContext
 
         modelBuilder.Entity<Orders>(entity =>
         {
-            entity.HasKey(e => e.OrderID).HasName("PK__Orders__C3905BAF920470A5");
+            entity.HasKey(e => e.OrderId).HasName("PK__Orders__C3905BAF920470A5");
 
             entity.Property(e => e.OrderDate).HasDefaultValueSql("(getdate())");
             entity.Property(e => e.Status).HasDefaultValue("Pending");
@@ -91,7 +99,7 @@ public partial class CompanyContext : DbContext
 
         modelBuilder.Entity<Payments>(entity =>
         {
-            entity.HasKey(e => e.PaymentID).HasName("PK__Payments__9B556A58F6C5182E");
+            entity.HasKey(e => e.PaymentId).HasName("PK__Payments__9B556A58F6C5182E");
 
             entity.Property(e => e.PaymentDate).HasDefaultValueSql("(getdate())");
 
@@ -108,7 +116,7 @@ public partial class CompanyContext : DbContext
 
         modelBuilder.Entity<Products>(entity =>
         {
-            entity.HasKey(e => e.ProductID).HasName("PK__Products__B40CC6ED2DE016E6");
+            entity.HasKey(e => e.ProductId).HasName("PK__Products__B40CC6ED2DE016E6");
 
             entity.HasOne(d => d.Category).WithMany(p => p.Products).HasConstraintName("FK_Products_Categories");
         });

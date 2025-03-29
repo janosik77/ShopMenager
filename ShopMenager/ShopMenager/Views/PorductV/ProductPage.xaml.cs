@@ -1,5 +1,4 @@
 ﻿using ShopMenager.ViewModels.ProductVM;
-using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -8,14 +7,19 @@ namespace ShopMenager.Views.PorductV
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProductPage : ContentPage
     {
+
+        ProductViewModel _viewModel;
         public ProductPage()
         {
             InitializeComponent();
-            try
-            {
-                BindingContext = App.Services.GetService<ProductViewModel>();
-            }
-            catch (Exception ex) { System.Diagnostics.Debug.WriteLine(ex); }
+                BindingContext = _viewModel = App.Services.GetService<ProductViewModel>();
+        }
+
+        protected override void OnAppearing()
+        {
+            //base.OnAppearing();
+            _viewModel.OnAppearing();
+
         }
     }
 }
