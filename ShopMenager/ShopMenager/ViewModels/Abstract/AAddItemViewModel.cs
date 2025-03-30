@@ -1,4 +1,5 @@
 ﻿using ShopMenager.Services.ApiService;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace ShopMenager.ViewModels.Abstract
@@ -20,13 +21,18 @@ namespace ShopMenager.ViewModels.Abstract
         #endregion
 
         #region Methods
+        public virtual Task OnAppearingAsync() 
+        {
+            return Task.CompletedTask;
+        }
+
         public abstract bool ValidateSave();
         private async void OnCancel()
             => await Shell.Current.GoToAsync("..");
         public abstract T SetItem();
         private async void OnSave()
         {
-            await ItemService.AddItemAsync(SetItem());     /*CreateAsync(SetItem());*/
+            await ItemService.AddItemAsync(SetItem());    
             await Shell.Current.GoToAsync("..");
         }
         #endregion

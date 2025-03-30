@@ -1,42 +1,47 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ShopMenager.Views.CategoryV.AddCategoryView"
-             BackgroundColor="{StaticResource Primary}"
-             >
-                
-    
-    
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ShopMenager.Views.CategoryV.AddCategoryView"
+    BackgroundColor="{StaticResource Primary}"
+    Title="{Binding Title}">
+
     <ContentPage.Content>
-        <ScrollView>
-            <StackLayout Padding="20" Spacing="15">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            
+            <ScrollView Grid.Row="0">
+                <StackLayout Padding="20" Spacing="15">
+                    <StackLayout Spacing="10" Margin="0,15">
 
-                <Label Text="Create Category"
-                       FontSize="Large"
-                       HorizontalOptions="Center" />
+                        <Label Text="Category Name" 
+                               Style="{StaticResource DetailLabel}" />
+                        <Frame Style="{StaticResource SearchFrame}">
+                            <Entry Placeholder="Enter category name"
+                                   Text="{Binding CategoryName}"
+                                   Style="{StaticResource SearchEntryStyle}" />
+                        </Frame>
 
-                <!-- Formularz dodawania kategorii -->
-                <StackLayout Spacing="10">
-
-                    <!-- Category Name -->
-                    <Label Text="Category Name" />
-                    <Entry Placeholder="Enter category name"
-                           Text="{Binding CategoryName}" />
-
-                    <!-- Category Description -->
-                    <Label Text="Category Description" />
-                    <Entry Placeholder="Enter category description"
-                           Text="{Binding CategoryDescription}" />
-
-                    <!-- Przycisk Create -->
-                    <Button Text="Create"
-                            Command="{Binding SaveCommand}" />
+                        <Label Text="Category Description" 
+                               Style="{StaticResource DetailLabel}" />
+                        <Frame Style="{StaticResource SearchFrame}">
+                            <Entry Placeholder="Enter category description"
+                                   Text="{Binding CategoryDescription}"
+                                   Style="{StaticResource SearchEntryStyle}" />
+                        </Frame>
+                    </StackLayout>
                 </StackLayout>
+            </ScrollView>
 
-                <!-- Przycisk Back to List -->
+            <StackLayout Grid.Row="1" Padding="20" Spacing="15">
+                <Button Text="Create"
+                        Command="{Binding SaveCommand}" />
                 <Button Text="Back to List"
                         Command="{Binding CancelCommand}" />
             </StackLayout>
-        </ScrollView>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

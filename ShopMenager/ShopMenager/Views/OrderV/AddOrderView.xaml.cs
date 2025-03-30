@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
+using ShopMenager.ViewModels.OrderVM;
+using ShopMenager.ViewModels.ProductVM;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,6 +12,15 @@ namespace ShopMenager.Views.OrderV
 		public AddOrderView ()
 		{
 			InitializeComponent ();
-		}
-	}
+            BindingContext = App.Services.GetService<AddOrderViewModel>();
+        }
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            if (BindingContext is AddOrderViewModel vm)
+            {
+                await vm.OnAppearingAsync();
+            }
+        }
+    }
 }

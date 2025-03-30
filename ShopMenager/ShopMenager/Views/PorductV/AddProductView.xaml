@@ -1,55 +1,84 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ShopMenager.Views.PorductV.AddProductView"
-             >
-    
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ShopMenager.Views.PorductV.AddProductView"
+    BackgroundColor="{StaticResource Primary}"
+    Title="{Binding Title}">
+
     <ContentPage.Content>
-        <ScrollView>
-            <StackLayout Padding="20" Spacing="15">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-                <Label Text="Create Product"
-                       FontSize="Large"
-                       HorizontalOptions="Center" />
+            <ScrollView Grid.Row="0">
+                <StackLayout Padding="20" Spacing="15">
+                    <StackLayout Spacing="10" Margin="0,15">
 
-                <StackLayout Spacing="10">
+                        <Label Text="Kategoria" 
+                                Style="{StaticResource DetailLabel}" />
+                        <Frame Style="{StaticResource SearchFrame}">
+                            <Picker Title="Select Category"                                    
+                                    ItemsSource="{Binding Categories}"
+                                    SelectedItem="{Binding SelectedCategory}"
+                                    Style="{StaticResource PickerStyle}" />
+                        </Frame>
 
-                    <Label Text="Category ID" />
-                    <Entry Placeholder="Enter category ID"
-                           Keyboard="Numeric"
-                           Text="{Binding CategoryID}" />
+                        <Label Text="Product Name" 
+                               Style="{StaticResource DetailLabel}" />
+                        <Frame Style="{StaticResource SearchFrame}">
+                            <Entry Placeholder="Enter product name"
+                                   Text="{Binding ProductName}"
+                                   Style="{StaticResource SearchEntryStyle}" />
+                        </Frame>
 
-                    <Label Text="Product Name" />
-                    <Entry Placeholder="Enter product name"
-                           Text="{Binding ProductName}" />
+                        <Label Text="Price" 
+                               Style="{StaticResource DetailLabel}" />
+                        <Frame Style="{StaticResource SearchFrame}">
+                            <Entry Placeholder="Enter price"
+                                   Keyboard="Numeric"
+                                   Text="{Binding Price}"
+                                   Style="{StaticResource SearchEntryStyle}" />
+                        </Frame>
 
-                    <Label Text="Price" />
-                    <Entry Placeholder="Enter price"
-                           Keyboard="Numeric"
-                           Text="{Binding Price}" />
+                        <Label Text="Stock" 
+                               Style="{StaticResource DetailLabel}" />
+                        <Frame Style="{StaticResource SearchFrame}">
+                            <Entry Placeholder="Enter stock quantity"
+                                   Keyboard="Numeric"
+                                   Text="{Binding Stock}"
+                                   Style="{StaticResource SearchEntryStyle}" />
+                        </Frame>
 
-                    <Label Text="Stock" />
-                    <Entry Placeholder="Enter stock quantity"
-                           Keyboard="Numeric"
-                           Text="{Binding Stock}" />
+                        <Label Text="Description" 
+                               Style="{StaticResource DetailLabel}" />
+                        <Frame Style="{StaticResource SearchFrame}">
+                            <Editor Placeholder="Enter product description"
+                                    Text="{Binding Description}"
+                                    AutoSize="TextChanges"
+                                    HeightRequest="100"
+                                    Style="{StaticResource SearchEntryStyle}" />
+                        </Frame>
 
-                    <Label Text="Description" />
-                    <Editor Placeholder="Enter product description"
-                            Text="{Binding Description}"
-                            AutoSize="TextChanges"
-                            HeightRequest="100" />
-
-                    <Label Text="Photo Path" />
-                    <Entry Placeholder="Enter photo path"
-                           Text="{Binding PhotoPath}" />
-
-                    <Button Text="Create"
-                            Command="{Binding SaveCommand}" />
+                        <Label Text="Photo Path" 
+                               Style="{StaticResource DetailLabel}" />
+                        <Frame Style="{StaticResource SearchFrame}">
+                            <Entry Placeholder="Enter photo path"
+                                   Text="{Binding PhotoPath}"
+                                   Style="{StaticResource SearchEntryStyle}" />
+                        </Frame>
+                    </StackLayout>
                 </StackLayout>
+            </ScrollView>
 
+            <StackLayout Grid.Row="1" Padding="20" Spacing="15">
+                <Button Text="Create"
+                        Command="{Binding SaveCommand}" />
                 <Button Text="Back to List"
                         Command="{Binding CancelCommand}" />
             </StackLayout>
-        </ScrollView>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

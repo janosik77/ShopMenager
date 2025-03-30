@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="ShopMenager.Views.EmployeeV.AddEmployeeView"
     BackgroundColor="{StaticResource Primary}"
-    Title="Create Employee">
+    Title="{Binding Title}">
 
     <ContentPage.Content>
         <Grid>

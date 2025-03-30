@@ -87,6 +87,15 @@
         <Setter Property="TextColor" Value="{StaticResource TextColor}"/>
         <Setter Property="FontSize" Value="18"/>
     </Style>
+    <Style x:Key="PickerStyle" TargetType="Picker">
+        <Setter Property="Margin" Value="15,0" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="TextColor" Value="{StaticResource TextColor}"/>
+        <Setter Property="TitleColor" Value="{StaticResource TextColor}"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource Clauds}"/>
+        <Setter Property="Background" Value="{StaticResource Clauds}"/>
+    </Style>
 
 
 </ResourceDictionary>

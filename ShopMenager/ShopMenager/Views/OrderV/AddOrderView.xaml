@@ -1,51 +1,186 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ShopMenager.Views.OrderV.AddOrderView"
-             >
-    
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ShopMenager.Views.OrderV.AddOrderView"
+    xmlns:vm="clr-namespace:ShopMenager.ViewModels.OrderVM"
+    BackgroundColor="{StaticResource Primary}"
+    Title="{Binding Title}">
+
     <ContentPage.Content>
-        <ScrollView>
-            <StackLayout Padding="20" Spacing="15">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-                <!-- Nagłówek -->
-                <Label Text="Create Order"
-                       FontSize="Large"
-                       HorizontalOptions="Center" />
+            <ScrollView Grid.Row="0">
+                <StackLayout Padding="20" Spacing="15">
+                    <StackLayout Spacing="10" Margin="0,15">
 
-                <!-- Formularz dodawania Order -->
-                <StackLayout Spacing="10">
+                        <Label Text="Customer" 
+                               Style="{StaticResource DetailLabel}" />
+                        <Frame Style="{StaticResource SearchFrame}">
+                            <Picker Title="Select Customer"
+                                    ItemsSource="{Binding Customers}"
+                                    SelectedItem="{Binding SelectedCustomer}"
+                                    Style="{StaticResource PickerStyle}" />
+                        </Frame>
 
-                    <!-- Customer ID -->
-                    <Label Text="Customer ID" />
-                    <Entry Placeholder="Enter customer ID"
-                           Keyboard="Numeric"
-                           Text="{Binding CustomerID}" />
+                        <Label Text="Employee" 
+                               Style="{StaticResource DetailLabel}" />
+                        <Frame Style="{StaticResource SearchFrame}">
+                            <Picker Title="Select Employee"
+                                    ItemsSource="{Binding Employees}"
+                                    SelectedItem="{Binding SelectedEmployee}"
+                                    Style="{StaticResource PickerStyle}" />
+                        </Frame>
 
-                    <!-- Employee ID -->
-                    <Label Text="Employee ID" />
-                    <Entry Placeholder="Enter employee ID"
-                           Keyboard="Numeric"
-                           Text="{Binding EmployeeID}" />
+                        <Label Text="Order Date" 
+                               Style="{StaticResource DetailLabel}" />
+                        <Frame Style="{StaticResource SearchFrame}">
+                            <DatePicker Date="{Binding OrderDate}"
+                                        Style="{StaticResource SearchEntryStyle}" />
+                        </Frame>
 
-                    <!-- Order Date -->
-                    <Label Text="Order Date" />
-                    <DatePicker Date="{Binding OrderDate}" />
+                        <Label Text="Status" 
+                               Style="{StaticResource DetailLabel}" />
+                        <Frame Style="{StaticResource SearchFrame}">
+                            <Entry Placeholder="Enter status"
+                                   Text="{Binding Status}"
+                                   Style="{StaticResource SearchEntryStyle}" />
+                        </Frame>
 
-                    <!-- Status -->
-                    <Label Text="Status" />
-                    <Entry Placeholder="Enter status"
-                           Text="{Binding Status}" />
+                    </StackLayout>
 
-                    <!-- Przycisk Create -->
-                    <Button Text="Create"
-                            Command="{Binding SaveCommand}" />
+                    <StackLayout Grid.Row="1" Padding="15" Spacing="15" BackgroundColor="{StaticResource Primary}">
+                        <Label Text="Order Positions"
+                               FontAttributes="Bold"
+                               FontSize="28"
+                               TextColor="{StaticResource TextColor}"
+                               HorizontalOptions="Center"
+                               Margin="0,20,0,10" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            
+                            <Frame  Grid.Column="0" Grid.Row="0"
+                                    Style="{StaticResource SearchFrame}">
+                                <Picker Title="Select product"
+                                        ItemsSource="{Binding Products}"
+                                        SelectedItem="{Binding SelectedProduct}"
+                                        Style="{StaticResource PickerStyle}" />
+                            </Frame>
+                            <Frame  Grid.Column="0" Grid.Row="1"
+                                    Style="{StaticResource SearchFrame}">
+                                <Picker Title="Select discount"
+                                        ItemsSource="{Binding AllDiscounts}"
+                                        SelectedItem="{Binding SelectedDiscount}"
+                                        Style="{StaticResource PickerStyle}" />
+                            </Frame>
+                            <Frame Grid.Column="1" Grid.Row="0"
+                                    Style="{StaticResource SearchFrame}">
+                                <Entry Placeholder="Enter quantity"
+                                       Keyboard="Numeric"
+                                       Text="{Binding ProdQuantity}"
+                                       Style="{StaticResource SearchEntryStyle}" />
+                            </Frame>
+                            <Button Margin="0,20"
+                                    Grid.Column="1" Grid.Row="1"
+                                    Text="Add Product"
+                                    Command="{Binding AddProductCommand}" />
+                        </Grid>
+                        
+                        <Grid ColumnSpacing="10" Padding="10" BackgroundColor="{StaticResource Clauds}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="Product" 
+                                    Style="{StaticResource DetailLabel}"
+                                    TextColor="{StaticResource SecondaryColor}"
+                                    HorizontalOptions="Start" 
+                                    FontSize="16"/>
+                            <Label Text="Qt." 
+                                    Style="{StaticResource DetailLabel}"
+                                    TextColor="{StaticResource SecondaryColor}"
+                                    HorizontalOptions="Center" Grid.Column="1" 
+                                    FontSize="16"/>
+                            <Label Text="Disc." 
+                                    Style="{StaticResource DetailLabel}"
+                                    TextColor="{StaticResource SecondaryColor}"
+                                    HorizontalOptions="Center" Grid.Column="2" 
+                                    FontSize="16"/>
+                            <Label Text="Total" 
+                                    Style="{StaticResource DetailLabel}"
+                                    TextColor="{StaticResource SecondaryColor}"
+                                    HorizontalOptions="Center" Grid.Column="3" 
+                                    FontSize="16"/>
+                            <Label/>
+                        </Grid>
+
+                        <CollectionView ItemsSource="{Binding OrderPositions}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame Padding="10" Margin="0,5" HasShadow="False" BackgroundColor="{StaticResource Clauds}">
+                                        <Grid ColumnSpacing="10">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Label Grid.Column="0" 
+                                                    Text="{Binding ProductName}" 
+                                                    Style="{StaticResource DetailLabel}" 
+                                                    HorizontalOptions="Start"
+                                                    FontSize="14"/>
+                                            <Label Grid.Column="1" 
+                                                    Text="{Binding Quantity}" 
+                                                    Style="{StaticResource DetailLabel}" 
+                                                    HorizontalOptions="Center"
+                                                    FontSize="14"/>
+                                            <Label Grid.Column="2" 
+                                                    Text="{Binding DiscountName}" 
+                                                    Style="{StaticResource DetailLabel}" 
+                                                    HorizontalOptions="Center"
+                                                    FontSize="14"/>
+                                            <Label Grid.Column="3" 
+                                                    Text="{Binding Total, StringFormat='{0:C}'}" 
+                                                    Style="{StaticResource DetailLabel}" 
+                                                    HorizontalOptions="Center"
+                                                    FontSize="14"/>
+                                            <Button Grid.Column="4"
+                                                    Text="X"
+                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:AddOrderViewModel}}, Path=RemovePositionCommand}"
+                                                    CommandParameter="{Binding .}"
+                                                    VerticalOptions="Center" />
+                                        </Grid>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+
                 </StackLayout>
+            </ScrollView>
 
-                <!-- Przycisk Back to List -->
+            <StackLayout Grid.Row="1" Padding="20" Spacing="15">
+                <Button Text="Create"
+                        Command="{Binding SaveCommand}" />
                 <Button Text="Back to List"
                         Command="{Binding CancelCommand}" />
             </StackLayout>
-        </ScrollView>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

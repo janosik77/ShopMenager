@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="ShopMenager.Views.CustomerV.AddCustomerView"
     BackgroundColor="{StaticResource Primary}"
-    Title="Create Customer">
+    Title="{Binding Title}">
 
     <Grid>
         <Grid.RowDefinitions>

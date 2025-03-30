@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
+using ShopMenager.ViewModels.ProductVM;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,6 +11,15 @@ namespace ShopMenager.Views.PorductV
 		public AddProductView ()
 		{
 			InitializeComponent ();
-		}
-	}
+            BindingContext = App.Services.GetService<AddproductViewModel>();
+        }
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            if (BindingContext is AddproductViewModel vm)
+            {
+                await vm.OnAppearingAsync();
+            }
+        }
+    }
 }

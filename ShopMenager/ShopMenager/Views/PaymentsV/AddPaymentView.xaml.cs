@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ShopMenager.ViewModels.CategoryVM;
+using ShopMenager.ViewModels.PaymentVM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +17,7 @@ namespace ShopMenager.Views.PaymentsV
 		public AddPaymentView ()
 		{
 			InitializeComponent ();
-		}
+            BindingContext = App.Services.GetService<AddpaymentViewModel>();
+        }
 	}
 }

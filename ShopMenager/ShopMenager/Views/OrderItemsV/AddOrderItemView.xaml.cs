@@ -1,4 +1,7 @@
-﻿using System;
+﻿using ShopMenager.ViewModels.CategoryVM;
+using ShopMenager.ViewModels.OrderitemsVM;
+using ShopMenager.ViewModels.OrderVM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +18,7 @@ namespace ShopMenager.Views.OrderItemsV
 		public AddOrderItemView ()
 		{
 			InitializeComponent ();
-		}
+            BindingContext = App.Services.GetService<AddOrderDetailViewModel>();
+        }
 	}
 }

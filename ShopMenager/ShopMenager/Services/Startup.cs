@@ -30,15 +30,23 @@ namespace ShopMenager.Services
             services.AddSingleton<PaymentsViewModel>();
             services.AddSingleton<ProductViewModel>();
             services.AddSingleton<ReviewsViewModel>();
+
             services.AddTransient<AddCustomerViewModel>();
-            services.AddSingleton<DiscountsDetailsViewModel>();
-            services.AddSingleton<EmployeeDetailViewModel>();
-            services.AddSingleton<OrderDetailViewModel>();
-            services.AddSingleton<PaymentDetailViewModel>();
-            services.AddSingleton<ProductDetailViewModel>();
-            services.AddSingleton<ReviewDetailViewModel>();
-            services.AddSingleton<CategoryDetailViewModel>();
-            services.AddSingleton<CustomerDetailViewModel>();
+            services.AddTransient<AddEmployeeViewModel>();
+            services.AddTransient<AddproductViewModel>();
+            services.AddTransient<AddCategoryViewModel>();
+            services.AddTransient<AddDiscountsViewModel>();
+            services.AddTransient<AddOrderViewModel>();
+
+
+            services.AddTransient<DiscountsDetailsViewModel>();
+            services.AddTransient<EmployeeDetailViewModel>();
+            services.AddTransient<OrderDetailViewModel>();
+            services.AddTransient<PaymentDetailViewModel>();
+            services.AddTransient<ProductDetailViewModel>();
+            services.AddTransient<ReviewDetailViewModel>();
+            services.AddTransient<CategoryDetailViewModel>();
+            services.AddTransient<CustomerDetailViewModel>();
 
 
             //Rest api connection services           

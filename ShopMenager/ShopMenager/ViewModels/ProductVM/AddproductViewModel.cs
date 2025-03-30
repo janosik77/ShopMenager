@@ -1,29 +1,33 @@
-﻿
+﻿using ShopMenager.Helpers;
 using ShopMenager.Services.ApiService;
 using ShopMenager.ViewModels.Abstract;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
 
 
 namespace ShopMenager.ViewModels.ProductVM
 {
     public class AddproductViewModel : AAddItemViewModel<ProductDto>
     {
-        public AddproductViewModel(IDataStore<ProductDto> itemService, string title) : base(itemService, title)
+        public AddproductViewModel(IDataStore<ProductDto> itemService, IDataStore<CategoryDto> categoryDataStore) : base(itemService, "Create Product")
         {
+            _categoryDataStore = categoryDataStore;
         }
         #region Properties
-
-        private int _categoryID;
-        public int CategoryID
+        private readonly IDataStore<CategoryDto> _categoryDataStore;
+        private ObservableCollection<KeyValueItem> _categories;
+        public ObservableCollection<KeyValueItem> Categories
         {
-            get => _categoryID;
-            set => SetProperty(ref _categoryID, value);
+            get => _categories;
+            set => SetProperty(ref _categories, value);
         }
 
-        private string _categoryName;
-        public string CategoryName 
+        private KeyValueItem _selectedCategory;
+        public KeyValueItem SelectedCategory
         {
-            get => _categoryName;
-            set => SetProperty(ref _categoryName, value);
+            get => _selectedCategory;
+            set => SetProperty(ref _selectedCategory, value);
         }
 
         private string _productName;
@@ -63,11 +67,17 @@ namespace ShopMenager.ViewModels.ProductVM
 
         #endregion
 
+        #region Methodss
+        public override async Task OnAppearingAsync()
+        {
+            Categories = await GetCategoryItemsAsync();
+        }
+
         public override ProductDto SetItem() => new ProductDto
         {
-            CategoryID = CategoryID,
-            CategoryName = CategoryName,
+            CategoryID = SelectedCategory.Key,
             ProductName = ProductName,
+            CategoryName = SelectedCategory.Value??" ",
             Price = Price,
             Stock = Stock,
             Description = Description,
@@ -76,8 +86,19 @@ namespace ShopMenager.ViewModels.ProductVM
 
         public override bool ValidateSave()
         {
-            // Przykład
             return !string.IsNullOrWhiteSpace(ProductName) && Price > 0;
         }
+        public async Task<ObservableCollection<KeyValueItem>> GetCategoryItemsAsync()
+        {
+            var categories = await _categoryDataStore.GetItemsAsync();
+            var keyValueItems = categories.Select(c => new KeyValueItem
+            {
+                Key = c.CategoryID,
+                Value = c.CategoryName
+            }).ToList();
+            return new ObservableCollection<KeyValueItem>(keyValueItems);
+        }
+        #endregion
+
     }
 }

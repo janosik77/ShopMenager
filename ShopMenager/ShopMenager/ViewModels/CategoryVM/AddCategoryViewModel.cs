@@ -1,5 +1,6 @@
 ﻿using ShopMenager.Services.ApiService;
 using ShopMenager.ViewModels.Abstract;
+using System.Threading.Tasks;
 
 namespace ShopMenager.ViewModels.CategoryVM
 {
@@ -25,6 +26,7 @@ namespace ShopMenager.ViewModels.CategoryVM
         }
         #endregion
 
+        #region Methode
         public override CategoryDto SetItem() => new CategoryDto
         {
             CategoryName = CategoryName,
@@ -35,5 +37,8 @@ namespace ShopMenager.ViewModels.CategoryVM
         {
             return !string.IsNullOrWhiteSpace(CategoryName);
         }
+
+        #endregion
+
     }
 }

@@ -1,41 +1,62 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ShopMenager.Views.DiscountV.AddDiscountView"
-             >
-    
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ShopMenager.Views.DiscountV.AddDiscountView"
+    BackgroundColor="{StaticResource Primary}"
+    Title="{Binding Title}">
+
     <ContentPage.Content>
-        <ScrollView>
-            <StackLayout Padding="20" Spacing="15">
+        <Grid>
 
-                <Label Text="Create Discount"
-                       FontSize="Large"
-                       HorizontalOptions="Center" />
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-                <StackLayout Spacing="10">
+            <ScrollView Grid.Row="0">
+                <StackLayout Padding="20" Spacing="15">
+                    <StackLayout Spacing="10" Margin="0,15">
+                        <Label Text="Discount Name" 
+                               Style="{StaticResource DetailLabel}" />
+                        <Frame Style="{StaticResource SearchFrame}">
+                            <Entry Placeholder="Enter discount name"
+                                   Text="{Binding DiscountName}"
+                                   Style="{StaticResource SearchEntryStyle}" />
+                        </Frame>
 
-                    <Label Text="Discount Name" />
-                    <Entry Placeholder="Enter discount name"
-                           Text="{Binding DiscountName}" />
+                        <Label Text="Discount Rate (%)" 
+                               Style="{StaticResource DetailLabel}" />
+                        <Frame Style="{StaticResource SearchFrame}">
+                            <Entry Placeholder="Enter discount rate"
+                                   Keyboard="Numeric"
+                                   Text="{Binding DiscountRate}"
+                                   Style="{StaticResource SearchEntryStyle}" />
+                        </Frame>
 
-                    <Label Text="Discount Rate (%)" />
-                    <Entry Placeholder="Enter discount rate"
-                           Keyboard="Numeric"
-                           Text="{Binding DiscountRate}" />
+                        <Label Text="Start Date" 
+                               Style="{StaticResource DetailLabel}" />
+                        <Frame Style="{StaticResource SearchFrame}">
+                            <DatePicker Date="{Binding StartDate}"
+                                        Style="{StaticResource SearchEntryStyle}" />
+                        </Frame>
 
-                    <Label Text="Start Date" />
-                    <DatePicker Date="{Binding StartDate}" />
-
-                    <Label Text="End Date" />
-                    <DatePicker Date="{Binding EndDate}" />
-
-                    <Button Text="Create"
-                            Command="{Binding SaveCommand}" />
+                        <Label Text="End Date" 
+                               Style="{StaticResource DetailLabel}" />
+                        <Frame Style="{StaticResource SearchFrame}">
+                            <DatePicker Date="{Binding EndDate}"
+                                        Style="{StaticResource SearchEntryStyle}" />
+                        </Frame>
+                    </StackLayout>
                 </StackLayout>
+            </ScrollView>
 
+            <StackLayout Grid.Row="1" Padding="20" Spacing="15">
+                <Button Text="Create"
+                        Command="{Binding SaveCommand}" />
                 <Button Text="Back to List"
                         Command="{Binding CancelCommand}" />
             </StackLayout>
-        </ScrollView>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -6,7 +6,7 @@ namespace ShopMenager.ViewModels.PaymentVM
 {
     public class AddpaymentViewModel : AAddItemViewModel<PaymentDto>
     {
-        public AddpaymentViewModel(IDataStore<PaymentDto> itemService, string title) : base(itemService, title)
+        public AddpaymentViewModel(IDataStore<PaymentDto> itemService) : base(itemService, "Create Payment")
         {
             PaymentDate = DateTime.Now;
         }

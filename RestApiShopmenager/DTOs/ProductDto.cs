@@ -4,7 +4,7 @@
     {
         public int ProductID { get; set; }
         public int CategoryID { get; set; }
-        public required string CategoryName { get; set; }
+        public string CategoryName { get; set; }
         public required string ProductName { get; set; }
         public decimal Price { get; set; }
         public int Stock { get; set; }
