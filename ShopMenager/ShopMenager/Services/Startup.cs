@@ -31,14 +31,25 @@ namespace ShopMenager.Services
             services.AddSingleton<ProductViewModel>();
             services.AddSingleton<ReviewsViewModel>();
 
+            //edit models
+            services.AddTransient<EditCustomerViewModel>();
+            services.AddTransient<EditEmployeeViewModel>();
+            services.AddTransient<EditProductViewModel>();
+            services.AddTransient<EditCategoryViewModel>();
+            services.AddTransient<EditDiscountsViewModel>();
+            services.AddTransient<EditOrderViewModel>();
+            services.AddTransient<EditPaymentViewModel>();
+
+            //add models services
             services.AddTransient<AddCustomerViewModel>();
             services.AddTransient<AddEmployeeViewModel>();
             services.AddTransient<AddproductViewModel>();
             services.AddTransient<AddCategoryViewModel>();
             services.AddTransient<AddDiscountsViewModel>();
             services.AddTransient<AddOrderViewModel>();
+            services.AddTransient<AddpaymentViewModel>();
 
-
+            //details models
             services.AddTransient<DiscountsDetailsViewModel>();
             services.AddTransient<EmployeeDetailViewModel>();
             services.AddTransient<OrderDetailViewModel>();

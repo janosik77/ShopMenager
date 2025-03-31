@@ -1,10 +1,6 @@
-﻿using ShopMenager.ViewModels.CategoryVM;
+﻿
+using ShopMenager.ViewModels.OrderVM;
 using ShopMenager.ViewModels.PaymentVM;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -19,5 +15,13 @@ namespace ShopMenager.Views.PaymentsV
 			InitializeComponent ();
             BindingContext = App.Services.GetService<AddpaymentViewModel>();
         }
-	}
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            if (BindingContext is AddpaymentViewModel vm)
+            {
+                await vm.OnAppearingAsync();
+            }
+        }
+    }
 }

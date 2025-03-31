@@ -1,5 +1,4 @@
-﻿using ShopMenager.Services;
-using ShopMenager.Services.ApiService;
+﻿using ShopMenager.Services.ApiService;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;

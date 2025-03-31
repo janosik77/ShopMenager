@@ -31,10 +31,10 @@ namespace ShopMenager.ViewModels.OrderVM
 
         #region Fields
 
-        IDataStore<CustomerDto> _customerDataStore;
-        IDataStore<EmployeeDto> _employeeDataStore;
-        IDataStore<ProductDto> _productDataStore;
-        IDataStore<Discounts> _discountsDataStore;
+        private IDataStore<CustomerDto> _customerDataStore;
+        private IDataStore<EmployeeDto> _employeeDataStore;
+        private IDataStore<ProductDto> _productDataStore;
+        private IDataStore<Discounts> _discountsDataStore;
 
         #endregion
 

@@ -49,9 +49,9 @@ namespace ShopMenager.ViewModels.Abstract
         public abstract Task LoadItem(int id);
         private async void OnSave()
         {
-            //await ItemService.UpdateAsync(SetItem());
-            // This will pop the current page off the navigation stack
-            await Shell.Current.GoToAsync("..");
+            await ItemService.UpdateItemAsync(SetItem());
+         
+            await Shell.Current.GoToAsync("../..");
         }
         #endregion
     }

@@ -60,16 +60,27 @@ namespace ShopMenager.BuissnesLogic
             return new List<KeyValueItem>(discountKeyValueItems);
         }
 
-        public static async Task<List<KeyValueItem>> GetpaymentMethodKeyValueItemsAsync(IDataStore<Discounts> discountsDataStore)
+        public static async Task<List<KeyValueItem>> GetpaymentMethodKeyValueItemsAsync(IDataStore<PaymentMethods> paymentMethodsDataStore)
         {
-            var discount = await discountsDataStore.GetItemsAsync();
-            var discountKeyValueItems = discount.Select(c => new KeyValueItem
+            var paymentMethods = await paymentMethodsDataStore.GetItemsAsync();
+            var paymentMethodsKeyValueItems = paymentMethods.Select(c => new KeyValueItem
             {
-                Key = c.DiscountId,
-                Value = c.DiscountName
+                Key = c.PaymentMethodId,
+                Value = c.MethodName
             }).ToList();
 
-            return new List<KeyValueItem>(discountKeyValueItems);
+            return new List<KeyValueItem>(paymentMethodsKeyValueItems);
+        }
+        public static async Task<List<KeyValueItem>> GetOrderKeyValueItemsAsync(IDataStore<OrderDto> orderDataStore)
+        {
+            var orders = await orderDataStore.GetItemsAsync();
+            var ordersKeyValueItems = orders.Select(c => new KeyValueItem
+            {
+                Key = c.OrderID,
+                Value =$"order Id: {c.OrderID} Customeer: {c.CustomerName} " ,
+            }).ToList();
+
+            return new List<KeyValueItem>(ordersKeyValueItems);
         }
     }
 }

@@ -16,32 +16,12 @@
             <ScrollView Grid.Row="0">
                 <StackLayout Padding="20" Spacing="15">
                     <StackLayout Spacing="10" Margin="0,15">
-                        <Label Text="Customer" 
+                        <Label Text="Order" 
                                Style="{StaticResource DetailLabel}" />
                         <Frame Style="{StaticResource SearchFrame}">
                             <Picker Title="Select Customer"
-                                    ItemsSource="{Binding Customers}"
-                                    SelectedItem="{Binding SelectedCustomer}"
-                                    ItemDisplayBinding="{Binding Name}"
-                                    Style="{StaticResource SearchEntryStyle}" />
-                        </Frame>
-
-                        <Label Text="Employee" 
-                               Style="{StaticResource DetailLabel}" />
-                        <Frame Style="{StaticResource SearchFrame}">
-                            <Picker Title="Select Employee"
-                                    ItemsSource="{Binding Employees}"
-                                    SelectedItem="{Binding SelectedEmployee}"
-                                    ItemDisplayBinding="{Binding FullName}"
-                                    Style="{StaticResource SearchEntryStyle}" />
-                        </Frame>
-
-                        <Label Text="Status" 
-                               Style="{StaticResource DetailLabel}" />
-                        <Frame Style="{StaticResource SearchFrame}">
-                            <Picker Title="Select Payment Status"
-                                    ItemsSource="{Binding PaymentStatuses}"
-                                    SelectedItem="{Binding SelectedStatus}"
+                                    ItemsSource="{Binding Order}"
+                                    SelectedItem="{Binding SelectedOrder}"
                                     Style="{StaticResource SearchEntryStyle}" />
                         </Frame>
 
@@ -51,7 +31,6 @@
                             <Picker Title="Select Payment Method"
                                     ItemsSource="{Binding PaymentMethods}"
                                     SelectedItem="{Binding SelectedPaymentMethod}"
-                                    ItemDisplayBinding="{Binding MethodName}"
                                     Style="{StaticResource SearchEntryStyle}" />
                         </Frame>
 

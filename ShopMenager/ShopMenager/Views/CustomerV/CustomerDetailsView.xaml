@@ -23,9 +23,7 @@
                            CornerRadius="10"
                            HeightRequest="120"
                            WidthRequest="120"
-                           HorizontalOptions="Center"
-                           >
-
+                           HorizontalOptions="Center">
                         <Image Source="{Binding PhotoPath}"
                            Aspect="AspectFill"
                            Opacity="1.1"
@@ -112,6 +110,7 @@
                                    Style="{StaticResource DetailLabel}" 
                                    TextColor="{StaticResource DetailsTextColor}"
                                    HorizontalOptions="End" />
+
 
                             <Label Grid.Row="6" Grid.Column="0" 
                                    Text="City:" 

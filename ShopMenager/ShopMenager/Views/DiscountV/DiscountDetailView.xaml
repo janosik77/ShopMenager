@@ -96,7 +96,7 @@
                     Command="{Binding DeleteCommand}"
                     CommandParameter="{Binding DiscountID}" />
             <Button Text="Back to List"
-                    Command="{Binding BackCommand}" />
+                    Command="{Binding CancelCommand}" />
         </StackLayout>
     </Grid>
 </ContentPage>

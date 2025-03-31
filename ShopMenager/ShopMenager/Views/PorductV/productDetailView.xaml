@@ -134,7 +134,7 @@
                     Command="{Binding DeleteCommand}"
                     CommandParameter="{Binding ProductID}" />
             <Button Text="Back to List"
-                    Command="{Binding BackCommand}" />
+                    Command="{Binding CancelCommand}" />
         </StackLayout>
     </Grid>
 </ContentPage>

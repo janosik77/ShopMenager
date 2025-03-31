@@ -5,7 +5,7 @@
         public int PaymentID { get; set; }
         public int OrderID { get; set; }
         public int CustomerID { get; set; }
-        public required string CustomerName { get; set; }
+        public string? CustomerName { get; set; }
         public DateTime PaymentDate { get; set; }
         public decimal Amount { get; set; }
         public string? PaymentMethodName { get; set; }

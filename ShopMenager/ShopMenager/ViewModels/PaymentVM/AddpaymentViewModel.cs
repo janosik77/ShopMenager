@@ -1,23 +1,56 @@
-﻿using ShopMenager.Services.ApiService;
+﻿using ShopMenager.BuissnesLogic;
+using ShopMenager.Helpers;
+using ShopMenager.Services.ApiService;
 using ShopMenager.ViewModels.Abstract;
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ShopMenager.ViewModels.PaymentVM
 {
     public class AddpaymentViewModel : AAddItemViewModel<PaymentDto>
     {
-        public AddpaymentViewModel(IDataStore<PaymentDto> itemService) : base(itemService, "Create Payment")
+        private IDataStore<PaymentMethods> _paymentMethodDataStore;
+        private IDataStore<OrderDto> _orderDataStore;
+        public AddpaymentViewModel(IDataStore<PaymentDto> itemService,
+            IDataStore<OrderDto> orderDataStore,
+            IDataStore<PaymentMethods> paymentMethodService) : base(itemService, "Create Payment")
         {
+            _paymentMethodDataStore = paymentMethodService;
+            _orderDataStore = orderDataStore;
             PaymentDate = DateTime.Now;
         }
 
         #region Properties
-
-        private int _orderID;
-        public int OrderID
+        //Select Props
+        private List<KeyValueItem> _order;
+        private List<KeyValueItem> _paymentMethods;
+        
+        public List<KeyValueItem> Order
         {
-            get => _orderID;
-            set => SetProperty(ref _orderID, value);
+            get => _order;
+            set => SetProperty(ref _order, value);
+        }
+        public List<KeyValueItem> PaymentMethods
+        {
+            get => _paymentMethods;
+            set => SetProperty(ref _paymentMethods, value);
+        }
+
+
+
+        private KeyValueItem _selectedPaymentMethod;
+        public KeyValueItem SelectedPaymentMethod
+        {
+            get => _selectedPaymentMethod;
+            set => SetProperty(ref _selectedPaymentMethod, value);
+        }
+
+        private KeyValueItem _selectedorder;
+        public KeyValueItem SelectedOrder
+        {
+            get => _selectedorder;
+            set => SetProperty(ref _selectedorder, value);
         }
 
         private DateTime _paymentDate;
@@ -34,37 +67,26 @@ namespace ShopMenager.ViewModels.PaymentVM
             set => SetProperty(ref _amount, value);
         }
 
-        private PaymentMethods _paymentMethod;
-        public PaymentMethods PaymentMethod
-        {
-            get => _paymentMethod;
-            set => SetProperty(ref _paymentMethod, value);
-        }
-
-        private PaymentStatuses _paymentStatus;
-        public PaymentStatuses PaymentStatus
-        {
-            get => _paymentStatus;
-            set => SetProperty(ref _paymentStatus, value);
-        }
 
         #endregion
 
         public override PaymentDto SetItem() => new PaymentDto
         {
-            //OrderID = OrderID,
-            //CustomerID = CustomerID,
-            //Amount = Amount,
-            //CustomerName = CustomerName,
-            //PaymentDate = PaymentDate,
-            //PaymentMethodName = PaymentMethodName,
-            //PaymentMethodID = PaymentMethodID
+            OrderID = SelectedOrder.Key,
+            Amount = Amount,
+            PaymentDate = PaymentDate,
+            PaymentMethodID = SelectedPaymentMethod.Key
         };
 
         public override bool ValidateSave()
         {
-            // Przykład
-            return OrderID > 0 && Amount > 0;
+            if (SelectedOrder == null ) return false;
+                return SelectedOrder.Key > 0 && Amount > 0;
+        }
+        public override async Task OnAppearingAsync()
+        {
+            Order = await DataStoreEntities.GetOrderKeyValueItemsAsync(_orderDataStore);
+            PaymentMethods = await DataStoreEntities.GetpaymentMethodKeyValueItemsAsync(_paymentMethodDataStore);
         }
     }
 }

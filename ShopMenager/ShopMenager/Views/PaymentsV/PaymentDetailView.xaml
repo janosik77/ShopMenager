@@ -119,7 +119,7 @@
                     Command="{Binding DeleteCommand}"
                     CommandParameter="{Binding PaymentID}" />
             <Button Text="Back to List"
-                    Command="{Binding BackCommand}" />
+                    Command="{Binding CancelCommand}" />
         </StackLayout>
     </Grid>
 </ContentPage>

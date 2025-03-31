@@ -1,7 +1,6 @@
 ﻿using ShopMenager.Services.ApiService.Abstract;
 using System;
-using System.Collections.Generic;
-
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -11,11 +10,11 @@ namespace ShopMenager.Services.ApiService
     {
         public PaymentMethodsDataStore()
         {
-            //items = DependencyService.Get<OrderService>()
-            //                         ()
-            //                         .GetAwaiter()
-            //                         .GetResult()
-            //                         .ToList();
+            items = DependencyService.Get<OrderService>()
+                                     .PaymentMethodAllAsync()
+                                     .GetAwaiter()
+                                     .GetResult()
+                                     .ToList();
 
         }
 
@@ -39,41 +38,14 @@ namespace ShopMenager.Services.ApiService
             throw new NotImplementedException();
         }
 
-        public override Task Refresh()
-        {
-            throw new NotImplementedException();
-        }
+        public override async Task Refresh() => items = (await DependencyService.Get<OrderService>()
+                                                  .PaymentMethodAllAsync())
+                                                  .ToList();
+
 
         public override Task<bool> UpdateItemInService(PaymentMethods item)
         {
             throw new NotImplementedException();
         }
-
-        //public override async Task<bool> AddItemToService(CategoryDto item)
-        //    => await DependencyService.Get<OrderService>()
-        //                             .CategoryPOSTAsync(item)
-        //                             .HandleRequest();
-
-        //public override Task<bool> DeleteItemFromService(CategoryDto item)
-        //    => DependencyService.Get<OrderService>()
-        //                       .CategoryDELETEAsync(item.CategoryID)
-        //                       .HandleRequest();
-
-        //public override CategoryDto Find(CategoryDto item)
-        //    => items.FirstOrDefault(c => c.CategoryID == item.CategoryID);
-
-        //public override CategoryDto Find(int id)
-        //    => items.FirstOrDefault(s => s.CategoryID == id);
-
-        //public override async Task Refresh()
-        //    => items = (await DependencyService.Get<OrderService>()
-        //                                      .CategoryAllAsync())
-        //                                      .ToList();
-
-        //public override async Task<bool> UpdateItemInService(CategoryDto item)
-        //    => await DependencyService.Get<OrderService>()
-        //                             .CategoryPUTAsync(item.CategoryID, item)
-        //                             .HandleRequest();
     }
-}
 }
