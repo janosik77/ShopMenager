@@ -168,9 +168,9 @@ namespace RestApiShopmenager.Controllers
             return _context.Orders.Any(e => e.OrderId == id);
         }
 
-        // ─────────────────────────────────────────────────────────
+ 
         // MAPOWANIE encji -> DTO
-        // ─────────────────────────────────────────────────────────
+       
 
         private OrderDto MapOrderToDto(Orders order)
         {

@@ -10,6 +10,7 @@ namespace ShopMenager.BuissnesLogic
     {
         //Lista przechowująca produkty odzwierciedlające baze
         public static List<ProductDto> DataStoreProducts { get; set; }
+
         public static async Task<List<KeyValueItem>> GetCustomerKeyValueItemsAsync(IDataStore<CustomerDto> customerDataStore)
         {
             var customers = await customerDataStore.GetItemsAsync();
@@ -48,6 +49,18 @@ namespace ShopMenager.BuissnesLogic
         }
 
         public static async Task<List<KeyValueItem>> GetDiscountKeyValueItemsAsync(IDataStore<Discounts> discountsDataStore)
+        {
+            var discount = await discountsDataStore.GetItemsAsync();
+            var discountKeyValueItems = discount.Select(c => new KeyValueItem
+            {
+                Key = c.DiscountId,
+                Value = c.DiscountName
+            }).ToList();
+
+            return new List<KeyValueItem>(discountKeyValueItems);
+        }
+
+        public static async Task<List<KeyValueItem>> GetpaymentMethodKeyValueItemsAsync(IDataStore<Discounts> discountsDataStore)
         {
             var discount = await discountsDataStore.GetItemsAsync();
             var discountKeyValueItems = discount.Select(c => new KeyValueItem

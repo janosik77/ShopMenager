@@ -1,43 +1,85 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ShopMenager.Views.PaymentsV.AddPaymentView"
-             >
-    
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ShopMenager.Views.PaymentsV.AddPaymentView"
+    BackgroundColor="{StaticResource Primary}"
+    Title="{Binding Title}">
+
     <ContentPage.Content>
-        <ScrollView>
-            <StackLayout Padding="20" Spacing="15">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-                <Label Text="Create Order"
-                       FontSize="Large"
-                       HorizontalOptions="Center" />
+            <ScrollView Grid.Row="0">
+                <StackLayout Padding="20" Spacing="15">
+                    <StackLayout Spacing="10" Margin="0,15">
+                        <Label Text="Customer" 
+                               Style="{StaticResource DetailLabel}" />
+                        <Frame Style="{StaticResource SearchFrame}">
+                            <Picker Title="Select Customer"
+                                    ItemsSource="{Binding Customers}"
+                                    SelectedItem="{Binding SelectedCustomer}"
+                                    ItemDisplayBinding="{Binding Name}"
+                                    Style="{StaticResource SearchEntryStyle}" />
+                        </Frame>
 
-                <StackLayout Spacing="10">
+                        <Label Text="Employee" 
+                               Style="{StaticResource DetailLabel}" />
+                        <Frame Style="{StaticResource SearchFrame}">
+                            <Picker Title="Select Employee"
+                                    ItemsSource="{Binding Employees}"
+                                    SelectedItem="{Binding SelectedEmployee}"
+                                    ItemDisplayBinding="{Binding FullName}"
+                                    Style="{StaticResource SearchEntryStyle}" />
+                        </Frame>
 
-                    <Label Text="Customer ID" />
-                    <Entry Placeholder="Enter customer ID"
-                           Keyboard="Numeric"
-                           Text="{Binding CustomerID}" />
+                        <Label Text="Status" 
+                               Style="{StaticResource DetailLabel}" />
+                        <Frame Style="{StaticResource SearchFrame}">
+                            <Picker Title="Select Payment Status"
+                                    ItemsSource="{Binding PaymentStatuses}"
+                                    SelectedItem="{Binding SelectedStatus}"
+                                    Style="{StaticResource SearchEntryStyle}" />
+                        </Frame>
 
-                    <Label Text="Employee ID" />
-                    <Entry Placeholder="Enter employee ID"
-                           Keyboard="Numeric"
-                           Text="{Binding EmployeeID}" />
+                        <Label Text="Payment Method" 
+                               Style="{StaticResource DetailLabel}" />
+                        <Frame Style="{StaticResource SearchFrame}">
+                            <Picker Title="Select Payment Method"
+                                    ItemsSource="{Binding PaymentMethods}"
+                                    SelectedItem="{Binding SelectedPaymentMethod}"
+                                    ItemDisplayBinding="{Binding MethodName}"
+                                    Style="{StaticResource SearchEntryStyle}" />
+                        </Frame>
 
-                    <Label Text="Order Date" />
-                    <DatePicker Date="{Binding OrderDate}" />
-
-                    <Label Text="Status" />
-                    <Entry Placeholder="Enter status"
-                           Text="{Binding Status}" />
-
-                    <Button Text="Create"
-                            Command="{Binding SaveCommand}" />
+                        <Label Text="Payment Date" 
+                               Style="{StaticResource DetailLabel}" />
+                        <Frame Style="{StaticResource SearchFrame}">
+                            <DatePicker Date="{Binding PaymentDate}"
+                                        Style="{StaticResource SearchEntryStyle}" />
+                        </Frame>
+                        
+                        <Label Text="Amount" 
+                               Style="{StaticResource DetailLabel}" />
+                        <Frame Style="{StaticResource SearchFrame}">
+                            <Entry Placeholder="Enter amount"
+                                   Keyboard="Numeric"
+                                   Text="{Binding Amount}"
+                                   Style="{StaticResource SearchEntryStyle}" />
+                        </Frame>
+                    </StackLayout>
                 </StackLayout>
+            </ScrollView>
 
+            <StackLayout Grid.Row="1" Padding="20" Spacing="15">
+                <Button Text="Create"
+                        Command="{Binding SaveCommand}" />
                 <Button Text="Back to List"
                         Command="{Binding CancelCommand}" />
             </StackLayout>
-        </ScrollView>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
