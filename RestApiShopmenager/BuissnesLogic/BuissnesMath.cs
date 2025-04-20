@@ -6,5 +6,6 @@
         {
             return quantity * price*(1-discount/100);
         }
+
     }
 }

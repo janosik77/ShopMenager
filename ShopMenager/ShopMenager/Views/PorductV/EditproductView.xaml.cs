@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ShopMenager.ViewModels.ProductVM;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -10,11 +6,12 @@ using Xamarin.Forms.Xaml;
 namespace ShopMenager.Views.PorductV
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class EditproductView : ContentPage
+	public partial class EditProductView : ContentPage
 	{
-		public EditproductView ()
+		public EditProductView()
 		{
-			InitializeComponent ();
-		}
+			InitializeComponent();
+            BindingContext = App.Services.GetService<EditProductViewModel>();
+        }
 	}
 }

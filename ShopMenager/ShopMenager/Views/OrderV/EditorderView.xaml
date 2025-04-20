@@ -1,40 +1,74 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ShopMenager.Views.OrderV.EditorderView"
-             >
-    
-    <ContentPage.Content>
-        <ScrollView>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ShopMenager.Views.OrderV.EditorderView"
+    BackgroundColor="{StaticResource Primary}"
+    Title="{Binding Title}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ScrollView Grid.Row="0">
             <StackLayout Padding="20" Spacing="15">
 
                 <Label Text="Edit Order"
-               FontSize="Large"
-               HorizontalOptions="Center" />
+                       Style="{StaticResource DetailLabel}"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       Margin="0,0,0,10"/>
 
-                <StackLayout Spacing="10">
+                <Label Text="Customer ID:" 
+                       Style="{StaticResource DetailLabel}" />
+                <Frame Style="{StaticResource SearchFrame}">
+                    <Entry
+                        Placeholder="Enter customer ID"
+                        Keyboard="Numeric"
+                        Text="{Binding CustomerID, Mode=TwoWay}"
+                        Style="{StaticResource SearchEntryStyle}" />
+                </Frame>
 
-                    <Label Text="Customer ID" />
-                    <Entry Keyboard="Numeric"
-                   Text="{Binding CustomerID}" />
+                <Label Text="Employee ID:" 
+                       Style="{StaticResource DetailLabel}" />
+                <Frame Style="{StaticResource SearchFrame}">
+                    <Entry
+                        Placeholder="Enter employee ID"
+                        Keyboard="Numeric"
+                        Text="{Binding EmployeeID, Mode=TwoWay}"
+                        Style="{StaticResource SearchEntryStyle}" />
+                </Frame>
 
-                    <Label Text="Employee ID" />
-                    <Entry Keyboard="Numeric"
-                   Text="{Binding EmployeeID}" />
+                <Label Text="Order Date:" 
+                       Style="{StaticResource DetailLabel}" />
+                <Frame Style="{StaticResource SearchFrame}">
+                    <DatePicker
+                        Date="{Binding OrderDate, Mode=TwoWay}"
+                        HorizontalOptions="FillAndExpand" />
+                </Frame>
 
-                    <Label Text="Order Date" />
-                    <DatePicker Date="{Binding OrderDate}" />
+                <Label Text="Status:" 
+                       Style="{StaticResource DetailLabel}" />
+                <Frame Style="{StaticResource SearchFrame}">
+                    <Entry
+                        Placeholder="Enter status"
+                        Text="{Binding Status, Mode=TwoWay}"
+                        Style="{StaticResource SearchEntryStyle}" />
+                </Frame>
 
-                    <Label Text="Status" />
-                    <Entry Text="{Binding Status}" />
-
-                    <Button Text="Update"
-                    Command="{Binding SaveCommand}" />
-                </StackLayout>
-
-                <Button Text="Back to List"
-                Command="{Binding CancelCommand}" />
             </StackLayout>
         </ScrollView>
-    </ContentPage.Content>
+
+        <StackLayout Grid.Row="1" Padding="20" Spacing="10">
+            <Button
+                Text="Save"
+                Command="{Binding SaveCommand}"/>
+            <Button
+                Text="Back to List"
+                Command="{Binding CancelCommand}"/>
+        </StackLayout>
+    </Grid>
 </ContentPage>

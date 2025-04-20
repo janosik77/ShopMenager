@@ -1,11 +1,6 @@
-﻿using ShopMenager.ViewModels;
-using ShopMenager.Views;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace ShopMenager.Services
 {

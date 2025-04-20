@@ -97,5 +97,26 @@
         <Setter Property="Background" Value="{StaticResource Clauds}"/>
     </Style>
 
+    <Style x:Key="HomeTile" TargetType="Frame">
+        <Setter Property="BackgroundColor" Value="#454645"/>
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="Margin" Value="0,5"/>
+        <Setter Property="CornerRadius" Value="15"/>
+        <Setter Property="HasShadow" Value="True"/>
+    </Style>
+
+    <Style x:Key="HomeTileTitle" TargetType="Label">
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="TextColor" Value="{StaticResource TextColor}"/>
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="16"/>
+    </Style>
+
+    <Style x:Key="HomeTileData" TargetType="Label">
+        <Setter Property="FontSize" Value="Large"/>
+        <Setter Property="TextColor" Value="{StaticResource SecondaryColor}"/>
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+    </Style>
+
 
 </ResourceDictionary>

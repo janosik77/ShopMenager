@@ -1,11 +1,4 @@
-﻿using ShopMenager.ViewModels.EmployeeVM;
-using ShopMenager.ViewModels.ProductVM;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using ShopMenager.ViewModels.ProductVM;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

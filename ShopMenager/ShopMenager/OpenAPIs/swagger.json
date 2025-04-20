@@ -745,6 +745,35 @@
         }
       }
     },
+    "/api/HomePage": {
+      "get": {
+        "tags": [
+          "HomePage"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/HomePageDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HomePageDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HomePageDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/OrderDetails": {
       "get": {
         "tags": [
@@ -1897,6 +1926,24 @@
   },
   "components": {
     "schemas": {
+      "BestCustomer": {
+        "type": "object",
+        "properties": {
+          "customerId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "totalOrderValue": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
       "Categories": {
         "type": "object",
         "properties": {
@@ -2216,6 +2263,55 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Reviews"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "HomePageDto": {
+        "type": "object",
+        "properties": {
+          "totalCustomers": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pendingOrders": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "canceledOrders": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "complitedOrders": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalIncome": {
+            "type": "number",
+            "format": "double"
+          },
+          "orderStatusCounts": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "paymentStatusSums": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "number",
+              "format": "double"
+            },
+            "nullable": true
+          },
+          "topCustomers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BestCustomer"
             },
             "nullable": true
           }

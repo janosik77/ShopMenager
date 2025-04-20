@@ -61,11 +61,11 @@ namespace ShopMenager.ViewModels.CategoryVM
             }
         }
 
-        protected override Task GoToUpdatePage()
-            => Shell.Current.GoToAsync($"{nameof(EditCategoryView)}?{nameof(EditCategoryViewModel.CategoryID)}={CategoryID}");
-        protected override Task GoToUpdatePage(CategoryDto item)
-        {
-            return null;
-        }
+        protected override async Task GoToUpdatePage()
+            => await Shell.Current
+            .GoToAsync($"{nameof(EditCategoryView)}?{nameof(EditCategoryViewModel.ItemId)}={CategoryID}");
+        protected override async Task GoToUpdatePage(CategoryDto item)
+         => await Shell.Current
+            .GoToAsync($"{nameof(EditCategoryView)}?{nameof(EditCategoryViewModel.ItemId)}={item.CategoryID}");
     }
 }

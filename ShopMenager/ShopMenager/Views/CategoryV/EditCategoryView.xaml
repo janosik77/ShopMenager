@@ -1,32 +1,48 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ShopMenager.Views.CategoryV.EditCategoryView"     
-             BackgroundColor="{StaticResource Primary}"
-             >
-    <ContentPage.Content>
-        <ScrollView>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ShopMenager.Views.CategoryV.EditCategoryView"
+    BackgroundColor="{StaticResource Primary}"
+    Title="{Binding Title}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ScrollView Grid.Row="0">
             <StackLayout Padding="20" Spacing="15">
 
-                <Label Text="Edit Category"
-                       FontSize="Large"
-                       HorizontalOptions="Center" />
+                <Label Text="Category Name:" Style="{StaticResource DetailLabel}" />
+                <Frame Style="{StaticResource SearchFrame}">
+                    <Entry
+                        Placeholder="Enter category name"
+                        Text="{Binding CategoryName, Mode=TwoWay}"
+                        Style="{StaticResource SearchEntryStyle}" />
+                </Frame>
 
-                <StackLayout Spacing="10">
+                <Label Text="Category Description:" Style="{StaticResource DetailLabel}" />
+                <Frame Style="{StaticResource SearchFrame}"
+                       HeightRequest="150">
+                    <Editor Placeholder="Enter category description"
+                            Text="{Binding CategoryDescription, Mode=TwoWay}"
+                            AutoSize="TextChanges"
+                            HeightRequest="150"
+                            Style="{StaticResource SearchEntryStyle}" />
+                </Frame>
 
-                    <Label Text="Category Name" />
-                    <Entry Text="{Binding CategoryName}" />
-
-                    <Label Text="Category Description" />
-                    <Entry Text="{Binding CategoryDescription}" />
-
-                    <Button Text="Update"
-                            Command="{Binding SaveCommand}" />
-                </StackLayout>
-
-                <Button Text="Back to List"
-                        Command="{Binding CancelCommand}" />
             </StackLayout>
         </ScrollView>
-    </ContentPage.Content>
+
+        <StackLayout Grid.Row="1" Padding="20" Spacing="10">
+            <Button
+                Text="Save"
+                Command="{Binding SaveCommand}"/>
+            <Button
+                Text="Back to List"
+                Command="{Binding CancelCommand}"/>
+        </StackLayout>
+    </Grid>
 </ContentPage>

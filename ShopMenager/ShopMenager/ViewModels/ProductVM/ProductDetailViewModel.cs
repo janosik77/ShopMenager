@@ -97,11 +97,10 @@ namespace ShopMenager.ViewModels.ProductVM
             }
         }
 
-        protected override Task GoToUpdatePage()
-            => Shell.Current.GoToAsync($"{nameof(EditproductView)}?{nameof(EditProductViewModel.ProductID)}={ProductID}");
-        protected override Task GoToUpdatePage(ProductDto item)
-        {
-            return null;
-        }
+        protected override async Task GoToUpdatePage()
+            => await Shell.Current.GoToAsync($"{nameof(EditProductView)}?{nameof(EditProductViewModel.ItemId)}={ProductID}");
+        protected override async Task GoToUpdatePage(ProductDto item)
+        => await Shell.Current
+            .GoToAsync($"{nameof(EditProductView)}?{nameof(EditProductViewModel.ItemId)}={item.ProductID}");
     }
 }

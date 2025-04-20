@@ -8,6 +8,7 @@ using ShopMenager.Views.OrderV;
 using ShopMenager.Views.PaymentsV;
 using ShopMenager.Views.PorductV;
 using ShopMenager.Views.ReviewV;
+using ShopMenager.Views;
 
 namespace ShopMenager
 {
@@ -44,12 +45,14 @@ namespace ShopMenager
             Routing.RegisterRoute(nameof(PaymentDetailView), typeof(PaymentDetailView));
 
             Routing.RegisterRoute(nameof(AddProductView), typeof(AddProductView));
-            Routing.RegisterRoute(nameof(EditproductView), typeof(EditproductView));
+            Routing.RegisterRoute(nameof(EditProductView), typeof(EditProductView));
             Routing.RegisterRoute(nameof(productDetailView), typeof(productDetailView));
             
             Routing.RegisterRoute(nameof(AddReviewView), typeof(AddReviewView));
             Routing.RegisterRoute(nameof(EditReviewView), typeof(EditReviewView));
             Routing.RegisterRoute(nameof(ReviewdetailView), typeof(ReviewdetailView));
+
+            Routing.RegisterRoute(nameof(HomePage), typeof(HomePage));
 
 
 

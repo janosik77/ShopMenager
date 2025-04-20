@@ -1,5 +1,7 @@
 ﻿using ShopMenager.Services.ApiService;
 using ShopMenager.ViewModels.Abstract;
+using ShopMenager.ViewModels.CustomerVM;
+using ShopMenager.Views.CustomerV;
 using ShopMenager.Views.EmployeeV;
 using System;
 using System.Threading.Tasks;
@@ -97,11 +99,12 @@ namespace ShopMenager.ViewModels.EmployeeVM
             }
         }
 
-        protected override Task GoToUpdatePage()
-            => Shell.Current.GoToAsync($"{nameof(EditEmployeeView)}?{nameof(EditEmployeeViewModel.EmployeeID)}={EmployeeID}");
-        protected override Task GoToUpdatePage(EmployeeDto item)
-        {
-            return null;
-        }
+        protected override async Task GoToUpdatePage(EmployeeDto item)
+            => await Shell.Current
+            .GoToAsync($"{nameof(EditEmployeeView)}?{nameof(EditEmployeeViewModel.ItemId)}={item.EmployeeID}");
+        protected override async Task GoToUpdatePage()
+            => await Shell.Current
+            .GoToAsync($"{nameof(EditEmployeeView)}?{nameof(EditEmployeeViewModel.ItemId)}={EmployeeID}");
+        
     }
 }

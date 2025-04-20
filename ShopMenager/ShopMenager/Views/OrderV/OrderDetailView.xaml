@@ -190,7 +190,7 @@
 
         <StackLayout Grid.Row="1" Padding="20" Spacing="15">
             <Button Text="Edit"
-                    Command="{Binding EditCommand}"
+                    Command="{Binding UpdateCommand}"
                     CommandParameter="{Binding OrderID}" />
             <Button Text="Delete"
                     Command="{Binding DeleteCommand}"

@@ -44,7 +44,6 @@
                     VerticalOptions="Center" />
         </Grid>
 
-        <!-- RefreshView opakowuje CollectionView -->
         <RefreshView
             x:Name="OrderDetailsRefreshView"
             VerticalOptions="FillAndExpand"
@@ -63,7 +62,6 @@
                                Margin="0,5"
                                HasShadow="True">
 
-                            <!-- TapGestureRecognizer do obsługi kliknięcia -->
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer
                                     NumberOfTapsRequired="1"
@@ -78,7 +76,6 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
-                                <!-- Ikona / obrazek (opcjonalnie) -->
                                 <Image Source="{Binding Icon}"
                                        WidthRequest="60"
                                        HeightRequest="60"
@@ -88,7 +85,6 @@
                                        Grid.Column="0"
                                        BackgroundColor="#E0E0E0" />
 
-                                <!-- OrderDetail Info -->
                                 <StackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
                                     <Label Text="{Binding OrderDetailsId, StringFormat='ID: {0}'}"
                                            FontAttributes="Bold"
@@ -117,7 +113,6 @@
             </CollectionView>
         </RefreshView>
 
-        <!-- Add OrderDetail Button -->
         <Button Text="＋ Add Order Detail"
                 BackgroundColor="#2196F3"
                 TextColor="White"

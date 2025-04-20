@@ -109,11 +109,11 @@ namespace ShopMenager.ViewModels.PaymentVM
             }
         }
 
-        protected override Task GoToUpdatePage()
-            => Shell.Current.GoToAsync($"{nameof(EditPaymentView)}?{nameof(EditPaymentViewModel.PaymentID)}={PaymentID}");
-        protected override Task GoToUpdatePage(PaymentDto item)
-        {
-            return null;
-        }
+        protected override async Task GoToUpdatePage()
+            => await Shell.Current
+            .GoToAsync($"{nameof(EditPaymentView)}?{nameof(EditPaymentViewModel.ItemId)}={PaymentID}");
+        protected override async Task GoToUpdatePage(PaymentDto item)
+            => await Shell.Current
+            .GoToAsync($"{nameof(EditPaymentView)}?{nameof(EditPaymentViewModel.ItemId)}={item.PaymentID}");
     }
 }

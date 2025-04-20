@@ -13,7 +13,7 @@ namespace RestApiShopmenager.Controllers
         private readonly CompanyContext _context;
 
         public CategoryController(CompanyContext context)
-        {
+        { 
             _context = context;
         }
 

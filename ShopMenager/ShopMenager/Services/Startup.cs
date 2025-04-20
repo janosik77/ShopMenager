@@ -71,6 +71,7 @@ namespace ShopMenager.Services
             services.AddSingleton<IDataStore<CustomerDto>, CustomerDataStore>();
             services.AddSingleton<IDataStore<ProductDto>, ProductDataStore>();
             services.AddSingleton<IDataStore<PaymentMethods>, PaymentMethodsDataStore>();
+            services.AddSingleton<IDataStore<HomePageDto>, HomePageDataStore>();
 
             services.AddSingleton<INavigationService, NavigationService>();
             return services.BuildServiceProvider();

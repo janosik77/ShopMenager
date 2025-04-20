@@ -1,49 +1,83 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ShopMenager.Views.PorductV.EditproductView"
-             >
-    
-    <ContentPage.Content>
-        <ScrollView>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ShopMenager.Views.PorductV.EditProductView"
+    BackgroundColor="{StaticResource Primary}"
+    Title="{Binding Title}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ScrollView Grid.Row="0">
             <StackLayout Padding="20" Spacing="15">
 
-                <Label Text="Edit Product"
-                       FontSize="Large"
-                       HorizontalOptions="Center" />
+                <Label Text="Category ID:" Style="{StaticResource DetailLabel}" />
+                <Frame Style="{StaticResource SearchFrame}">
+                    <Entry
+                        Placeholder="Enter category ID"
+                        Keyboard="Numeric"
+                        Text="{Binding CategoryID, Mode=TwoWay}"
+                        Style="{StaticResource SearchEntryStyle}" />
+                </Frame>
 
-                <StackLayout Spacing="10">
+                <Label Text="Product Name:" Style="{StaticResource DetailLabel}" />
+                <Frame Style="{StaticResource SearchFrame}">
+                    <Entry
+                        Placeholder="Enter product name"
+                        Text="{Binding ProductName, Mode=TwoWay}"
+                        Style="{StaticResource SearchEntryStyle}" />
+                </Frame>
 
-                    <Label Text="Category ID" />
-                    <Entry Keyboard="Numeric"
-                           Text="{Binding CategoryID}" />
+                <Label Text="Price:" Style="{StaticResource DetailLabel}" />
+                <Frame Style="{StaticResource SearchFrame}">
+                    <Entry
+                        Placeholder="Enter price"
+                        Keyboard="Numeric"
+                        Text="{Binding Price, Mode=TwoWay}"
+                        Style="{StaticResource SearchEntryStyle}" />
+                </Frame>
 
-                    <Label Text="Product Name" />
-                    <Entry Text="{Binding ProductName}" />
+                <Label Text="Stock:" Style="{StaticResource DetailLabel}" />
+                <Frame Style="{StaticResource SearchFrame}">
+                    <Entry
+                        Placeholder="Enter stock quantity"
+                        Keyboard="Numeric"
+                        Text="{Binding Stock, Mode=TwoWay}"
+                        Style="{StaticResource SearchEntryStyle}" />
+                </Frame>
 
-                    <Label Text="Price" />
-                    <Entry Keyboard="Numeric"
-                           Text="{Binding Price}" />
+                <Label Text="Description:" Style="{StaticResource DetailLabel}" />
+                <Frame Style="{StaticResource SearchFrame}">
+                    <Editor
+                        Placeholder="Enter description"
+                        Text="{Binding Description, Mode=TwoWay}"
+                        AutoSize="TextChanges"
+                        HeightRequest="100"
+                        Margin="10,0" />
+                </Frame>
 
-                    <Label Text="Stock" />
-                    <Entry Keyboard="Numeric"
-                           Text="{Binding Stock}" />
+                <Label Text="Photo Path:" Style="{StaticResource DetailLabel}" />
+                <Frame Style="{StaticResource SearchFrame}">
+                    <Entry
+                        Placeholder="Enter photo path"
+                        Text="{Binding PhotoPath, Mode=TwoWay}"
+                        Style="{StaticResource SearchEntryStyle}" />
+                </Frame>
 
-                    <Label Text="Description" />
-                    <Editor Text="{Binding Description}"
-                            AutoSize="TextChanges"
-                            HeightRequest="100" />
-
-                    <Label Text="Photo Path" />
-                    <Entry Text="{Binding PhotoPath}" />
-
-                    <Button Text="Update"
-                            Command="{Binding SaveCommand}" />
-                </StackLayout>
-
-                <Button Text="Back to List"
-                        Command="{Binding CancelCommand}" />
             </StackLayout>
         </ScrollView>
-    </ContentPage.Content>
+
+        <StackLayout Grid.Row="1" Padding="20" Spacing="10" Orientation="Vertical">
+            <Button
+                Text="Save"
+                Command="{Binding SaveCommand}"/>
+            <Button
+                Text="Back to List"
+                Command="{Binding CancelCommand}" />
+        </StackLayout>
+    </Grid>
 </ContentPage>

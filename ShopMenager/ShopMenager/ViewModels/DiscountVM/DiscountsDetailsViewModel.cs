@@ -73,11 +73,11 @@ namespace ShopMenager.ViewModels.DiscountVM
             }
         }
 
-        protected override Task GoToUpdatePage()
-            => Shell.Current.GoToAsync($"{nameof(EditDiscountView)}?{nameof(EditDiscountsViewModel.DiscountID)}={DiscountID}");
-        protected override Task GoToUpdatePage(Discounts item)
-        {
-            return null;
-        }
+        protected override async Task GoToUpdatePage()
+            => await Shell.Current
+            .GoToAsync($"{nameof(EditDiscountView)}?{nameof(EditDiscountsViewModel.ItemId)}={DiscountID}");
+        protected override async Task GoToUpdatePage(Discounts item)
+        => await Shell.Current
+            .GoToAsync($"{nameof(EditDiscountView)}?{nameof(EditDiscountsViewModel.ItemId)}={item.DiscountId}");
     }
 }

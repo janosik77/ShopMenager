@@ -1,8 +1,162 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:micro="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              x:Class="ShopMenager.Views.HomePage"
              BackgroundColor="{StaticResource Primary}"
              Title="{Binding Title}">
-    
+
+    <ScrollView>
+        <StackLayout Padding="15" Spacing="20">
+
+            <Label Text="Dashboard"
+                   FontAttributes="Bold"
+                   FontSize="Medium"
+                   TextColor="{StaticResource TextColor}"/>
+
+            <Grid ColumnSpacing="10" RowSpacing="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Frame Grid.Row="0" Grid.ColumnSpan="3" Padding="10" HasShadow="True"
+                       Style="{StaticResource HomeTile}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Text="Total Income" Style="{StaticResource HomeTileTitle}"/>
+                        <Label Grid.Row="1" Text="{Binding TotalIncome, StringFormat='${0:N2}'}"
+                               Style="{StaticResource HomeTileData}"
+                               FontSize="28"
+                               TextColor="{StaticResource MainButtons}"/>
+                    </Grid>
+                </Frame>
+
+                <Frame Grid.Row="1" Grid.Column="0" Padding="10" HasShadow="True"
+                       Style="{StaticResource HomeTile}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Text="Completed Orders" Style="{StaticResource HomeTileTitle}"/>
+                        <Label Grid.Row="1" Text="{Binding ComplitedOrders}" Style="{StaticResource HomeTileData}"/>
+                    </Grid>
+                </Frame>
+
+                <Frame Grid.Row="1" Grid.Column="1" Padding="10" HasShadow="True"
+                       Style="{StaticResource HomeTile}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Text="Pending Orders" Style="{StaticResource HomeTileTitle}"/>
+                        <Label Grid.Row="1" Text="{Binding PendingOrders}" Style="{StaticResource HomeTileData}"/>
+                    </Grid>
+                </Frame>
+
+                <Frame Grid.Row="1" Grid.Column="2" Padding="10" HasShadow="True"
+                       Style="{StaticResource HomeTile}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Text="Canceled Orders" Style="{StaticResource HomeTileTitle}"/>
+                        <Label Grid.Row="1" Text="{Binding CanceledOrders}" Style="{StaticResource HomeTileData}"/>
+                    </Grid>
+                </Frame>
+
+                <Frame Grid.Row="2" Grid.ColumnSpan="3" Padding="10" HasShadow="True"
+                       Style="{StaticResource HomeTile}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Text="Total Orders" Style="{StaticResource HomeTileTitle}"/>
+                        <Label Grid.Row="1" Text="{Binding TotalOrders}" Style="{StaticResource HomeTileData}"/>
+                    </Grid>
+                </Frame>
+
+            </Grid>
+
+            <Label Text="Customers"
+                   FontAttributes="Bold"
+                   FontSize="Medium"
+                   TextColor="{StaticResource TextColor}"/>
+
+            <Frame Grid.Row="2" Grid.Column="0" Padding="10" HasShadow="True"
+                       Style="{StaticResource HomeTile}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Text="Total Customers" Style="{StaticResource HomeTileTitle}"/>
+                    <Label Grid.Row="1" Text="{Binding TotalCustomers}" Style="{StaticResource HomeTileData}"/>
+                </Grid>
+            </Frame>
+
+            <Label Text="Top 3 Customers"
+                   FontAttributes="Bold"
+                   FontSize="Medium"
+                   TextColor="{StaticResource TextColor}"/>
+
+            <CollectionView ItemsSource="{Binding TopCustomers}"
+                            HeightRequest="180">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BackgroundColor="{StaticResource Primary}"
+                               Margin="0" Padding="2">
+                            <Frame Style="{StaticResource HomeTile}"
+                                   Padding="5">
+                                <Grid Margin="0" Padding="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Style="{StaticResource HomeTileTitle}"
+                                           VerticalTextAlignment="Center"
+                                           Grid.Column="0" Text="{Binding Name}"
+                                           FontSize="20"/>
+                                    <Label Style="{StaticResource HomeTileData}" 
+                                           Grid.Column="1" 
+                                           Text="{Binding TotalOrderValue, StringFormat='${0:N2}'}"
+                                           TextColor="{StaticResource MainButtons}"                                         
+                                           VerticalTextAlignment="Center"/>
+                                </Grid>
+                            </Frame>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Label Text="Orders by Status"
+                   FontAttributes="Bold"
+                   FontSize="Medium"
+                   TextColor="{StaticResource TextColor}"/>
+
+            <micro:ChartView Chart="{Binding OrdersStatusChart}"
+                             HeightRequest="200"/>
+
+            <Label Text="Payments Last Month"
+                   FontAttributes="Bold"
+                   FontSize="Medium"
+                   TextColor="{StaticResource TextColor}"/>
+
+            <micro:ChartView Chart="{Binding PaymentsChart}"
+                             HeightRequest="300"/>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using ShopMenager.ViewModels.OrderVM;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,6 +10,7 @@ namespace ShopMenager.Views.OrderV
 		public EditorderView ()
 		{
 			InitializeComponent ();
-		}
+            BindingContext = App.Services.GetService<EditOrderViewModel>();
+        }
 	}
 }

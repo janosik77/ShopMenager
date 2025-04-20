@@ -1,47 +1,73 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ShopMenager.Views.PaymentsV.EditPaymentView"
-             >
-    
-    <ContentPage.Content>
-        <ScrollView>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ShopMenager.Views.PaymentsV.EditPaymentView"
+    BackgroundColor="{StaticResource Primary}"
+    Title="{Binding Title}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ScrollView Grid.Row="0">
             <StackLayout Padding="20" Spacing="15">
 
-                <Label Text="Edit Payment"
-                       FontSize="Large"
-                       HorizontalOptions="Center" />
+                <Label Text="Order ID:" Style="{StaticResource DetailLabel}" />
+                <Frame Style="{StaticResource SearchFrame}">
+                    <Entry
+                        Placeholder="Enter order ID"
+                        Keyboard="Numeric"
+                        Text="{Binding OrderID, Mode=TwoWay}"
+                        Style="{StaticResource SearchEntryStyle}" />
+                </Frame>
 
-                <StackLayout Spacing="10">
+                <Label Text="Payment Date:" Style="{StaticResource DetailLabel}" />
+                <Frame Style="{StaticResource SearchFrame}">
+                    <DatePicker
+                        Date="{Binding PaymentDate, Mode=TwoWay}"
+                        HorizontalOptions="FillAndExpand" />
+                </Frame>
 
-                    <Label Text="Order ID" />
-                    <Entry Placeholder="Enter order ID"
-                           Keyboard="Numeric"
-                           Text="{Binding OrderID}" />
+                <Label Text="Amount:" Style="{StaticResource DetailLabel}" />
+                <Frame Style="{StaticResource SearchFrame}">
+                    <Entry
+                        Placeholder="Enter amount"
+                        Keyboard="Numeric"
+                        Text="{Binding Amount, Mode=TwoWay}"
+                        Style="{StaticResource SearchEntryStyle}" />
+                </Frame>
 
-                    <Label Text="Payment Date" />
-                    <DatePicker Date="{Binding PaymentDate}" />
+                <Label Text="Payment Method ID:" Style="{StaticResource DetailLabel}" />
+                <Frame Style="{StaticResource SearchFrame}">
+                    <Picker Title="Select product"
+                            ItemsSource="{Binding PaymentMethodName}"
+                            SelectedItem="{Binding SelectedProduct}"
+                            Style="{StaticResource PickerStyle}" />
+                    <Entry
+                        Placeholder="Enter payment method ID"
+                        Keyboard="Numeric"
+                        Text="{Binding PaymentMethodName, Mode=TwoWay}"
+                        Style="{StaticResource SearchEntryStyle}" />
+                </Frame>
 
-                    <Label Text="Amount" />
-                    <Entry Placeholder="Enter amount"
-                           Keyboard="Numeric"
-                           Text="{Binding Amount}" />
+                <Label Text="Payment Status ID:" Style="{StaticResource DetailLabel}" />
+                <Frame Style="{StaticResource SearchFrame}">
+                    <Entry
+                        Placeholder="Enter payment status ID"
+                        Keyboard="Numeric"
+                        Text="{Binding PaymentStatusID, Mode=TwoWay}"
+                        Style="{StaticResource SearchEntryStyle}" />
+                </Frame>
 
-                    <Label Text="Payment Method" />
-                    <Entry Placeholder="Enter payment method"
-                           Text="{Binding PaymentMethod}" />
-
-                    <Label Text="Payment Status" />
-                    <Entry Placeholder="Enter payment status"
-                           Text="{Binding PaymentStatus}" />
-
-                    <Button Text="Update"
-                            Command="{Binding SaveCommand}" />
-                </StackLayout>
-
-                <Button Text="Back to List"
-                        Command="{Binding CancelCommand}" />
             </StackLayout>
         </ScrollView>
-    </ContentPage.Content>
+
+        <StackLayout Grid.Row="1" Padding="20" Spacing="10">
+            <Button Text="Save" Command="{Binding SaveCommand}"/>
+            <Button Text="Back to List" Command="{Binding CancelCommand}"/>
+        </StackLayout>
+    </Grid>
 </ContentPage>

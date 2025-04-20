@@ -1,5 +1,6 @@
 
 using Microsoft.EntityFrameworkCore;
+using RestApiShopmenager.BuissnesLogic.Services;
 using RestApiShopmenager.Models.Contexts;
 
 namespace RestApiShopmenager
@@ -14,7 +15,7 @@ namespace RestApiShopmenager
                 ?? throw new InvalidOperationException("Connection string 'CompanyContext' not found.")));
 
             // Add services to the container.
-
+            builder.Services.AddScoped<IHomeService, HomeService>();
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
