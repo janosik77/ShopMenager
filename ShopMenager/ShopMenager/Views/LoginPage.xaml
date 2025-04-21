@@ -1,10 +1,87 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ShopMenager.Views.LoginPage">
-    <ContentPage.Content>
-        <StackLayout Padding="10,0,10,0" VerticalOptions="Center">
-            <Button VerticalOptions="Center" Text="Login" Command="{Binding LoginCommand}"/>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ShopMenager.Views.LoginPage"
+    BackgroundColor="{StaticResource Primary}"    
+    Title="ShopManager"
+    >
+    <NavigationPage.TitleView>
+        <Label 
+            Text="ShopManager"
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="Center"
+            TextColor="White"
+            FontAttributes="Bold"
+            FontSize="32"/>
+    </NavigationPage.TitleView>    
+    
+    <ScrollView>
+        <StackLayout 
+        Padding="30" 
+        Spacing="20" 
+        VerticalOptions="Center">
+
+            <Label Text="Welcome to Shop Manager" 
+                    FontSize="24" 
+                    TextColor="White"
+                    HorizontalOptions="Center"/>
+
+            <Frame Style="{StaticResource HomeTile}" 
+                   Padding="0" 
+                   HasShadow="True">
+                <Entry Placeholder="Username" 
+                       PlaceholderColor="LightGray"
+                       TextColor="White"
+                       Keyboard="Email"
+                       Margin="15,0"
+                       Text="{Binding UserName}"/>
+            </Frame>
+
+            <Frame Style="{StaticResource HomeTile}"
+                   Padding="0" 
+                   HasShadow="True">
+                <Entry Placeholder="Password" 
+                       Text="{Binding Password}"
+                       PlaceholderColor="LightGray"
+                       TextColor="White"
+                       IsPassword="True"
+                       Margin="15,0"/>
+            </Frame>
+
+            <Button Text="Log In" 
+                    Command="{Binding LoginCommand}"
+                    IsEnabled="{Binding IsNotBusy}"
+                    BackgroundColor="{StaticResource MainButtons}" 
+                    TextColor="{StaticResource Primary}"
+                    CornerRadius="25"
+                    HeightRequest="50"
+                    FontAttributes="Bold"/>
+            
+            
+            <ActivityIndicator IsRunning="{Binding IsBusy}"
+                         IsVisible="{Binding IsBusy}"
+                         HorizontalOptions="Center"/>
+
+            <StackLayout Orientation="Horizontal" 
+                         HorizontalOptions="Center" 
+                         Spacing="20">
+                <Label Text="Forgot password?" 
+                       TextColor="LightGray"
+                       FontSize="Small">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label Text="Sign up" 
+                       TextColor="{StaticResource MainButtons}"
+                       FontSize="Small">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SignupCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+
         </StackLayout>
-    </ContentPage.Content>
+    </ScrollView>
 </ContentPage>

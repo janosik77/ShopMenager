@@ -5,20 +5,37 @@ using ShopMenager.ViewModels.CustomerVM;
 using ShopMenager.ViewModels.DiscountVM;
 using ShopMenager.ViewModels.CategoryVM;
 using ShopMenager.ViewModels.EmployeeVM;
-using ShopMenager.ViewModels.OrderitemsVM;
 using ShopMenager.ViewModels.PaymentVM;
 using ShopMenager.ViewModels.ProductVM;
 using ShopMenager.ViewModels.ReviewsVM;
 using ShopMenager.Services.ApiService;
 using ShopMenager.ViewModels.OrderVM;
+using System.Net.Http;
+using ShopMenager.Services.Interfaces;
+using ShopMenager.Services.Auth;
+using Xamarin.Forms;
 
 namespace ShopMenager.Services
 {
     public class Startup
     {
-        public static IServiceProvider ConfigureService ()
+        public static IServiceProvider ConfigureService (HttpClientHandler handler)
         {
             var services = new ServiceCollection();
+
+            services.AddSingleton(sp =>
+            {
+                var client = new HttpClient(handler)
+                {
+                    BaseAddress = new Uri("https://10.0.2.2:7265/api/")
+                };
+                return client;
+            });
+
+            services.AddSingleton(sp =>
+                new OrderService("https://10.0.2.2:7265/api/", sp.GetRequiredService<HttpClient>()));
+            services.AddSingleton<IAuthService>(sp =>
+                new AuthService(sp.GetRequiredService<HttpClient>()));
 
             // services
             services.AddSingleton<CategoriesViewModel>();
@@ -30,6 +47,8 @@ namespace ShopMenager.Services
             services.AddSingleton<PaymentsViewModel>();
             services.AddSingleton<ProductViewModel>();
             services.AddSingleton<ReviewsViewModel>();
+            services.AddTransient<LoginViewModel>();
+            services.AddSingleton<AppShell>();
 
             //edit models
             services.AddTransient<EditCustomerViewModel>();

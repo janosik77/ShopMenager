@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace ShopMenager.Services
+namespace ShopMenager.Services.Interfaces
 {
     public interface INavigationService
     {

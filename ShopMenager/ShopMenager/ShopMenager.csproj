@@ -25,22 +25,23 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Services\ApiService\ApiService.cs" />
-    <Compile Remove="Services\ApiService\CategoryService.cs" />
-    <Compile Remove="Services\ApiService\CustomerService.cs" />
-    <Compile Remove="Services\ApiService\DiscountService.cs" />
-    <Compile Remove="Services\ApiService\EmployeeService.cs" />
-    <Compile Remove="Services\ApiService\OrderDetailService.cs" />
-    <Compile Remove="Services\ApiService\OrderService.cs" />
-    <Compile Remove="Services\ApiService\PaymentService.cs" />
-    <Compile Remove="Services\ApiService\ProductService.cs" />
-    <Compile Remove="Services\ApiService\ReviewService.cs" />
+    <Compile Remove="Services\ResReqServices\ApiService.cs" />
+    <Compile Remove="Services\ResReqServices\CategoryService.cs" />
+    <Compile Remove="Services\ResReqServices\CustomerService.cs" />
+    <Compile Remove="Services\ResReqServices\DiscountService.cs" />
+    <Compile Remove="Services\ResReqServices\EmployeeService.cs" />
+    <Compile Remove="Services\ResReqServices\OrderDetailService.cs" />
+    <Compile Remove="Services\ResReqServices\OrderService.cs" />
+    <Compile Remove="Services\ResReqServices\PaymentService.cs" />
+    <Compile Remove="Services\ResReqServices\ProductService.cs" />
+    <Compile Remove="Services\ResReqServices\ReviewService.cs" />
     <Compile Remove="ViewModels\DiscountVM\DiscountsPageViewModel.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microcharts" Version="0.9.5.9" />
     <PackageReference Include="Microcharts.Forms" Version="0.9.5.9" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="9.0.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -56,8 +57,11 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Portable.System.DateTimeOnly" Version="9.0.0" />
     <PackageReference Include="Rg.Plugins.Popup" Version="2.1.0" />
+    <PackageReference Include="SkiaSharp" Version="3.116.1" />
     <PackageReference Include="SkiaSharp.Views.Forms" Version="2.80.2" />
+    <PackageReference Include="System.Net.Http.Json" Version="9.0.4" />
     <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2545" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.7.1" />  
@@ -181,5 +185,8 @@
 
   <ItemGroup>
     <None Update="OpenAPIs\index.html" ClassName="OrderService" />
+    <None Update="Views\LoginPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
   </ItemGroup>
 </Project>

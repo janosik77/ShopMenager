@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace RestApiShopmenager.Controllers
+namespace WebApplication2.Controllers
 {
     [ApiController]
     [Route("[controller]")]

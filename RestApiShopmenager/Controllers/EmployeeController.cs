@@ -143,7 +143,7 @@ namespace RestApiShopmenager.Controllers
         {
             // Konwersja z DateOnly? na DateTime
             var hireDate = e.HireDate.HasValue
-                ? new DateTime(e.HireDate.Value.Year, e.HireDate.Value.Month, e.HireDate.Value.Day)
+                ? new DateOnly(e.HireDate.Value.Year, e.HireDate.Value.Month, e.HireDate.Value.Day)
                 : default;
 
             return new EmployeeDto

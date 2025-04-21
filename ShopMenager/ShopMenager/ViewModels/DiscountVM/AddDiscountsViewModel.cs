@@ -28,7 +28,7 @@ namespace ShopMenager.ViewModels.DiscountVM
         }
 
         private DateTime _startDate;
-        public DateTime StartDate
+        public System.DateTime StartDate
         {
             get => _startDate;
             set => SetProperty(ref _startDate, value);

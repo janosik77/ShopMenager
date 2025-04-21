@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using RestApiShopmenager.Models;
+﻿using Microsoft.EntityFrameworkCore;
+
 
 namespace RestApiShopmenager.Models.Contexts;
 
@@ -38,10 +36,6 @@ public partial class CompanyContext : DbContext
 
     public virtual DbSet<Reviews> Reviews { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=DESKTOP-A6PI8K2\\SQLEXPRESS;Initial Catalog=ShpMenager;Integrated Security=True;TrustServerCertificate=True;");
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Categories>(entity =>
@@ -62,6 +56,8 @@ public partial class CompanyContext : DbContext
         modelBuilder.Entity<Employees>(entity =>
         {
             entity.HasKey(e => e.EmployeeId).HasName("PK__Employee__7AD04FF1DB3C1AC3");
+
+            entity.Property(e => e.PasswordHash).HasDefaultValue("");
         });
 
         modelBuilder.Entity<OrderDetails>(entity =>

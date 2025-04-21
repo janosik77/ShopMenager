@@ -11,9 +11,6 @@
     <Color x:Key="DetailsTextColor">#DDDD</Color>
 
 
-   
-
-
     <Style TargetType="Shell" >
         <Setter Property="FlyoutBackgroundColor" Value="{StaticResource Primary}"/>
     </Style>

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -28,7 +26,7 @@ public partial class Employees
     [Unicode(false)]
     public string? Phone { get; set; }
 
-    public DateTime? HireDate { get; set; }
+    public DateOnly? HireDate { get; set; }
 
     [Column(TypeName = "decimal(10, 2)")]
     public decimal? Salary { get; set; }
@@ -36,6 +34,9 @@ public partial class Employees
     [StringLength(255)]
     [Unicode(false)]
     public string? PhotoPath { get; set; }
+
+    [StringLength(255)]
+    public string PasswordHash { get; set; } = null!;
 
     [InverseProperty("Employee")]
     public virtual ICollection<Orders> Orders { get; set; } = new List<Orders>();

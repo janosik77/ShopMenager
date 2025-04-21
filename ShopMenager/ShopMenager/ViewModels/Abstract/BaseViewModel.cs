@@ -14,6 +14,7 @@ namespace ShopMenager.ViewModels.Abstract
             
             ItemService = itemService;
         }
+        public BaseViewModel() { }
         #endregion
 
         #region Properties

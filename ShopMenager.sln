@@ -7,9 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopMenager.Android", "Shop
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopMenager.iOS", "ShopMenager\ShopMenager.iOS\ShopMenager.iOS.csproj", "{59E9E507-86D2-4BAF-863B-0FE289C5E73E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopMenager", "ShopMenager\ShopMenager\ShopMenager.csproj", "{793C7E16-C1BE-48F9-9F22-70B44858D4B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopMenager", "ShopMenager\ShopMenager\ShopMenager.csproj", "{793C7E16-C1BE-48F9-9F22-70B44858D4B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestApiShopmenager", "RestApiShopmenager\RestApiShopmenager.csproj", "{25259341-448A-4BB5-B130-E16F5839142F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestApiShopmenager", "RestApiShopmenager\RestApiShopmenager.csproj", "{25259341-448A-4BB5-B130-E16F5839142F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

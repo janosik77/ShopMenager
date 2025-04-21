@@ -1,6 +1,5 @@
 ﻿
 using System.Collections.Generic;
-using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 
 namespace ShopMenager.Services.ApiService.Abstract

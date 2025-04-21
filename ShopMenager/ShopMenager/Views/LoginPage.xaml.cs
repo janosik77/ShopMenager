@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using ShopMenager.ViewModels;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace ShopMenager.Views
@@ -9,7 +10,8 @@ namespace ShopMenager.Views
         public LoginPage()
         {
             InitializeComponent();
-            this.BindingContext = new LoginViewModel();
+            //NavigationPage.SetHasNavigationBar(this, false);
+            this.BindingContext = App.Services.GetService<LoginViewModel>();
         }
     }
 }

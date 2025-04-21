@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using ShopMenager.Services.Interfaces;
 using Xamarin.Forms;
 
 namespace ShopMenager.Services
