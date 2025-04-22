@@ -59,7 +59,7 @@
     </PackageReference>
     <PackageReference Include="Portable.System.DateTimeOnly" Version="9.0.0" />
     <PackageReference Include="Rg.Plugins.Popup" Version="2.1.0" />
-    <PackageReference Include="SkiaSharp" Version="3.116.1" />
+    <PackageReference Include="SkiaSharp" Version="2.88.6" />
     <PackageReference Include="SkiaSharp.Views.Forms" Version="2.80.2" />
     <PackageReference Include="System.Net.Http.Json" Version="9.0.4" />
     <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />

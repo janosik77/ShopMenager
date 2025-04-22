@@ -10,7 +10,6 @@ namespace ShopMenager.Views
         public LoginPage()
         {
             InitializeComponent();
-            //NavigationPage.SetHasNavigationBar(this, false);
             this.BindingContext = App.Services.GetService<LoginViewModel>();
         }
     }

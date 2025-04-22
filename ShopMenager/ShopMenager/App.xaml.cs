@@ -27,7 +27,7 @@ namespace ShopMenager
 #endif
             var client = new HttpClient(handler);
             DependencyService.RegisterSingleton(new OrderService("https://10.0.2.2:7265",client));
-            SessionManager.LogoutAsync().GetAwaiter().GetResult();
+            //SessionManager.LogoutAsync().GetAwaiter().GetResult();
             InitializeComponent();
            
             Services = Startup.ConfigureService(handler);
